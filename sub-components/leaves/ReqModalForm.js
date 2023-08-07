@@ -183,7 +183,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="name"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Employee Name
@@ -204,7 +204,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="id"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Employee ID
@@ -227,7 +227,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="applyDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Apply Date
@@ -248,7 +248,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="leaveType"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Leave Type
@@ -272,7 +272,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="fromDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   From Date
@@ -293,7 +293,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="toDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   To Date
@@ -316,7 +316,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="status"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Status
@@ -338,7 +338,7 @@ const ReqModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="remark"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Remark
@@ -361,7 +361,7 @@ const ReqModalForm = ({
               <div className="col-sm-12">
                 <label
                   htmlFor="image"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Employee Profile

@@ -30,7 +30,7 @@ const ModalForm = () => {
               <div className="col-sm-12">
                 <label
                   htmlFor="pName"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Project Name
@@ -50,7 +50,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="cName"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Client Name
@@ -68,7 +68,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="cEmail"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Client Email
@@ -88,7 +88,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="startDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Start Date
@@ -106,7 +106,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="endDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   End Date
@@ -126,7 +126,7 @@ const ModalForm = () => {
               <div className="col-sm-12">
                 <label
                   htmlFor="member"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Team Member
@@ -146,7 +146,7 @@ const ModalForm = () => {
               <div className="col-sm-12">
                 <label
                   htmlFor="jDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Upload Project Documents

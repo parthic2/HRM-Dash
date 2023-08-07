@@ -122,7 +122,7 @@ const ModalForm = ({
               <div className="col-sm-12">
                 <label
                   htmlFor="name"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Leave Name
@@ -145,7 +145,7 @@ const ModalForm = ({
               <div className="col-sm-12">
                 <label
                   htmlFor="type"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Leave Type
@@ -168,7 +168,7 @@ const ModalForm = ({
               <div className="col-sm-12">
                 <label
                   htmlFor="status"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Status

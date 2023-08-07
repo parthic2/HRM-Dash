@@ -159,7 +159,7 @@ const ModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="name"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Department Name
@@ -180,7 +180,7 @@ const ModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="headName"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Head Of Department
@@ -203,7 +203,7 @@ const ModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="number"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Phone No.
@@ -225,7 +225,7 @@ const ModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="email"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Email
@@ -249,7 +249,7 @@ const ModalForm = ({
                 <div className="col-sm-6">
                   <label
                     htmlFor="startingDate"
-                    className="col-sm-4 col-form-label
+                    className="col-sm-6 col-form-label
                     form-label"
                   >
                     Starting Date
@@ -271,7 +271,7 @@ const ModalForm = ({
               <div className="col-sm-6">
                 <label
                   htmlFor="totalEmp"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Total Employee
@@ -296,7 +296,7 @@ const ModalForm = ({
                 <div className="col-sm-12">
                   <label
                     htmlFor="about"
-                    className="col-sm-4 col-form-label
+                    className="col-sm-6 col-form-label
                     form-label"
                   >
                     More About Department

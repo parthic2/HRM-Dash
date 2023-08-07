@@ -35,7 +35,7 @@ const ModalForm = () => {
               <div className="col-sm-12">
                 <label
                   htmlFor="title"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Job Title
@@ -55,7 +55,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="posType"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Position Type
@@ -72,7 +72,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="department"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Department
@@ -91,7 +91,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="noPos"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   No Of Position
@@ -109,7 +109,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="intDate"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Interview Date
@@ -129,7 +129,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="location"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Location
@@ -147,7 +147,7 @@ const ModalForm = () => {
               <div className="col-sm-6">
                 <label
                   htmlFor="report"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Reporting To
@@ -167,7 +167,7 @@ const ModalForm = () => {
               <div className="col-sm-12">
                 <label
                   htmlFor="qualification"
-                  className="col-sm-4 col-form-label
+                  className="col-sm-6 col-form-label
                     form-label"
                 >
                   Desired Qualifications
