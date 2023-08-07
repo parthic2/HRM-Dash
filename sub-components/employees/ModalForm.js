@@ -4,13 +4,19 @@ import { Col, Modal, Form, Button, Row } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { DropFiles, FormSelect } from 'widgets';
 
-const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData }) => {
+const ModalForm = ({
+  addEmployee,
+  editEmployee,
+  editEmployeeEmail,
+  employeeData,
+  isEditModalOpen,
+  setIsEditModalOpen
+}) => {
   const genderOptions = [
     { value: "Male", label: "Male" },
     { value: "Female", label: "Female" }
   ];
 
-  const [lgShow, setLgShow] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,8 +25,77 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
     designation: "",
     joiningDate: "",
     birthDate: "",
+    gender: "",
     image: null // To store the selected image
   });
+
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    number: '',
+    address: '',
+    designation: '',
+    joiningDate: '',
+    birthDate: '',
+    gender: ""
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+      valid = false;
+    } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+      newErrors.name = "Name should contain only characters.";
+      valid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+      valid = false;
+    } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+      valid = false;
+    }
+
+    if (!formData.number.trim()) {
+      newErrors.number = 'Mobile number is required';
+      valid = false;
+    } else if (!/^\d{10}$/.test(formData.number)) {
+      newErrors.number = "Contact Number must be a 10-digit number.";
+      valid = false;
+    }
+
+    if (!formData.address.trim()) {
+      newErrors.address = 'Address is required';
+      valid = false;
+    }
+
+    if (!formData.designation.trim()) {
+      newErrors.designation = 'Designation is required';
+      valid = false;
+    }
+
+    if (!formData.joiningDate.trim()) {
+      newErrors.joiningDate = 'Joining date is required';
+      valid = false;
+    }
+
+    if (!formData.birthDate.trim()) {
+      newErrors.birthDate = 'Birth date is required';
+      valid = false;
+    }
+
+    if (!formData.gender) {
+      newErrors.gender = 'Gender is required';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -57,6 +132,11 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
+    if (!validateForm()) {
+      return; // If the form is not valid, don't submit
+    }
+
     if (editEmployeeEmail) {
       editEmployee({ ...formData, email: editEmployeeEmail });
     } else {
@@ -72,28 +152,28 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
       birthDate: "",
       image: null, // Clear the image after submission
     });
-    setLgShow(false);
+    setIsEditModalOpen(false);
   };
 
   const isInEditMode = !!editEmployeeEmail; // Check if editEmployeeEmail exists
 
   return (
     <Col md={12} xs={12}>
-      <div className="btn btn-white mb-5" onClick={() => setLgShow(true)}>Add Employees</div>
+      <div className="btn btn-white mb-5" onClick={() => setIsEditModalOpen(true)}>Add Employees</div>
       <Modal
         style={{ paddingLeft: "0px" }}
         size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
+        show={isEditModalOpen}
+        onHide={() => setIsEditModalOpen(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Add Employees
+            {editEmployeeEmail ? 'Edit Employee' : 'Add Employee'}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleFormSubmit}>
+          <Form onSubmit={handleFormSubmit} autoComplete="off">
             {/* row */}
             <Row className="mb-3">
               <div className="col-sm-6">
@@ -107,14 +187,14 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 <div className="col-md-12 col-12">
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                     placeholder="Name"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                 </div>
               </div>
               <div className="col-sm-6">
@@ -127,15 +207,15 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 </label>
                 <div className="col-md-12 col-12">
                   <input
-                    type="email"
-                    className="form-control"
+                    type="text"
+                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                     placeholder="Email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </div>
               </div>
             </Row>
@@ -151,14 +231,14 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 <div className="col-md-12 col-12">
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errors.designation ? 'is-invalid' : ''}`}
                     placeholder="Designation"
                     id="designation"
                     name="designation"
                     value={formData.designation}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.designation && <div className="invalid-feedback">{errors.designation}</div>}
                 </div>
               </div>
               <div className="col-sm-6">
@@ -172,14 +252,15 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 <div className="col-md-12 col-12">
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errors.number ? 'is-invalid' : ''}`}
                     placeholder="Mobile Number"
                     id="number"
                     name="number"
+                    maxLength="10"
                     value={formData.number}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.number && <div className="invalid-feedback">{errors.number}</div>}
                 </div>
               </div>
             </Row>
@@ -195,14 +276,14 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 <div className="col-md-12 col-12">
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errors.address ? 'is-invalid' : ''}`}
                     placeholder="Address"
                     id="address"
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.address && <div className="invalid-feedback">{errors.address}</div>}
                 </div>
               </div>
               <div className="col-sm-6">
@@ -216,14 +297,14 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 <div className="col-md-12 col-12">
                   <input
                     type="date"
-                    className="form-control"
+                    className={`form-control ${errors.birthDate ? 'is-invalid' : ''}`}
                     placeholder="Birth Date"
                     id="birthDate"
                     name="birthDate"
                     value={formData.birthDate}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.birthDate && <div className="invalid-feedback">{errors.birthDate}</div>}
                 </div>
               </div>
             </Row>
@@ -239,33 +320,40 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 <div className="col-md-12 col-12">
                   <input
                     type="date"
-                    className="form-control"
+                    className={`form-control ${errors.joiningDate ? 'is-invalid' : ''}`}
                     placeholder="Birth Date"
                     id="joiningDate"
                     name="joiningDate"
                     value={formData.joiningDate}
                     onChange={handleInputChange}
-                    required
                   />
+                  {errors.joiningDate && <div className="invalid-feedback">{errors.joiningDate}</div>}
                 </div>
               </div>
-              <div className="col-sm-6">
-                <label
-                  htmlFor="gender"
-                  className="col-sm-4 col-form-label
+              {!editEmployeeEmail ?
+                <div className="col-sm-6">
+                  <label
+                    htmlFor="gender"
+                    className="col-sm-4 col-form-label
                     form-label"
-                >
-                  Gender
-                </label>
-                <div className="col-md-12 col-12">
-                  <Form.Control
-                    as={FormSelect}
-                    placeholder="Select Gender"
-                    id="gender"
-                    options={genderOptions}
-                  />
-                </div>
-              </div>
+                  >
+                    Gender
+                  </label>
+                  <div className="col-md-12 col-12">
+                    <Form.Control
+                      as={FormSelect}
+                      className={`form-control ${errors.gender ? 'is-invalid' : ''}`}
+                      placeholder="Select Gender"
+                      id="gender"
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleInputChange}
+                      options={genderOptions}
+                    />
+                    {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
+                  </div>
+                </div> : ""
+              }
             </Row>
             <Row className="mb-3">
               <div className="col-sm-12">
@@ -286,6 +374,7 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 </div>
               </div>
             </Row>
+
             {isInEditMode ? (
               <Button variant="primary" type="submit">
                 Update
@@ -295,7 +384,8 @@ const ModalForm = ({ addEmployee, editEmployee, editEmployeeEmail, employeeData 
                 Save
               </Button>
             )}
-            <Button variant="light" style={{ marginLeft: "10px" }} onClick={() => setLgShow(false)}>
+
+            <Button variant="light" style={{ marginLeft: "10px" }} onClick={() => setIsEditModalOpen(false)}>
               Cancel
             </Button>
           </Form>

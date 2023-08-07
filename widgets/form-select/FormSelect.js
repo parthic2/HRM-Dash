@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export const FormSelect = (props) => {
-	const { placeholder, defaultselected, options, id, name, onChange, className } = props;
+	const { placeholder, options, id, name, onChange, className, value } = props;
 
 	return (
 		<Fragment>
@@ -13,6 +13,7 @@ export const FormSelect = (props) => {
 				name={name}
 				onChange={onChange}
 				className={className}
+				value={value}
 			>
 				{placeholder ? (
 					<option value="" className="text-muted">
@@ -24,8 +25,8 @@ export const FormSelect = (props) => {
 				{options.map((item, index) => {
 					return (
 						<option key={index} value={item.value} className="text-dark"
-							//selected={defaultselected==item.value}
-							>
+						//selected={defaultselected==item.value}
+						>
 							{item.label}
 						</option>
 					);
@@ -40,7 +41,7 @@ FormSelect.propTypes = {
 	defaultselected: PropTypes.string.isRequired,
 	id: PropTypes.string,
 	name: PropTypes.string,
-	className:PropTypes.string
+	className: PropTypes.string
 };
 
 FormSelect.defaultProps = {
@@ -48,7 +49,7 @@ FormSelect.defaultProps = {
 	defaultselected: '',
 	id: '',
 	name: '',
-	className:''
+	className: ''
 };
 
 export default FormSelect;

@@ -1,7 +1,6 @@
 // import node module libraries
 import Link from 'next/link';
 import { Col, Card, Table, Image, Dropdown } from 'react-bootstrap';
-
 // import required data files
 import EmployeesData from 'data/employees/employees';
 import React, { useState } from 'react';
@@ -44,6 +43,12 @@ const AllEmployee = () => {
 
   const [employeeData, setEmployeeData] = useState(EmployeesData); // State to hold form data
   const [editEmployeeEmail, setEditEmployeeEmail] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleEditButtonClick = (email) => {
+    setEditEmployeeEmail(email);
+    setIsEditModalOpen(true);
+  };
 
   const addEmployee = (newEmployee) => {
     setEmployeeData([...employeeData, newEmployee]);
@@ -69,13 +74,15 @@ const AllEmployee = () => {
         employeeData={employeeData}
         editEmployee={editEmployee}
         editEmployeeEmail={editEmployeeEmail}
+        isEditModalOpen={isEditModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
       />
       <Card>
         <Card.Header className="bg-white  py-4">
           <h4 className="mb-0">All Employees</h4>
         </Card.Header>
         {employeeData.length === 0 ? (
-          <p>No Data Found!</p>
+          <p style={{ textAlign: "center", marginTop: "20px", fontSize: "20px" }}>No Data Found!</p>
         ) : (
           <Table responsive className="text-nowrap mb-0">
             <thead className="table-light">
@@ -116,7 +123,7 @@ const AllEmployee = () => {
                     <td className="align-middle">
                       <ActionMenu
                         onDelete={() => deleteEmployee(item.email)}
-                        onEdit={() => setEditEmployeeEmail(item.email)}
+                        onEdit={() => handleEditButtonClick(item.email)}
                       />
                     </td>
                   </tr>

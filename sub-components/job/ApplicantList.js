@@ -78,6 +78,7 @@ const AllApplicantList = () => {
                   <td className="align-middle">{item.interviewTime}</td>
                   <td className="align-middle">{item.reporting}</td>
                   <td className="align-middle">{item.requiredQua}</td>
+                  <td className="align-middle"></td>
                   <td className="align-middle">
                     <ActionMenu />
                   </td>

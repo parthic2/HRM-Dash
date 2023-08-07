@@ -1,41 +1,41 @@
 const departmentData = [
     {
         id: 1,
-        departName: "Development",
+        name: "Development",
         headName: "Sanjay",
-        mobile: "9890876789",
+        number: "9890876789",
         email: "example@example.com",
         totalEmp: "10"
     },
     {
         id: 2,
-        departName: "Finance",
+        name: "Finance",
         headName: "Sanjana",
-        mobile: "7809876543",
+        number: "7809876543",
         email: "example@example.com",
         totalEmp: "5"
     },
     {
         id: 3,
-        departName: "Account",
+        name: "Account",
         headName: "Pooja",
-        mobile: "6709876543",
+        number: "6709876543",
         email: "example@example.com",
         totalEmp: "2"
     },
     {
         id: 4,
-        departName: "Design",
+        name: "Design",
         headName: "Rajesh",
-        mobile: "8907123678",
+        number: "8907123678",
         email: "example@example.com",
         totalEmp: "3"
     },
     {
         id: 5,
-        departName: "Testing",
+        name: "Testing",
         headName: "Poonam",
-        mobile: "5609876789",
+        number: "5609876789",
         email: "example@example.com",
         totalEmp: "6"
     },

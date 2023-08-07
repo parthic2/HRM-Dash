@@ -6,11 +6,6 @@ import React, { useState } from 'react';
 import { DropFiles, FormSelect } from 'widgets';
 
 const ModalForm = () => {
-  const genderOptions = [
-    { value: "Male", label: "Male" },
-    { value: "Female", label: "Female" }
-  ];
-
   const [lgShow, setLgShow] = useState(false);
 
   return (
@@ -80,7 +75,7 @@ const ModalForm = () => {
                 </label>
                 <div className="col-md-12 col-12">
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
                     placeholder="Client Email"
                     id="cEmail"
