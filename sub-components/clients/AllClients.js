@@ -1,71 +1,13 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Image, Dropdown } from 'react-bootstrap';
-// import required data files
-import React, { useState } from 'react';
-import { MoreVertical } from 'react-feather';
-import ModalForm from './ModalForm';
+import { Col, Card, Table, Image } from 'react-bootstrap';
+import React from 'react';
+import ModalForm from './ModalForm/ModalForm';
+import ActionMenu from 'common/ActionMenu';
+import useClientData from 'hooks/useClientData';
 import ClientData from 'data/clients/clients';
 
 const AllClients = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = ({ onDelete, onEdit }) => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1" onClick={onEdit}>
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2" onClick={onDelete}>
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
-
-  const [clientData, setClientData] = useState(ClientData); // State to hold form data
-  const [editClientId, setEditClientId] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditButtonClick = (id) => {
-    setEditClientId(id);
-    setIsEditModalOpen(true);
-  };
-
-  const addClient = (newClient) => {
-    setClientData([...clientData, newClient]);
-  };
-
-  const editClient = (editedClient) => {
-    const updatedData = clientData.map((client) =>
-      client.id === editedClient.id ? editedClient : client
-    );
-    setClientData(updatedData);
-    setEditClientId(null);
-  };
-
-  const deleteClient = (id) => {
-    const updatedData = clientData.filter((client) => client.id !== id);
-    setClientData(updatedData);
-  };
+  const { clientData, editClientId, addClient, editClient, deleteClient, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useClientData(ClientData);
 
   return (
     <Col md={12} xs={12}>
@@ -127,7 +69,7 @@ const AllClients = () => {
                       <ActionMenu
                         onDelete={() => deleteClient(item.id)}
                         onEdit={() => handleEditButtonClick(item.id)}
-                      /> 
+                      />
                     </td>
                   </tr>
                 )

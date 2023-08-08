@@ -1,71 +1,13 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Image, Dropdown } from 'react-bootstrap';
-// import required data files
+import { Col, Card, Table, Image } from 'react-bootstrap';
 import EmployeesData from 'data/employees/employees';
-import React, { useState } from 'react';
-import { MoreVertical } from 'react-feather';
-import ModalForm from './ModalForm';
+import React from 'react';
+import ModalForm from './ModalForm/ModalForm';
+import useEmployeeData from 'hooks/useEmployeeData';
+import ActionMenu from 'common/ActionMenu';
 
 const AllEmployee = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = ({ onDelete, onEdit }) => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1" onClick={onEdit}>
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2" onClick={onDelete}>
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
-
-  const [employeeData, setEmployeeData] = useState(EmployeesData); // State to hold form data
-  const [editEmployeeEmail, setEditEmployeeEmail] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditButtonClick = (email) => {
-    setEditEmployeeEmail(email);
-    setIsEditModalOpen(true);
-  };
-
-  const addEmployee = (newEmployee) => {
-    setEmployeeData([...employeeData, newEmployee]);
-  };
-
-  const editEmployee = (editedEmployee) => {
-    const updatedData = employeeData.map((employee) =>
-      employee.email === editedEmployee.email ? editedEmployee : employee
-    );
-    setEmployeeData(updatedData);
-    setEditEmployeeEmail(null);
-  };
-
-  const deleteEmployee = (email) => {
-    const updatedData = employeeData.filter((employee) => employee.email !== email);
-    setEmployeeData(updatedData);
-  };
+  const { employeeData, editEmployeeEmail, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, addEmployee, editEmployee, deleteEmployee } = useEmployeeData(EmployeesData);
 
   return (
     <Col md={12} xs={12}>

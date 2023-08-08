@@ -1,11 +1,10 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Image, Dropdown } from 'react-bootstrap';
-// import required data files
-import React, { useState } from 'react';
-import { MoreVertical } from 'react-feather';
+import { Col, Card, Table, Image } from 'react-bootstrap';
+import React from 'react';
 import LeaveReqData from 'data/leave/leaveReq';
-import ReqModalForm from './ReqModalForm';
+import ReqModalForm from './ModalForm/ReqModalForm/ReqModalForm';
+import ActionMenu from 'common/ActionMenu';
+import useLeaveReqData from 'hooks/useLeaveReqData';
 
 const statusColorMap = {
   Pending: "warning",
@@ -14,64 +13,7 @@ const statusColorMap = {
 };
 
 const AllLeaveReq = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = ({ onDelete, onEdit }) => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1" onClick={onEdit}>
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2" onClick={onDelete}>
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
-
-  const [leaveData, setLeaveData] = useState(LeaveReqData); // State to hold form data
-  const [editLeaveId, setEditLeaveId] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditButtonClick = (id) => {
-    setEditLeaveId(id);
-    setIsEditModalOpen(true);
-  };
-
-  const addLeaveReq = (newLeave) => {
-    setLeaveData([...leaveData, newLeave]);
-  };
-
-  const editLeaveReq = (editedLeave) => {
-    const updatedData = leaveData.map((leave) =>
-      leave.id === editedLeave.id ? editedLeave : leave
-    );
-    setLeaveData(updatedData);
-    setEditLeaveId(null);
-  };
-
-  const deleteEmployee = (id) => {
-    const updatedData = leaveData.filter((leave) => leave.id !== id);
-    setLeaveData(updatedData);
-  };
+  const { leaveData, editLeaveId, addLeaveReq, editLeaveReq, deleteLeaveReq, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveReqData(LeaveReqData);
 
   return (
     <Col md={12} xs={12}>
@@ -114,7 +56,6 @@ const AllLeaveReq = () => {
                         <div>
                           <div className={`icon-shape icon-md border p-4 rounded-1`}>
                             <Image src={item.employeeImg} alt="" width={35} />
-
                             {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
                           </div>
                         </div>
@@ -136,7 +77,7 @@ const AllLeaveReq = () => {
                     <td className="align-middle">{item.remark}</td>
                     <td className="align-middle">
                       <ActionMenu
-                        onDelete={() => deleteEmployee(item.id)}
+                        onDelete={() => deleteLeaveReq(item.id)}
                         onEdit={() => handleEditButtonClick(item.id)}
                       />
                     </td>

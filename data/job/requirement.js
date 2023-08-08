@@ -1,43 +1,47 @@
 const RequirementData = [
     {
         id: 1,
-        jobTitle: "Java Developer",
-        position: "Sr.Engineer",
+        title: "Java Developer",
+        posType: "Manager",
         department: "Development",
         noPos: 2,
-        interviewDate: "17-07-2018",
-        reporting: "Mark John",
-        requiredQua: "B.E."
+        interviewDate: "2018-07-17",
+        reportingTo: "Mark John",
+        qualification: "B.E.",
+        location: "Surat"
     },
     {
         id: 2,
-        jobTitle: "Accountant",
-        position: "Sr.Clerk",
+        title: "Accountant",
+        posType: "Accountant",
         department: "Account",
         noPos: 5,
-        interviewDate: "12-07-2018",
-        reporting: "Sarah Smith",
-        requiredQua: "B.Com."
+        interviewDate: "2018-07-12",
+        reportingTo: "Sarah Smith",
+        qualification: "B.Com.",
+        location: "Surat"
     },
     {
         id: 3,
-        jobTitle: "Tester",
-        position: "Jr.Tester",
+        title: "Tester",
+        posType: "Tester",
         department: "Testing",
         noPos: 10,
-        interviewDate: "13-07-2018",
-        reporting: "John Deo",
-        requiredQua: "M.C.A."
+        interviewDate: "2018-07-13",
+        reportingTo: "John Deo",
+        qualification: "M.C.A.",
+        location: "Surat"
     },
     {
         id: 4,
-        jobTitle: "Html Developer",
-        position: "Sr.Engineer",
+        title: "Html Developer",
+        posType: "Developer",
         department: "Development",
         noPos: 9,
-        interviewDate: "13-07-2018",
-        reporting: "Mark John",
-        requiredQua: "B.C.A."
+        interviewDate: "2018-07-13",
+        reportingTo: "Mark John",
+        qualification: "B.C.A.",
+        location: "Surat"
     }
 ];
 

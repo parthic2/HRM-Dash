@@ -1,11 +1,10 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Dropdown } from 'react-bootstrap';
-// import required data files
-import React, { useState } from 'react';
-import { MoreVertical } from 'react-feather';
-import ModalForm from './ModalForm';
+import { Col, Card, Table } from 'react-bootstrap';
+import React from 'react';
+import ModalForm from './ModalForm/TypeModalForm/ModalForm';
 import leaveTypeData from 'data/leave/leaveType';
+import ActionMenu from 'common/ActionMenu';
+import useLeaveTypeData from 'hooks/useLeaveTypeData';
 
 const statusColorMap = {
   Active: "success",
@@ -13,64 +12,7 @@ const statusColorMap = {
 };
 
 const AllLeaveType = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = ({ onDelete, onEdit }) => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1" onClick={onEdit}>
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2" onClick={onDelete}>
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
-
-  const [leaveData, setLeaveData] = useState(leaveTypeData); // State to hold form data
-  const [editLeaveName, setEditLeaveName] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditButtonClick = (name) => {
-    setEditLeaveName(name);
-    setIsEditModalOpen(true);
-  };
-
-  const addLeaveType = (newLeave) => {
-    setLeaveData([...leaveData, newLeave]);
-  };
-
-  const editLeave = (editedLeave) => {
-    const updatedData = leaveData.map((leave) =>
-      leave.name === editedLeave.name ? editedLeave : leave
-    );
-    setLeaveData(updatedData);
-    setEditLeaveName(null);
-  };
-
-  const deleteLeaveType = (name) => {
-    const updatedData = leaveData.filter((leave) => leave.name !== name);
-    setLeaveData(updatedData);
-  };
+  const { leaveData, editLeaveName, addLeaveType, editLeave, deleteLeaveType, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveTypeData(leaveTypeData);
 
   return (
     <Col md={12} xs={12}>

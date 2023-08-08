@@ -1,71 +1,13 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Dropdown } from 'react-bootstrap';
-// import required data files
-import React, { useState } from 'react';
-import { MoreVertical } from 'react-feather';
+import { Col, Card, Table } from 'react-bootstrap';
+import React from 'react';
 import departmentData from 'data/department/department';
-import ModalForm from './ModalForm';
+import ModalForm from './ModalForm/ModalForm';
+import ActionMenu from 'common/ActionMenu';
+import useDepartmentData from 'hooks/useDepartmentData';
 
 const AllDepartment = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = ({ onDelete, onEdit }) => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1" onClick={onEdit}>
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2" onClick={onDelete}>
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
-
-  const [department, setDepartment] = useState(departmentData); // State to hold form data
-  const [editDepartmentName, setEditDepartmentName] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditButtonClick = (name) => {
-    setEditDepartmentName(name);
-    setIsEditModalOpen(true);
-  };
-
-  const addDepartment = (newDepartment) => {
-    setDepartment([...department, newDepartment]);
-  };
-
-  const editDepartment = (editedDepartment) => {
-    const updatedData = department.map((dept) =>
-      dept.name === editedDepartment.name ? editedDepartment : dept
-    );
-    setDepartment(updatedData);
-    setEditDepartmentName(null);
-  };
-
-  const deleteDepartment = (name) => {
-    const updatedData = department.filter((dept) => dept.name !== name);
-    setDepartment(updatedData);
-  };
+  const { department, editDepartmentName, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, addDepartment, editDepartment, deleteDepartment } = useDepartmentData(departmentData);
 
   return (
     <Col md={12} xs={12}>
