@@ -44,3 +44,8 @@ export const proStatusOptions = [
     { value: "Active", label: "Active" },
     { value: "Closed", label: "Closed" }
 ];
+
+export const attStatusOptions = [
+    { value: "Present", label: "Present" },
+    { value: "Leave", label: "Leave" }
+];

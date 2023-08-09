@@ -1,48 +1,29 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Image, Dropdown } from 'react-bootstrap';
-
-// import required data files
+import { Col, Card, Table, Image } from 'react-bootstrap';
 import React from 'react';
-import { MoreVertical } from 'react-feather';
 import TodayAttendances from 'data/attendance/todayAttendance';
+import ActionMenu from 'common/ActionMenu';
+import ModalForm from './ModalForm/ModalForm';
+import useAttendanceData from 'hooks/useAttendanceData';
+
+const statusColorMap = {
+  Present: 'success',
+  Leave: 'danger',
+};
 
 const TodayAttendance = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = () => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1">
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2">
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
+  const { attendanceData, editAttId, addAttendance, editAttendance, deleteAttendance, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useAttendanceData(TodayAttendances);
 
   return (
     <Col md={12} xs={12}>
+      <ModalForm
+        addAttendance={addAttendance}
+        attendanceData={attendanceData}
+        editAttendance={editAttendance}
+        editAttId={editAttId}
+        isEditModalOpen={isEditModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
+      />
       <Card>
         <Card.Header className="bg-white  py-4">
           <h4 className="mb-0">Today Attendance</h4>
@@ -60,33 +41,36 @@ const TodayAttendance = () => {
             </tr>
           </thead>
           <tbody>
-            {TodayAttendances.map((item, index) => {
+            {attendanceData.map((item, index) => {
               return (
                 <tr key={index}>
                   <td className="align-middle">
                     <div className="d-flex align-items-center">
                       <div>
                         <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                          <Image src={item.employeeImg} alt="" width={35} />
+                          {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
                         </div>
                       </div>
                       <div className="ms-3 lh-1">
                         <h5 className=" mb-1">
-                          <Link href="/pages/employeeAttendances" className="text-inherit">{item.employeeName}</Link></h5>
+                          <Link href="/pages/employeeAttendances" className="text-inherit">{item.name}</Link></h5>
                       </div>
                     </div>
                   </td>
                   <td className="align-middle">{item.employeeId}</td>
                   <td className="align-middle">{item.department}</td>
+                  <td className="align-middle">{item.checkIn}</td>
+                  <td className="align-middle">{item.checkOut}</td>
                   <td className="align-middle">
-                    <span>{item.checkIn}</span>
+                    <span className={`badge bg-${statusColorMap[item.status]}`}>
+                      {item.status}
+                    </span>
                   </td>
                   <td className="align-middle">
-                    <span>{item.checkOut}</span>
-                  </td>
-                  <td className="align-middle"><span className={`badge bg-${item.priorityBadgeBg}`}>{item.status}</span></td>
-                  <td className="align-middle">
-                    <ActionMenu />
+                    <ActionMenu
+                      onDelete={() => deleteAttendance(item.id)}
+                      onEdit={() => handleEditButtonClick(item.id)}
+                    />
                   </td>
                 </tr>
               )

@@ -1,49 +1,24 @@
-// import node module libraries
 import Link from 'next/link';
-import { Col, Card, Table, Dropdown } from 'react-bootstrap';
-
-// import required data files
+import { Col, Card, Table } from 'react-bootstrap';
 import React from 'react';
-import { MoreVertical } from 'react-feather';
 import ApplicantData from 'data/job/applicant';
+import ActionMenu from 'common/ActionMenu';
+import ModalForm from './AppliModalForm/ModalForm';
+import useApplicantData from 'hooks/useApplicantData';
 
 const AllApplicantList = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    (<Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover">
-      {children}
-    </Link>)
-  ));
-
-  CustomToggle.displayName = 'CustomToggle';
-
-  const ActionMenu = () => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={'end'}>
-          <Dropdown.Item eventKey="1">
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="2">
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
+  const { applicantData, editAppliId, addApplicant, editApplicant, deleteApplicant, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useApplicantData(ApplicantData);
 
   return (
     <Col md={12} xs={12}>
-      {/* <ModalForm /> */}
+      <ModalForm
+        addApplicant={addApplicant}
+        applicantData={applicantData}
+        editApplicant={editApplicant}
+        editAppliId={editAppliId}
+        isEditModalOpen={isEditModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
+      />
       <Card>
         <Card.Header className="bg-white  py-4">
           <h4 className="mb-0">Applicant List</h4>
@@ -63,7 +38,7 @@ const AllApplicantList = () => {
             </tr>
           </thead>
           <tbody>
-            {ApplicantData.map((item, index) => {
+            {applicantData.map((item, index) => {
               return (
                 <tr key={index}>
                   <td className="align-middle">
@@ -72,15 +47,18 @@ const AllApplicantList = () => {
                         <Link href="#" className="text-inherit">{item.name}</Link></h5>
                     </div>
                   </td>
-                  <td className="align-middle">{item.jobTitle}</td>
+                  <td className="align-middle">{item.title}</td>
                   <td className="align-middle">{item.department}</td>
                   <td className="align-middle">{item.interviewDate}</td>
                   <td className="align-middle">{item.interviewTime}</td>
-                  <td className="align-middle">{item.reporting}</td>
-                  <td className="align-middle">{item.requiredQua}</td>
+                  <td className="align-middle">{item.reportingTo}</td>
+                  <td className="align-middle">{item.qualification}</td>
                   <td className="align-middle"></td>
                   <td className="align-middle">
-                    <ActionMenu />
+                    <ActionMenu
+                      onDelete={() => deleteApplicant(item.id)}
+                      onEdit={() => handleEditButtonClick(item.id)}
+                    />
                   </td>
                 </tr>
               )

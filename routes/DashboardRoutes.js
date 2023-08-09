@@ -7,11 +7,11 @@ export const DashboardMenu = [
 		icon: 'home',
 		link: '/'
 	},
-	{
-		id: uuid(),
-		title: 'PAGES',
-		grouptitle: true
-	},
+	// {
+	// 	id: uuid(),
+	// 	title: 'PAGES',
+	// 	grouptitle: true
+	// },
 	{
 		id: uuid(),
 		title: 'Employees',
@@ -96,6 +96,17 @@ export const DashboardMenu = [
 			{ id: uuid(), link: '/pages/requirement', name: 'Requirements' },
 			{ id: uuid(), link: '/pages/applicantList', name: 'Applicant List' }
 		]
+	},
+	{
+		id: uuid(),
+		title: 'Tracker',
+		icon: 'clock',
+		link: "/pages/tracker",
+		// children: [
+		// 	// { id: uuid(), link: '/', name: 'Add Job' },
+		// 	{ id: uuid(), link: '/pages/requirement', name: 'Requirements' },
+		// 	{ id: uuid(), link: '/pages/applicantList', name: 'Applicant List' }
+		// ]
 	},
 	// {
 	// 	id: uuid(),

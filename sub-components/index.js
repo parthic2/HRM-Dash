@@ -45,6 +45,9 @@ import AllDepartment from './department/AllDepartment';
 import AllRequirement from './job/AllRequirement';
 import AllApplicantList from './job/ApplicantList';
 
+// sub components for /pages/tracker
+import Tracker from './tracker/Tracker';
+
 export {
    ActiveProjects,
    TasksPerformance,
@@ -67,5 +70,6 @@ export {
    AllIncome,
    AllDepartment,
    AllRequirement,
-   AllApplicantList
+   AllApplicantList,
+   Tracker
 };

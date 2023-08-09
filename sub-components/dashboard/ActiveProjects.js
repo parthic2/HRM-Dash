@@ -1,8 +1,12 @@
-// import node module libraries
 import Link from 'next/link';
-import { ProgressBar, Col, Row, Card, Table, Image } from 'react-bootstrap';
-// import required data files
+import { Col, Row, Card, Table } from 'react-bootstrap';
 import ProjectsData from 'data/projects/projects';
+
+const statusColorMap = {
+  Pending: "warning",
+  Active: 'success',
+  Closed: 'danger',
+};
 
 const ActiveProjects = () => {
   return (
@@ -17,11 +21,9 @@ const ActiveProjects = () => {
               <tr>
                 <th>Project name</th>
                 <th>Client name</th>
-                <th>DeadLine</th>
-                <th>Members</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>Status</th>
-                <th>Progress</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -30,29 +32,17 @@ const ActiveProjects = () => {
                   <tr key={index}>
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
-                        <h5 className=" mb-1">
+                        <h5 className="mb-1">
                           <Link href="#" className="text-inherit">{item.projectName}</Link></h5>
                       </div>
                     </td>
                     <td className="align-middle">{item.clientName}</td>
-                    <td className="align-middle">{item.deadLine}</td>
+                    <td className="align-middle">{item.startDate}</td>
+                    <td className="align-middle">{item.endDate}</td>
                     <td className="align-middle">
-                      <div className="avatar-group">
-                        {item.members.map((avatar, avatarIndex) => {
-                          return (
-                            <span className="avatar avatar-sm" key={avatarIndex}>
-                              <Image alt="avatar" src={avatar.image} className="rounded-circle" />
-                            </span>
-                          )
-                        })}
-                      </div>
-                    </td>
-                    <td className="align-middle"><span className={`badge bg-${item.priorityBadgeBg}`}>{item.status}</span></td>
-                    <td className="align-middle text-dark">
-                      <div className="float-start me-3">{item.progress}%</div>
-                      <div className="mt-2">
-                        <ProgressBar now={item.progress} style={{ height: '5px' }} />
-                      </div>
+                      <span className={`badge bg-${statusColorMap[item.status]}`}>
+                        {item.status}
+                      </span>
                     </td>
                   </tr>
                 )
@@ -68,4 +58,4 @@ const ActiveProjects = () => {
   )
 }
 
-export default ActiveProjects
+export default ActiveProjects;

@@ -2,42 +2,42 @@ const ApplicantData = [
     {
         id: 1,
         name: "Jens Brincker",
-        jobTitle: "Java Developer",
+        title: "Java Developer",
         department: "Development",
-        interviewDate: "17-07-2018",
+        interviewDate: "2018-07-17",
         interviewTime: "10:30",
-        reporting: "Mark John",
-        requiredQua: "B.E.",
+        reportingTo: "Mark John",
+        qualification: "B.E.",
     },
     {
         id: 2,
         name: "Mark Hay",
-        jobTitle: "Accountant",
+        title: "Accountant",
         department: "Account",
-        interviewDate: "12-07-2018",
-        interviewTime: "1:30",
-        reporting: "Sarah Smith",
-        requiredQua: "B.Com."
+        interviewDate: "2018-07-12",
+        interviewTime: "01:30",
+        reportingTo: "Sarah Smith",
+        qualification: "B.Com."
     },
     {
         id: 3,
         name: "David Perry",
-        interviewTime: "4:30",
-        jobTitle: "Tester",
+        interviewTime: "04:30",
+        title: "Tester",
         department: "Testing",
-        interviewDate: "13-07-2018",
-        reporting: "John Deo",
-        requiredQua: "M.C.A."
+        interviewDate: "2018-07-13",
+        reportingTo: "John Deo",
+        qualification: "M.C.A."
     },
     {
         id: 4,
         name: "Anthony Davie",
         interviewTime: "12:00",
-        jobTitle: "Html Developer",
+        title: "Html Developer",
         department: "Development",
-        interviewDate: "13-07-2018",
-        reporting: "Mark John",
-        requiredQua: "B.C.A."
+        interviewDate: "2018-07-13",
+        reportingTo: "Mark John",
+        qualification: "B.C.A."
     }
 ];
 
