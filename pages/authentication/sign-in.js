@@ -1,11 +1,16 @@
-// import node module libraries
-import { Row, Col, Card, Form, Button, Image } from "react-bootstrap";
+import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import Link from "next/link";
-
-// import authlayout to override default layout
 import AuthLayout from "layouts/AuthLayout";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push("/");
+  }
+
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
       <Col xxl={4} lg={6} md={8} xs={12} className="py-8 py-xl-0">
@@ -58,7 +63,7 @@ const SignIn = () => {
               <div>
                 {/* Button */}
                 <div className="d-grid">
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" type="submit" onClick={handleSubmit}>
                     Sign In
                   </Button>
                 </div>

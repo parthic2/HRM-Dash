@@ -1,11 +1,9 @@
-// import node module libraries
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import SSRProvider from 'react-bootstrap/SSRProvider';
-// import theme style scss file
 import 'styles/theme.scss';
-// import default layouts
 import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
+import SignIn from './authentication/sign-in';
 // import SignIn from './authentication/sign-in';
 
 function MyApp({ Component, pageProps }) {
@@ -19,6 +17,19 @@ function MyApp({ Component, pageProps }) {
   const Layout = Component.Layout || (router.pathname.includes('dashboard') ?
     (router.pathname.includes('instructor') || router.pathname.includes('student') ?
       DefaultDashboardLayout : DefaultDashboardLayout) : DefaultDashboardLayout)
+
+  // Simulate user login state using local storage
+  // const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem('userLoggedIn');
+  //   if (loggedInUser) {
+  //     setUserLoggedIn(true);
+  //     // router.push('/');
+  //   }
+  // }, []);
+
+  // const Layout = userLoggedIn ? DefaultDashboardLayout : SignIn;
 
   return (
     <SSRProvider>

@@ -86,7 +86,6 @@
 
 .stop-button {
 	background-color: #ef0d36;
-	margin-right: 24px;
 
 	@media screen and (max-width: 500px) {
 		margin-right: 0px;
@@ -96,6 +95,7 @@
 
 .reset-button {
 	background-color: #eaa800;
+	margin-right: 24px;
 
 	@media screen and (max-width: 500px) {
 		margin-top: 10px;
