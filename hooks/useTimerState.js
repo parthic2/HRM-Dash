@@ -45,11 +45,11 @@ export function useTimerState() {
     const time = renderTime();
 
     // Function to handle Enter key press in the project name input field
-    const onKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            setShowConfirm(true);
-        }
-    };
+    // const onKeyDown = (e) => {
+    //     if (e.key === 'Enter') {
+    //         setShowConfirm(true);
+    //     }
+    // };
 
     // Function to handle canceling the confirmation
     const onCancelConfirm = () => {
@@ -60,7 +60,13 @@ export function useTimerState() {
 
     // Function to start the timer
     const onStartTimer = () => {
-        setIsTimerRunning(true);
+        setShowProjectInput(true); // Show the project name input field
+        if (projectName === "") {
+            setIsTimerRunning(false);
+        }else{
+            setIsTimerRunning(true);
+            setShowProjectInput(false);
+        }
         setStartTime(new Date());
     };
 
@@ -72,7 +78,8 @@ export function useTimerState() {
 
     // Function to handle stopping the timer
     const onStopTimer = () => {
-        setShowProjectInput(true); // Show the project name input field
+        setShowConfirm(true);
+        // setShowProjectInput(true); // Show the project name input field
         setStopTime(new Date());
     };
 
@@ -141,7 +148,7 @@ export function useTimerState() {
         setStopTime,
         SECONDS_IN_AN_HOUR,
         renderTime,
-        onKeyDown,
+        // onKeyDown,
         onCancelConfirm,
         onStartTimer,
         onPauseTimer,

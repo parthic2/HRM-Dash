@@ -6,7 +6,7 @@ import ProjectTable from './ProjectTable';
 const Tracker = () => {
   const {
     isTimerRunning,
-    onKeyDown,
+    // onKeyDown,
     onCancelConfirm,
     onStartTimer,
     onPauseTimer,
@@ -21,8 +21,12 @@ const Tracker = () => {
     setShowConfirm
   } = useTimerState();
 
+  // const currentDate = new Date();
+  // const currentDateString = currentDate.toISOString().split('T')[0]; // Get the current date in YYYY-MM-DD format
+
   const currentDate = new Date();
-  const currentDateString = currentDate.toISOString().split('T')[0]; // Get the current date in YYYY-MM-DD format
+  const currentMonth = currentDate.getMonth(); // Current month (0-11)
+  const currentYear = currentDate.getFullYear(); // Current year
 
   return (
     <>
@@ -38,9 +42,9 @@ const Tracker = () => {
                 name="name"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
-                onKeyDown={onKeyDown}
+              // onKeyDown={onKeyDown}
               />
-              <p>Please enter the project name and hit enter</p>
+              {/* <p>Please enter the project name and hit enter</p> */}
             </>
           ) : null}
         </div>
@@ -81,9 +85,26 @@ const Tracker = () => {
         </div>
       </div>
       <div className="mt-4">
-        {currentDateString in savedProjects && (
+        {Object.keys(savedProjects).map(date => {
+          const projectDate = new Date(date);
+          const projectMonth = projectDate.getMonth(); // Month of the saved project
+          const projectYear = projectDate.getFullYear(); // Year of the saved project
+
+          // Check if the saved project is from the current month and year
+          if (projectMonth === currentMonth && projectYear === currentYear) {
+            return (
+              <div key={date}>
+                <ProjectTable savedProjects={savedProjects} date={date} />
+              </div>
+            );
+          }
+          return null; // Exclude projects from other months
+        })}
+
+
+        {/* {currentDateString in savedProjects && (
           <ProjectTable currentDateString={currentDateString} savedProjects={savedProjects} />
-        )}
+        )} */}
       </div>
 
       <ConfirmationModal

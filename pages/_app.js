@@ -3,11 +3,46 @@ import { useRouter } from 'next/router';
 import SSRProvider from 'react-bootstrap/SSRProvider';
 import 'styles/theme.scss';
 import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
-import SignIn from './authentication/sign-in';
+import { useEffect, useState } from 'react';
 // import SignIn from './authentication/sign-in';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
+  const [user, setUser] = useState(null);
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    // on initial load - run auth check 
+    authCheck(router.asPath);
+
+    // Simulate checking if a user is already authenticated
+    const userFromLocalStorage = localStorage.getItem('user');
+    if (userFromLocalStorage) {
+      setUser(JSON.parse(userFromLocalStorage));
+      setAuthorized(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function authCheck(url) {
+    const publicPaths = ['/authentication/sign-in', '/authentication/sign-up'];
+    const path = url.split('?')[0];
+
+    if (!publicPaths.includes(path)) {
+      if (!user) {
+        router.push({
+          pathname: '/authentication/sign-in',
+          query: { returnUrl: router.asPath }
+        });
+      } else {
+        setAuthorized(true);
+      }
+    } else {
+      setAuthorized(true);
+    }
+  }
 
   // Identify the layout, which will be applied conditionally
   // const Layout = Component.Layout || (router.pathname.includes('dashboard') ?
@@ -39,7 +74,9 @@ function MyApp({ Component, pageProps }) {
         <title>HRM - Dashboard</title>
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        {authorized &&
+          <Component {...pageProps} />
+        }
       </Layout>
     </SSRProvider>
   )
