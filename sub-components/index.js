@@ -48,6 +48,9 @@ import AllApplicantList from './job/ApplicantList';
 // sub components for /pages/tracker
 import Tracker from './tracker/Tracker';
 
+// sub components for /pages/tracker
+import AllOptions from './options/AllOptions';
+
 export {
    ActiveProjects,
    TasksPerformance,
@@ -71,5 +74,6 @@ export {
    AllDepartment,
    AllRequirement,
    AllApplicantList,
-   Tracker
+   Tracker,
+   AllOptions
 };

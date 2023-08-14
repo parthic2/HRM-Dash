@@ -117,51 +117,6 @@ const ModalFormComponent = ({
           </div>
           <div className="col-sm-6">
             <label
-              htmlFor="checkIn"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Check In
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="time"
-                className="form-control"
-                // className={`form-control ${errors.checkIn ? 'is-invalid' : ''}`}
-                placeholder="Check In"
-                id="checkIn"
-                name="checkIn"
-                maxLength="10"
-                value={formData.checkIn}
-                onChange={handleInputChange}
-              />
-              {/* {errors.checkIn && <div className="invalid-feedback">{errors.checkIn}</div>} */}
-            </div>
-          </div>
-        </Row>
-        <Row className="mb-3">
-          <div className="col-sm-6">
-            <label
-              htmlFor="checkOut"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Check Out
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="time"
-                className="form-control"
-                // className={`form-control ${errors.checkOut ? 'is-invalid' : ''}`}
-                placeholder="Check Out"
-                id="checkOut"
-                name="checkOut"
-                value={formData.checkOut}
-                onChange={handleInputChange}
-              />
-              {/* {errors.checkOut && <div className="invalid-feedback">{errors.checkOut}</div>} */}
-            </div>
-          </div>
-          <div className="col-sm-6">
-            <label
               htmlFor="status"
               className="col-sm-6 col-form-label form-label"
             >
@@ -181,6 +136,56 @@ const ModalFormComponent = ({
               {errors.status && <div className="invalid-feedback">{errors.status}</div>}
             </div>
           </div>
+        </Row>
+        <Row className="mb-3">
+          {formData.status !== 'Leave' && (
+            <>
+              <div className="col-sm-6">
+                <label
+                  htmlFor="checkOut"
+                  className="col-sm-6 col-form-label form-label"
+                >
+                  Check Out
+                </label>
+                <div className="col-md-12 col-12">
+                  <input
+                    type="time"
+                    className="form-control"
+                    // className={`form-control ${errors.checkOut ? 'is-invalid' : ''}`}
+                    placeholder="Check Out"
+                    id="checkOut"
+                    name="checkOut"
+                    value={formData.checkOut}
+                    onChange={handleInputChange}
+                  />
+                  {/* {errors.checkOut && <div className="invalid-feedback">{errors.checkOut}</div>} */}
+                </div>
+              </div>
+
+              <div className="col-sm-6">
+                <label
+                  htmlFor="checkIn"
+                  className="col-sm-6 col-form-label form-label"
+                >
+                  Check In
+                </label>
+                <div className="col-md-12 col-12">
+                  <input
+                    type="time"
+                    className="form-control"
+                    // className={`form-control ${errors.checkIn ? 'is-invalid' : ''}`}
+                    placeholder="Check In"
+                    id="checkIn"
+                    name="checkIn"
+                    maxLength="10"
+                    value={formData.checkIn}
+                    onChange={handleInputChange}
+                  />
+                  {/* {errors.checkIn && <div className="invalid-feedback">{errors.checkIn}</div>} */}
+                </div>
+              </div>
+            </>
+          )}
         </Row>
         <Row className="mb-3">
           <div className="col-sm-12">

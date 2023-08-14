@@ -49,3 +49,8 @@ export const attStatusOptions = [
     { value: "Present", label: "Present" },
     { value: "Leave", label: "Leave" }
 ];
+
+export const totalProjectName = [
+    { value: "Abc", label: "Abc" },
+    { value: "Dashboard", label: "Dashboard" },
+];

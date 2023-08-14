@@ -4,11 +4,10 @@ import SSRProvider from 'react-bootstrap/SSRProvider';
 import 'styles/theme.scss';
 import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
 import { useEffect, useState } from 'react';
-// import SignIn from './authentication/sign-in';
+import { TimerProvider } from 'context/TimerContext';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-
   const [user, setUser] = useState(null);
   const [authorized, setAuthorized] = useState(false);
 
@@ -22,8 +21,6 @@ function MyApp({ Component, pageProps }) {
       setUser(JSON.parse(userFromLocalStorage));
       setAuthorized(true);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function authCheck(url) {
@@ -32,10 +29,7 @@ function MyApp({ Component, pageProps }) {
 
     if (!publicPaths.includes(path)) {
       if (!user) {
-        router.push({
-          pathname: '/authentication/sign-in',
-          query: { returnUrl: router.asPath }
-        });
+        router.push('/authentication/sign-in');
       } else {
         setAuthorized(true);
       }
@@ -73,11 +67,13 @@ function MyApp({ Component, pageProps }) {
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <title>HRM - Dashboard</title>
       </Head>
-      <Layout>
-        {authorized &&
-          <Component {...pageProps} />
-        }
-      </Layout>
+      <TimerProvider>
+        <Layout>
+          {authorized &&
+            <Component {...pageProps} />
+          }
+        </Layout>
+      </TimerProvider>
     </SSRProvider>
   )
 }

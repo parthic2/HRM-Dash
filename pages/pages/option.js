@@ -1,13 +1,13 @@
 import { Container } from 'react-bootstrap';
-import { AllDepartment } from 'sub-components';
+import { AllOptions } from 'sub-components';
 
-const AllDepart = () => {
+const Clients = () => {
     return (
         <Container fluid className="p-6">
             {/* content */}
-            <AllDepartment />
+            <AllOptions />
         </Container>
     )
 }
 
-export default AllDepart;
+export default Clients;

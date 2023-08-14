@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-const ProjectTable = ({ savedProjects, date }) => {
+const ProjectTable = ({ savedProjects }) => {
   return (
     <Card>
       <Table responsive className="text-nowrap mb-0">
@@ -18,9 +18,9 @@ const ProjectTable = ({ savedProjects, date }) => {
           </tr>
         </thead>
         <tbody>
-          {savedProjects[date].map((project, index) => (
+          {savedProjects.map((project, index) => (
             <tr key={index}>
-              <td>{date}</td>
+              <td>{project.date}</td>
               <td className="align-middle">{project.projectName}</td>
               <td className="align-middle">{project.startTime}</td>
               <td className="align-middle">{project.pauseTime || "-"}</td>

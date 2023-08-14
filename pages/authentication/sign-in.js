@@ -8,12 +8,13 @@ const SignIn = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedRole, setSelectedRole] = useState("user"); // Default role is user
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simulate a successful sign-in by setting the user in localStorage
-    const user = { id: 1, username: "testuser" };
+    // Simulate a successful sign-in by setting the user and role in localStorage
+    const user = { id: 1, username: "testuser", role: selectedRole };
     localStorage.setItem('user', JSON.stringify(user));
 
     // Redirect the user back to the returnUrl or a default route
@@ -48,7 +49,7 @@ const SignIn = () => {
                   type="email"
                   name="username"
                   placeholder="Enter address here"
-                  required
+                  // required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -61,10 +62,43 @@ const SignIn = () => {
                   type="password"
                   name="password"
                   placeholder="**************"
-                  required
+                  // required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Select Role</Form.Label>
+                <div>
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="Admin"
+                    name="role"
+                    value="admin"
+                    checked={selectedRole === "admin"}
+                    onChange={() => setSelectedRole("admin")}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="HR"
+                    name="role"
+                    value="hr"
+                    checked={selectedRole === "hr"}
+                    onChange={() => setSelectedRole("hr")}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="User"
+                    name="role"
+                    value="user"
+                    checked={selectedRole === "user"}
+                    onChange={() => setSelectedRole("user")}
+                  />
+                </div>
               </Form.Group>
 
               {/* Checkbox */}
