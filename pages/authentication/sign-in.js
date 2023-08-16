@@ -8,6 +8,7 @@ const SignIn = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState("user"); // Default role is user
 
   const handleSubmit = (e) => {
@@ -41,7 +42,7 @@ const SignIn = () => {
               <p className="mb-6">Please enter your user information.</p>
             </div>
             {/* Form */}
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} autoComplete="off">
               {/* Username */}
               <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username or email</Form.Label>
@@ -58,14 +59,23 @@ const SignIn = () => {
               {/* Password */}
               <Form.Group className="mb-3" controlId="password">
                 <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  placeholder="**************"
-                  // required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="position-relative">
+                  <Form.Control
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter Password"
+                    // required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div
+                    className="position-absolute top-50 end-0 translate-middle-y"
+                    style={{ right: "10px", cursor: "pointer" }}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <i className="fe fe-eye-off me-2" /> : <i className="fe fe-eye me-2" />}
+                  </div>
+                </div>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -77,6 +87,7 @@ const SignIn = () => {
                     label="Admin"
                     name="role"
                     value="admin"
+                    id="adminRole"
                     checked={selectedRole === "admin"}
                     onChange={() => setSelectedRole("admin")}
                   />
@@ -86,6 +97,7 @@ const SignIn = () => {
                     label="HR"
                     name="role"
                     value="hr"
+                    id="hrRole"
                     checked={selectedRole === "hr"}
                     onChange={() => setSelectedRole("hr")}
                   />
@@ -95,6 +107,7 @@ const SignIn = () => {
                     label="User"
                     name="role"
                     value="user"
+                    id="userRole"
                     checked={selectedRole === "user"}
                     onChange={() => setSelectedRole("user")}
                   />
