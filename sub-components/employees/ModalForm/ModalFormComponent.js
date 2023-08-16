@@ -34,13 +34,18 @@ const ModalFormComponent = ({
       addEmployee(formData);
     }
     setFormData({
+      id: "",
       name: "",
+      password: "",
       email: "",
       number: "",
+      alterNum: "",
       address: "",
       designation: "",
       joiningDate: "",
       birthDate: "",
+      gender: "",
+      bloodGroup: "",
       image: null, // Clear the image after submission
     });
     setIsEditModalOpen(false);
@@ -55,9 +60,28 @@ const ModalFormComponent = ({
         <Row className="mb-3">
           <div className="col-sm-6">
             <label
+              htmlFor="id"
+              className="col-sm-6 col-form-label form-label"
+            >
+              Employee ID
+            </label>
+            <div className="col-md-12 col-12">
+              <input
+                type="text"
+                className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+                placeholder="Employee ID"
+                id="id"
+                name="id"
+                value={formData.id}
+                onChange={handleInputChange}
+              />
+              {errors.id && <div className="invalid-feedback">{errors.id}</div>}
+            </div>
+          </div>
+          <div className="col-sm-6">
+            <label
               htmlFor="name"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Name
             </label>
@@ -74,11 +98,47 @@ const ModalFormComponent = ({
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
           </div>
+        </Row>
+        <Row className="mb-3">
+          <div className="col-sm-6">
+            <label
+              htmlFor="password"
+              className="col-sm-6 col-form-label form-label"
+            >
+              Password
+            </label>
+            <div className="col-md-12 col-12">
+              <div className="input-group">
+                <input
+                  type={formData.showPassword ? 'text' : 'password'}
+                  className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                  placeholder="Password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      showPassword: !formData.showPassword
+                    })
+                  }
+                >
+                  {formData.showPassword ? <i className="fe fe-eye-off" /> : <i className="fe fe-eye" />}
+                {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div className="col-sm-6">
             <label
               htmlFor="email"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Email
             </label>
@@ -100,8 +160,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="designation"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Designation
             </label>
@@ -121,8 +180,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="number"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Mobile No.
             </label>
@@ -144,9 +202,29 @@ const ModalFormComponent = ({
         <Row className="mb-3">
           <div className="col-sm-6">
             <label
+              htmlFor="alterNum"
+              className="col-sm-6 col-form-label form-label"
+            >
+              Alternative Number
+            </label>
+            <div className="col-md-12 col-12">
+              <input
+                type="text"
+                className={`form-control ${errors.alterNum ? 'is-invalid' : ''}`}
+                placeholder="Alternative Number"
+                id="alterNum"
+                name="alterNum"
+                maxLength="10"
+                value={formData.alterNum}
+                onChange={handleInputChange}
+              />
+              {errors.alterNum && <div className="invalid-feedback">{errors.alterNum}</div>}
+            </div>
+          </div>
+          <div className="col-sm-6">
+            <label
               htmlFor="address"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Address
             </label>
@@ -163,11 +241,12 @@ const ModalFormComponent = ({
               {errors.address && <div className="invalid-feedback">{errors.address}</div>}
             </div>
           </div>
+        </Row>
+        <Row className="mb-3">
           <div className="col-sm-6">
             <label
               htmlFor="birthDate"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Birth Date
             </label>
@@ -184,13 +263,10 @@ const ModalFormComponent = ({
               {errors.birthDate && <div className="invalid-feedback">{errors.birthDate}</div>}
             </div>
           </div>
-        </Row>
-        <Row className="mb-3">
           <div className="col-sm-6">
             <label
               htmlFor="joiningDate"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Joining Date
             </label>
@@ -205,6 +281,28 @@ const ModalFormComponent = ({
                 onChange={handleInputChange}
               />
               {errors.joiningDate && <div className="invalid-feedback">{errors.joiningDate}</div>}
+            </div>
+          </div>
+        </Row>
+        <Row className="mb-3">
+          <div className="col-sm-6">
+            <label
+              htmlFor="bloodGroup"
+              className="col-sm-6 col-form-label form-label"
+            >
+              Blood Group
+            </label>
+            <div className="col-md-12 col-12">
+              <input
+                type="text"
+                className={`form-control ${errors.bloodGroup ? 'is-invalid' : ''}`}
+                placeholder="Blood Group"
+                id="bloodGroup"
+                name="bloodGroup"
+                value={formData.bloodGroup}
+                onChange={handleInputChange}
+              />
+              {errors.bloodGroup && <div className="invalid-feedback">{errors.bloodGroup}</div>}
             </div>
           </div>
           {!editEmployeeEmail ?
@@ -236,10 +334,9 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="image"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
-              Profile
+              Government Document
             </label>
             <div className="col-md-12 col-12">
               <Form
@@ -250,6 +347,7 @@ const ModalFormComponent = ({
               </Form>
             </div>
           </div>
+          {errors.image && <div className="invalid-feedback">{errors.image}</div>}
         </Row>
 
         {isInEditMode ? (

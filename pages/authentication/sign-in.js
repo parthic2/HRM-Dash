@@ -9,7 +9,7 @@ const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("user"); // Default role is user
+  const [selectedRole, setSelectedRole] = useState(""); // Default role is user
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -115,12 +115,6 @@ const SignIn = () => {
               </Form.Group>
 
               {/* Checkbox */}
-              <div className="d-lg-flex justify-content-between align-items-center mb-4">
-                <Form.Check type="checkbox" id="rememberme">
-                  <Form.Check.Input type="checkbox" />
-                  <Form.Check.Label>Remember me</Form.Check.Label>
-                </Form.Check>
-              </div>
               <div>
                 {/* Button */}
                 <div className="d-grid">
@@ -129,11 +123,6 @@ const SignIn = () => {
                   </Button>
                 </div>
                 <div className="d-md-flex justify-content-between mt-4">
-                  <div className="mb-2 mb-md-0">
-                    <Link href="/authentication/sign-up" className="fs-5">
-                      Create An Account{" "}
-                    </Link>
-                  </div>
                   <div>
                     <Link
                       href="/authentication/forget-password"

@@ -29,13 +29,18 @@ const AllEmployee = () => {
           <Table responsive className="text-nowrap mb-0">
             <thead className="table-light">
               <tr>
+                <th>Employee ID</th>
                 <th>Employee name</th>
+                <th>Password</th>
                 <th>Designation</th>
                 <th>Mobile Number</th>
+                <th>Alternative Number</th>
                 <th>Email</th>
                 <th>Birth Date</th>
                 <th>Address</th>
                 <th>Joining Date</th>
+                <th>Blood Group</th>
+                <th>Document</th>
                 <th></th>
               </tr>
             </thead>
@@ -43,25 +48,28 @@ const AllEmployee = () => {
               {employeeData.map((item, index) => {
                 return (
                   <tr key={index}>
+                    <td className="align-middle">{item.id}</td>
                     <td className="align-middle">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
-                          </div>
-                        </div>
-                        <div className="ms-3 lh-1">
-                          <h5 className=" mb-1">
-                            <Link href="#" className="text-inherit">{item.name}</Link></h5>
-                        </div>
-                      </div>
+                      <Link href="#" className="text-inherit">{item.name}</Link>
                     </td>
+                    <td className="align-middle">{item.password}</td>
                     <td className="align-middle">{item.designation}</td>
                     <td className="align-middle">{item.number}</td>
+                    <td className="align-middle">{item.alterNum}</td>
                     <td className="align-middle">{item.email}</td>
                     <td className="align-middle">{item.birthDate}</td>
                     <td className="align-middle">{item.address}</td>
                     <td className="align-middle">{item.joiningDate}</td>
+                    <td className="align-middle">{item.bloodGroup}</td>
+                    <td className="align-middle">
+                      <div className="d-flex align-items-center">
+                        <div className={`icon-shape icon-md border p-4 rounded-1`}>
+                          <Image src={item.clientImg} alt="" width={35} />
+
+                          {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
+                        </div>
+                      </div>
+                    </td>
                     <td className="align-middle">
                       <ActionMenu
                         onDelete={() => deleteEmployee(item.email)}

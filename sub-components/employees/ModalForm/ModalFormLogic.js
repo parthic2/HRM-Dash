@@ -2,26 +2,35 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const [formData, setFormData] = useState({
+        id: "",
         name: "",
+        password: "",
         email: "",
         number: "",
+        alterNum: "",
         address: "",
         designation: "",
         joiningDate: "",
         birthDate: "",
         gender: "",
+        bloodGroup: "",
+        showPassword: false,
         image: null // To store the selected image
     });
 
     const [errors, setErrors] = useState({
+        id: "",
         name: "",
+        password: "",
         email: "",
         number: "",
+        alterNum: "",
         address: "",
         designation: "",
         joiningDate: "",
         birthDate: "",
-        gender: ""
+        gender: "",
+        bloodGroup: "",
     });
 
     const validateForm = () => {
@@ -33,6 +42,19 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             valid = false;
         } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
             newErrors.name = "Name should contain only characters";
+            valid = false;
+        }
+
+        if (!formData.password.trim()) {
+            newErrors.password = 'Password is required';
+            valid = false;
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(formData.password)) {
+            newErrors.password = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character';
+            valid = false;
+        }
+
+        if (!formData.id.trim()) {
+            newErrors.id = 'Employee Id is required';
             valid = false;
         }
 
@@ -49,6 +71,14 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             valid = false;
         } else if (!/^\d{10}$/.test(formData.number)) {
             newErrors.number = "Contact Number must be a 10-digit number";
+            valid = false;
+        }
+
+        if (!formData.alterNum.trim()) {
+            newErrors.alterNum = 'Alternative Number is required';
+            valid = false;
+        } else if (!/^\d{10}$/.test(formData.alterNum)) {
+            newErrors.alterNum = "Contact number must be a 10-digit alterNum";
             valid = false;
         }
 
@@ -69,6 +99,11 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
 
         if (!formData.birthDate.trim()) {
             newErrors.birthDate = 'Birth date is required';
+            valid = false;
+        }
+
+        if (!formData.bloodGroup.trim()) {
+            newErrors.bloodGroup = 'Blood Group is required';
             valid = false;
         }
 
@@ -102,13 +137,18 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             setFormData(selectedEmployee);
         } else {
             setFormData({
+                id: "",
                 name: "",
+                password: "",
                 email: "",
                 number: "",
+                alterNum: "",
                 address: "",
                 designation: "",
                 joiningDate: "",
                 birthDate: "",
+                gender: "",
+                bloodGroup: "",
                 image: null, // Clear the image after submission
             });
         }

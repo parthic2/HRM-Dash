@@ -114,9 +114,6 @@ const QuickMenu = () => {
             <Dropdown.Item eventKey="2">
               <i className="fe fe-user me-2"></i> Edit Profile
             </Dropdown.Item>
-            <Dropdown.Item eventKey="3">
-              <i className="fe fe-activity me-2"></i> Activity Log
-            </Dropdown.Item>
             <Dropdown.Item>
               <i className="fe fe-settings me-2"></i> Account Settings
             </Dropdown.Item>
@@ -186,9 +183,6 @@ const QuickMenu = () => {
             </Dropdown.Item>
             <Dropdown.Item eventKey="2">
               <i className="fe fe-user me-2"></i> Edit Profile
-            </Dropdown.Item>
-            <Dropdown.Item eventKey="3">
-              <i className="fe fe-activity me-2"></i> Activity Log
             </Dropdown.Item>
             <Dropdown.Item >
               <i className="fe fe-settings me-2"></i> Account Settings
