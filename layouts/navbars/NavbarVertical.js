@@ -19,11 +19,26 @@ const NavbarVertical = (props) => {
   const location = useRouter();
 
   const [filteredMenu, setFilteredMenu] = useState([]); // Initialize filteredMenu state
+  const [hrData, setHrData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
+  // (useEffect to filter menu items based on user role)
   useEffect(() => {
     // This code will run on the client side
     const user = JSON.parse(localStorage.getItem('user'));
     const userRole = user ? user.role : "user";
+
+    if (userRole === "hr") {
+      const hrOptions = JSON.parse(localStorage.getItem("hrEnabledRoutes")) || [];
+      console.log({ hrOptions });
+      setHrData(hrOptions);
+    }
+
+    if (userRole === "user") {
+      const userOptions = JSON.parse(localStorage.getItem("userEnabledRoutes")) || [];
+      console.log({ userOptions });
+      setUserData(userOptions);
+    }
 
     // Filter menu items based on user role
     const filtered = DashboardMenu.filter((menuItem) => {
@@ -187,6 +202,14 @@ const NavbarVertical = (props) => {
               );
             }
           })}
+
+          {hrData.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))}
+
+          {userData.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))}
         </Accordion>
         {/* end of Dashboard Menu */}
       </SimpleBar>
