@@ -114,7 +114,6 @@ const SignIn = () => {
                 </div>
               </Form.Group>
 
-              {/* Checkbox */}
               <div>
                 {/* Button */}
                 <div className="d-grid">
