@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export const FormSelect = (props) => {
-	const { placeholder, options, id, name, onChange, className, value } = props;
+	const { placeholder, options, id, name, onChange, onBlur, className, value } = props;
 
 	return (
 		<Fragment>
@@ -12,6 +12,7 @@ export const FormSelect = (props) => {
 				id={id}
 				name={name}
 				onChange={onChange}
+				onBlur={onBlur}
 				className={className}
 				value={value}
 			>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
-    const [formData, setFormData] = useState({
+    const initialFormValue = {
         id: "",
         name: "",
         password: "",
@@ -16,104 +16,172 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         bloodGroup: "",
         showPassword: false,
         image: null // To store the selected image
-    });
+    };
 
-    const [errors, setErrors] = useState({
-        id: "",
-        name: "",
-        password: "",
-        email: "",
-        number: "",
-        alterNum: "",
-        address: "",
-        designation: "",
-        joiningDate: "",
-        birthDate: "",
-        gender: "",
-        bloodGroup: "",
-    });
+    const [formData, setFormData] = useState(initialFormValue);
+    const [errors, setErrors] = useState(initialFormValue);
+
+    // Validation function for each field
+    const validateName = (value) => {
+        if (value.trim() === "") {
+            return "Name is required";
+        } else if (!/^[A-Za-z\s]+$/.test(value)) {
+            return "Name should contain only characters";
+        } else {
+            return "";
+        }
+    };
+
+    const validatePassword = (value) => {
+        if (value.trim() === "") {
+            return "Password is required"
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)) {
+            return "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+        } else {
+            return "";
+        }
+    }
+
+    const validateId = (value) => {
+        if (value.trim() === "") {
+            return "Employee Id is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateEmail = (value) => {
+        if (value.trim() === "") {
+            return "Email Address is required";
+        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(value)) {
+            return "Invalid email address";
+        } else {
+            return "";
+        }
+    };
+
+    const validateNumber = (value) => {
+        if (value.trim() === "") {
+            return "Mobile number is required";
+        } else if (!/^\d{10}$/.test(value)) {
+            return "Contact Number must be a 10-digit number";
+        } else {
+            return "";
+        }
+    };
+
+    const validateAltNumber = (value) => {
+        if (value.trim() === "") {
+            return "Alternative Number is required";
+        } else if (!/^\d{10}$/.test(value)) {
+            return "Contact Number must be a 10-digit number";
+        } else {
+            return "";
+        }
+    };
+
+    const validateAddress = (value) => {
+        if (value.trim() === "") {
+            return "Address is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateDes = (value) => {
+        if (value.trim() === "") {
+            return "Designation is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateJoinDate = (value) => {
+        if (value.trim() === "") {
+            return "Joining date is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateBirDate = (value) => {
+        if (value.trim() === "") {
+            return "Birth date is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateBGroup = (value) => {
+        if (value.trim() === "") {
+            return "Blood Group is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateGender = (value) => {
+        if (value === "" || value === "select gender") {
+            return "Gender is required";
+        } else {
+            return "";
+        }
+    };
 
     const validateForm = () => {
-        let valid = true;
-        const newErrors = {};
-
-        if (!formData.name.trim()) {
-            newErrors.name = 'Name is required';
-            valid = false;
-        } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-            newErrors.name = "Name should contain only characters";
-            valid = false;
-        }
-
-        if (!formData.password.trim()) {
-            newErrors.password = 'Password is required';
-            valid = false;
-        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(formData.password)) {
-            newErrors.password = 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character';
-            valid = false;
-        }
-
-        if (!formData.id.trim()) {
-            newErrors.id = 'Employee Id is required';
-            valid = false;
-        }
-
-        if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
-            valid = false;
-        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(formData.email)) {
-            newErrors.email = 'Invalid email format';
-            valid = false;
-        }
-
-        if (!formData.number.trim()) {
-            newErrors.number = 'Mobile number is required';
-            valid = false;
-        } else if (!/^\d{10}$/.test(formData.number)) {
-            newErrors.number = "Contact Number must be a 10-digit number";
-            valid = false;
-        }
-
-        if (!formData.alterNum.trim()) {
-            newErrors.alterNum = 'Alternative Number is required';
-            valid = false;
-        } else if (!/^\d{10}$/.test(formData.alterNum)) {
-            newErrors.alterNum = "Contact number must be a 10-digit alterNum";
-            valid = false;
-        }
-
-        if (!formData.address.trim()) {
-            newErrors.address = 'Address is required';
-            valid = false;
-        }
-
-        if (!formData.designation.trim()) {
-            newErrors.designation = 'Designation is required';
-            valid = false;
-        }
-
-        if (!formData.joiningDate.trim()) {
-            newErrors.joiningDate = 'Joining date is required';
-            valid = false;
-        }
-
-        if (!formData.birthDate.trim()) {
-            newErrors.birthDate = 'Birth date is required';
-            valid = false;
-        }
-
-        if (!formData.bloodGroup.trim()) {
-            newErrors.bloodGroup = 'Blood Group is required';
-            valid = false;
-        }
-
-        if (!formData.gender) {
-            newErrors.gender = 'Gender is required';
-            valid = false;
-        }
+        // Validate all form fields and set the error messages
+        const newErrors = {
+            id: validateId(formData.id),
+            name: validateName(formData.name),
+            password: validatePassword(formData.password),
+            email: validateEmail(formData.email),
+            number: validateNumber(formData.number),
+            alterNum: validateAltNumber(formData.alterNum),
+            address: validateAddress(formData.address),
+            designation: validateDes(formData.designation),
+            joiningDate: validateJoinDate(formData.joiningDate),
+            birthDate: validateBirDate(formData.birthDate),
+            gender: validateGender(formData.gender),
+            bloodGroup: validateBGroup(formData.bloodGroup),
+        };
 
         setErrors(newErrors);
-        return valid;
+
+        // Check if the form is valid by checking if there are no error messages
+        return !Object.values(newErrors).some((error) => error !== "");
+    };
+
+    // Handle onBlur event for each input field
+    const handleInputBlur = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        // Validate the current field and set the error message
+        if (name === "id") {
+            setErrors({ ...errors, [name]: validateId(value) });
+        } else if (name === "name") {
+            setErrors({ ...errors, [name]: validateName(value) });
+        } else if (name === "password") {
+            setErrors({ ...errors, [name]: validatePassword(value) });
+        } else if (name === "email") {
+            setErrors({ ...errors, [name]: validateEmail(value) });
+        } else if (name === "number") {
+            setErrors({ ...errors, [name]: validateNumber(value) });
+        } else if (name === "alterNum") {
+            setErrors({ ...errors, [name]: validateAltNumber(value) });
+        } else if (name === "address") {
+            setErrors({ ...errors, [name]: validateAddress(value) });
+        } else if (name === "designation") {
+            setErrors({ ...errors, [name]: validateDes(value) });
+        } else if (name === "joiningDate") {
+            setErrors({ ...errors, [name]: validateJoinDate(value) });
+        } else if (name === "birthDate") {
+            setErrors({ ...errors, [name]: validateBirDate(value) });
+        } else if (name === "gender") {
+            setErrors({ ...errors, [name]: validateGender(value) });
+        } else if (name === "bloodGroup") {
+            setErrors({ ...errors, [name]: validateBGroup(value) });
+        }
     };
 
     const handleInputChange = (event) => {
@@ -159,6 +227,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         setFormData,
         errors,
         validateForm,
+        handleInputBlur,
         handleInputChange,
         handleImageChange,
     };

@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
     handleImageChange,
   } = useModalFormLogic(projectData, editProjectId);
@@ -58,8 +59,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="projectName"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Project Name
             </label>
@@ -72,6 +72,7 @@ const ModalFormComponent = ({
                 name="projectName"
                 value={formData.projectName}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.projectName && <div className="invalid-feedback">{errors.projectName}</div>}
             </div>
@@ -81,8 +82,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="clientName"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Client Name
             </label>
@@ -95,6 +95,7 @@ const ModalFormComponent = ({
                 name="clientName"
                 value={formData.clientName}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.clientName && <div className="invalid-feedback">{errors.clientName}</div>}
             </div>
@@ -102,8 +103,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="clientEmail"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Client Email
             </label>
@@ -116,6 +116,7 @@ const ModalFormComponent = ({
                 name="clientEmail"
                 value={formData.clientEmail}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.clientEmail && <div className="invalid-feedback">{errors.clientEmail}</div>}
             </div>
@@ -125,8 +126,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="startDate"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Start Date
             </label>
@@ -139,6 +139,7 @@ const ModalFormComponent = ({
                 name="startDate"
                 value={formData.startDate}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.startDate && <div className="invalid-feedback">{errors.startDate}</div>}
             </div>
@@ -146,8 +147,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="endDate"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               End Date
             </label>
@@ -160,6 +160,7 @@ const ModalFormComponent = ({
                 name="endDate"
                 value={formData.endDate}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.endDate && <div className="invalid-feedback">{errors.endDate}</div>}
             </div>
@@ -169,8 +170,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="status"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Status
             </label>
@@ -183,6 +183,7 @@ const ModalFormComponent = ({
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
                 options={proStatusOptions}
               />
               {errors.status && <div className="invalid-feedback">{errors.status}</div>}
@@ -191,8 +192,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="progress"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Progress
             </label>
@@ -205,6 +205,7 @@ const ModalFormComponent = ({
                 name="progress"
                 value={formData.progress}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.progress && <div className="invalid-feedback">{errors.progress}</div>}
             </div>
@@ -214,8 +215,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="members"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Team Member
             </label>
@@ -228,6 +228,7 @@ const ModalFormComponent = ({
                 name="members"
                 value={formData.members}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.members && <div className="invalid-feedback">{errors.members}</div>}
             </div>
@@ -237,8 +238,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="image"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Upload Project Documents
             </label>

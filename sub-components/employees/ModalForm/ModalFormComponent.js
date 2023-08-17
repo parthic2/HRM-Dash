@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
     handleImageChange,
   } = useModalFormLogic(employeeData, editEmployeeEmail);
@@ -74,6 +75,7 @@ const ModalFormComponent = ({
                 name="id"
                 value={formData.id}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.id && <div className="invalid-feedback">{errors.id}</div>}
             </div>
@@ -94,6 +96,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -117,6 +120,7 @@ const ModalFormComponent = ({
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
+                  onBlur={handleInputBlur}
                 />
                 <button
                   className="btn btn-outline-secondary"
@@ -129,12 +133,11 @@ const ModalFormComponent = ({
                   }
                 >
                   {formData.showPassword ? <i className="fe fe-eye-off" /> : <i className="fe fe-eye" />}
-                {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                 </button>
+                {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               </div>
             </div>
           </div>
-
           <div className="col-sm-6">
             <label
               htmlFor="email"
@@ -151,6 +154,7 @@ const ModalFormComponent = ({
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
@@ -173,6 +177,7 @@ const ModalFormComponent = ({
                 name="designation"
                 value={formData.designation}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.designation && <div className="invalid-feedback">{errors.designation}</div>}
             </div>
@@ -194,6 +199,7 @@ const ModalFormComponent = ({
                 maxLength="10"
                 value={formData.number}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.number && <div className="invalid-feedback">{errors.number}</div>}
             </div>
@@ -217,6 +223,7 @@ const ModalFormComponent = ({
                 maxLength="10"
                 value={formData.alterNum}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.alterNum && <div className="invalid-feedback">{errors.alterNum}</div>}
             </div>
@@ -237,6 +244,7 @@ const ModalFormComponent = ({
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.address && <div className="invalid-feedback">{errors.address}</div>}
             </div>
@@ -259,6 +267,7 @@ const ModalFormComponent = ({
                 name="birthDate"
                 value={formData.birthDate}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.birthDate && <div className="invalid-feedback">{errors.birthDate}</div>}
             </div>
@@ -279,6 +288,7 @@ const ModalFormComponent = ({
                 name="joiningDate"
                 value={formData.joiningDate}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.joiningDate && <div className="invalid-feedback">{errors.joiningDate}</div>}
             </div>
@@ -301,6 +311,7 @@ const ModalFormComponent = ({
                 name="bloodGroup"
                 value={formData.bloodGroup}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.bloodGroup && <div className="invalid-feedback">{errors.bloodGroup}</div>}
             </div>
@@ -323,6 +334,7 @@ const ModalFormComponent = ({
                   name="gender"
                   value={formData.gender}
                   onChange={handleInputChange}
+                  onBlur={handleInputBlur}
                   options={genderOptions}
                 />
                 {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}

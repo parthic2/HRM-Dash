@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (projectData, editProjectId) => {
-    const [formData, setFormData] = useState({
+    const initialFormValue = {
         projectName: "",
         clientName: "",
         clientEmail: "",
@@ -11,71 +11,120 @@ export const useModalFormLogic = (projectData, editProjectId) => {
         status: "",
         progress: "",
         image: [] // To store the selected image
-    });
+    }
 
-    const [errors, setErrors] = useState({
-        projectName: "",
-        clientName: "",
-        clientEmail: "",
-        startDate: "",
-        endDate: "",
-        members: "",
-        status: "",
-        progress: "",
-    });
+    const [formData, setFormData] = useState(initialFormValue);
+    const [errors, setErrors] = useState(initialFormValue);
+
+    // Validation function for each field
+    const validateProName = (value) => {
+        if (value.trim() === "") {
+            return "Project name is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateName = (value) => {
+        if (value.trim() === "") {
+            return "Client name is required";
+        } else if (!/^[A-Za-z\s]+$/.test(value)) {
+            return "Client name should contain only characters";
+        } else {
+            return "";
+        }
+    };
+
+    const validateEmail = (value) => {
+        if (value.trim() === "") {
+            return "Email Address is required";
+        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(value)) {
+            return "Invalid email address";
+        } else {
+            return "";
+        }
+    };
+
+    const validateStartDate = (value) => {
+        if (value.trim() === "") {
+            return "Starting date is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateEndDate = (value) => {
+        if (value.trim() === "") {
+            return "Ending date is required";
+        } else {
+            return "";
+        }
+    };
+    const validateMember = (value) => {
+        if (value.trim() === "") {
+            return "Member number is required";
+        } else {
+            return "";
+        }
+    };
+    const validateStatus = (value) => {
+        if (value.trim() === "") {
+            return "Status is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateProgress = (value) => {
+        if (value.trim() === "") {
+            return "Progress is required";
+        } else {
+            return "";
+        }
+    };
 
     const validateForm = () => {
-        let valid = true;
-        const newErrors = {};
-
-        if (!formData.projectName.trim()) {
-            newErrors.projectName = 'Project name is required';
-            valid = false;
-        }
-
-        if (!formData.clientName.trim()) {
-            newErrors.clientName = 'Client name is required';
-            valid = false;
-        } else if (!/^[A-Za-z\s]+$/.test(formData.clientName)) {
-            newErrors.clientName = "Client name should contain only characters";
-            valid = false;
-        }
-
-        if (!formData.clientEmail.trim()) {
-            newErrors.clientEmail = 'Client email is required';
-            valid = false;
-        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(formData.clientEmail)) {
-            newErrors.clientEmail = 'Invalid email format';
-            valid = false;
-        }
-
-        if (!formData.startDate.trim()) {
-            newErrors.startDate = 'Starting date is required';
-            valid = false;
-        }
-
-        if (!formData.endDate.trim()) {
-            newErrors.endDate = 'Ending date is required';
-            valid = false;
-        }
-
-        if (!formData.members.trim()) {
-            newErrors.members = 'Member number is required';
-            valid = false;
-        }
-
-        if (!formData.status.trim()) {
-            newErrors.status = 'status is required';
-            valid = false;
-        }
-
-        if (!formData.progress.trim()) {
-            newErrors.progress = 'Progress is required';
-            valid = false;
-        }
+        // Validate all form fields and set the error messages
+        const newErrors = {
+            projectName: validateProName(formData.projectName),
+            clientName: validateName(formData.clientName),
+            clientEmail: validateEmail(formData.clientEmail),
+            startDate: validateStartDate(formData.startDate),
+            endDate: validateEndDate(formData.endDate),
+            members: validateMember(formData.members),
+            status: validateStatus(formData.status),
+            progress: validateProgress(formData.progress)
+        };
 
         setErrors(newErrors);
-        return valid;
+
+        // Check if the form is valid by checking if there are no error messages
+        return !Object.values(newErrors).some((error) => error !== "");
+    };
+
+    // Handle onBlur event for each input field
+    const handleInputBlur = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        // Validate the current field and set the error message
+        if (name === "projectName") {
+            setErrors({ ...errors, [name]: validateProName(value) });
+        } else if (name === "clientName") {
+            setErrors({ ...errors, [name]: validateName(value) });
+        } else if (name === "clientEmail") {
+            setErrors({ ...errors, [name]: validateEmail(value) });
+        } else if (name === "startDate") {
+            setErrors({ ...errors, [name]: validateStartDate(value) });
+        } else if (name === "endDate") {
+            setErrors({ ...errors, [name]: validateEndDate(value) });
+        } else if (name === "members") {
+            setErrors({ ...errors, [name]: validateMember(value) });
+        } else if (name === "status") {
+            setErrors({ ...errors, [name]: validateStatus(value) });
+        } else if (name === "progress") {
+            setErrors({ ...errors, [name]: validateProgress(value) });
+        }
     };
 
     const handleInputChange = (event) => {
@@ -117,6 +166,7 @@ export const useModalFormLogic = (projectData, editProjectId) => {
         setFormData,
         errors,
         validateForm,
+        handleInputBlur,
         handleInputChange,
         handleImageChange,
     };
