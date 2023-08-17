@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }) {
     } else {
       // If there's no user data in local storage, make sure authorized is false
       setAuthorized(false);
+      router.push('/authentication/sign-in');
     }
   }, []);
 
