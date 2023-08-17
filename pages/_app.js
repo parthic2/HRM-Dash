@@ -12,18 +12,16 @@ function MyApp({ Component, pageProps }) {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    // on initial load - run auth check 
-    authCheck(router.asPath);
-
     // Simulate checking if a user is already authenticated
     const userFromLocalStorage = localStorage.getItem('user');
     if (userFromLocalStorage) {
       setUser(JSON.parse(userFromLocalStorage));
       setAuthorized(true);
-    } else {
-      router.push('/authentication/sign-in');
     }
-  }, [router.asPath]);
+
+    // on initial load - run auth check 
+    authCheck(router.asPath);
+  }, []);
 
   function authCheck(url) {
     const publicPaths = ['/authentication/sign-in', '/authentication/sign-up'];
@@ -80,4 +78,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default MyApp;
