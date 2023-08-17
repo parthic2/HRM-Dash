@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
     } else {
       router.push('/authentication/sign-in');
     }
-  }, []);
+  }, [router.asPath]);
 
   function authCheck(url) {
     const publicPaths = ['/authentication/sign-in', '/authentication/sign-up'];
