@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
       setUser(JSON.parse(userFromLocalStorage));
       setAuthorized(true);
     }
-  }, [authCheck]);
+  }, [router.asPath]);
 
   function authCheck(url) {
     const publicPaths = ['/authentication/sign-in', '/authentication/sign-up'];
