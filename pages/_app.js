@@ -20,12 +20,8 @@ function MyApp({ Component, pageProps }) {
     if (userFromLocalStorage) {
       setUser(JSON.parse(userFromLocalStorage));
       setAuthorized(true);
-    } else {
-      // If there's no user data in local storage, make sure authorized is false
-      setAuthorized(false);
-      router.push('/authentication/sign-in');
     }
-  }, []);
+  }, [authCheck]);
 
   function authCheck(url) {
     const publicPaths = ['/authentication/sign-in', '/authentication/sign-up'];
