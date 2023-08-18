@@ -70,10 +70,8 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <TimerProvider>
         <Layout>
-          {authorized ? (
+          {authorized && (
             <Component {...pageProps} />
-          ) : (
-            <p>Loading..</p>
           )}
         </Layout>
       </TimerProvider>
