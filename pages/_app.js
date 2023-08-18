@@ -21,8 +21,6 @@ function MyApp({ Component, pageProps }) {
 
     // on initial load - run auth check 
     authCheck(router.pathname);
-
-    console.log(router.pathname);
   }, []);
 
   function authCheck(url) {

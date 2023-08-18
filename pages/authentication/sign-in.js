@@ -18,12 +18,8 @@ const SignIn = () => {
     const user = { id: 1, username: "testuser", role: selectedRole };
     localStorage.setItem('user', JSON.stringify(user));
 
-    // Debug: Check if user data is successfully stored in local storage
-    console.log("Stored user data:", user);
-
     // Redirect the user back to the returnUrl or a default route
     const returnUrl = router.query.returnUrl || '/';
-    console.log("Return URL:", returnUrl);
     router.push(returnUrl);
   };
 
@@ -108,12 +104,12 @@ const SignIn = () => {
                   <Form.Check
                     inline
                     type="radio"
-                    label="User"
+                    label="Employee"
                     name="role"
-                    value="user"
-                    id="userRole"
-                    checked={selectedRole === "user"}
-                    onChange={() => setSelectedRole("user")}
+                    value="employee"
+                    id="employeeRole"
+                    checked={selectedRole === "employee"}
+                    onChange={() => setSelectedRole("employee")}
                   />
                 </div>
               </Form.Group>

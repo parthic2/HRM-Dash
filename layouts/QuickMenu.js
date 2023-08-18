@@ -47,10 +47,7 @@ const QuickMenu = () => {
   };
 
   const handleSignOut = () => {
-    // Remove user information from localStorage
     localStorage.removeItem('user'); // Adjust the key as needed
-
-    // Navigate to the sign-in page
     router.push('/authentication/sign-in');
   };
 
@@ -112,10 +109,10 @@ const QuickMenu = () => {
               <div className=" dropdown-divider mt-3 mb-2"></div>
             </Dropdown.Item>
             <Dropdown.Item eventKey="2">
-              <i className="fe fe-user me-2"></i> Edit Profile
+              <Link href="/pages/editProfile" className="text-inherit"><i className="fe fe-user me-2"></i> Edit Profile</Link>
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fe fe-settings me-2"></i> Account Settings
+              <Link href="/pages/userUpdateDetail" className="text-inherit"><i className="fe fe-settings me-2"></i> Account Settings</Link>
             </Dropdown.Item>
             <Dropdown.Item onClick={handleSignOut}>
               <i className="fe fe-power me-2"></i>Sign Out
@@ -182,10 +179,10 @@ const QuickMenu = () => {
               <div className=" dropdown-divider mt-3 mb-2"></div>
             </Dropdown.Item>
             <Dropdown.Item eventKey="2">
-              <i className="fe fe-user me-2"></i> Edit Profile
+              <Link href="/pages/editProfile" className="text-inherit"><i className="fe fe-user me-2"></i> Edit Profile</Link>
             </Dropdown.Item>
-            <Dropdown.Item >
-              <i className="fe fe-settings me-2"></i> Account Settings
+            <Dropdown.Item>
+              <Link href="/pages/userUpdateDetail" className="text-inherit"><i className="fe fe-settings me-2"></i> Account Settings</Link>
             </Dropdown.Item>
             <Dropdown.Item onClick={handleSignOut}>
               <i className="fe fe-power me-2"></i>Sign Out
