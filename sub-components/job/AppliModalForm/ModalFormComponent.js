@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
   } = useModalFormLogic(applicantData, editAppliId);
 
@@ -67,6 +68,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -87,6 +89,7 @@ const ModalFormComponent = ({
                 name="title"
                 value={formData.title}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.title && <div className="invalid-feedback">{errors.title}</div>}
             </div>
@@ -109,6 +112,7 @@ const ModalFormComponent = ({
                 name="department"
                 value={formData.department}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
                 options={deptOptions}
               />
               {errors.department && <div className="invalid-feedback">{errors.department}</div>}
@@ -130,6 +134,7 @@ const ModalFormComponent = ({
                 name="interviewDate"
                 value={formData.interviewDate}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.interviewDate && <div className="invalid-feedback">{errors.interviewDate}</div>}
             </div>
@@ -152,6 +157,7 @@ const ModalFormComponent = ({
                 name="interviewTime"
                 value={formData.interviewTime}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.interviewTime && <div className="invalid-feedback">{errors.interviewTime}</div>}
             </div>
@@ -172,6 +178,7 @@ const ModalFormComponent = ({
                 name="reportingTo"
                 value={formData.reportingTo}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.reportingTo && <div className="invalid-feedback">{errors.reportingTo}</div>}
             </div>
@@ -194,6 +201,7 @@ const ModalFormComponent = ({
                 name="qualification"
                 value={formData.qualification}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.qualification && <div className="invalid-feedback">{errors.qualification}</div>}
             </div>

@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
   } = useModalFormLogic(leaveData, editLeaveName);
 
@@ -51,8 +52,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="name"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Leave Name
             </label>
@@ -65,6 +65,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -74,8 +75,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="type"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Leave Type
             </label>
@@ -88,6 +88,7 @@ const ModalFormComponent = ({
                 name="type"
                 value={formData.type}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.type && <div className="invalid-feedback">{errors.type}</div>}
             </div>
@@ -97,8 +98,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="status"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Status
             </label>
@@ -111,6 +111,7 @@ const ModalFormComponent = ({
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
                 options={statusOptions}
               />
               {errors.status && <div className="invalid-feedback">{errors.status}</div>}

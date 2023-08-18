@@ -61,7 +61,7 @@ export const useModalFormLogic = (projectData, editProjectId) => {
         }
     };
     const validateMember = (value) => {
-        if (value.trim() === "") {
+        if (value === "") {
             return "Member number is required";
         } else {
             return "";

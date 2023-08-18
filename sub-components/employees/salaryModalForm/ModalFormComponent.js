@@ -16,6 +16,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
     handleImageChange,
   } = useModalFormLogic(employeeData, editEmployeeEmail);
@@ -67,6 +68,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -87,6 +89,7 @@ const ModalFormComponent = ({
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
@@ -109,6 +112,7 @@ const ModalFormComponent = ({
                 name="designation"
                 value={formData.designation}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.designation && <div className="invalid-feedback">{errors.designation}</div>}
             </div>
@@ -130,6 +134,7 @@ const ModalFormComponent = ({
                 maxLength="10"
                 value={formData.number}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.number && <div className="invalid-feedback">{errors.number}</div>}
             </div>
@@ -152,6 +157,7 @@ const ModalFormComponent = ({
                 name="joiningDate"
                 value={formData.joiningDate}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.joiningDate && <div className="invalid-feedback">{errors.joiningDate}</div>}
             </div>
@@ -172,6 +178,7 @@ const ModalFormComponent = ({
                 name="salary"
                 value={formData.salary}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.salary && <div className="invalid-feedback">{errors.salary}</div>}
             </div>

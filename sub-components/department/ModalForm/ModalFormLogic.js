@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (department, editDepartmentName) => {
-    const [formData, setFormData] = useState({
+    const initialFormValue = {
         name: "",
         headName: "",
         number: "",
@@ -9,65 +9,103 @@ export const useModalFormLogic = (department, editDepartmentName) => {
         startingDate: "",
         totalEmp: "",
         about: "",
-    });
+    }
 
-    const [errors, setErrors] = useState({
-        name: "",
-        headName: "",
-        number: "",
-        email: "",
-        startingDate: "",
-        totalEmp: "",
-    });
+    const [formData, setFormData] = useState(initialFormValue);
+    const [errors, setErrors] = useState(initialFormValue);
+
+    const validateName = (value) => {
+        if (value.trim() === "") {
+            return "Name is required";
+        } else if (!/^[A-Za-z\s]+$/.test(value)) {
+            return "Name should contain only characters";
+        } else {
+            return "";
+        }
+    };
+
+    const validateHead = (value) => {
+        if (value.trim() === "") {
+            return "Head name is required";
+        } else if (!/^[A-Za-z\s]+$/.test(value)) {
+            return "Head name should contain only characters";
+        } else {
+            return "";
+        }
+    };
+
+    const validateNumber = (value) => {
+        if (value.trim() === "") {
+            return "Mobile number is required";
+        } else if (!/^\d{10}$/.test(value)) {
+            return "Mobile Number must be a 10-digit number";
+        } else {
+            return "";
+        }
+    };
+
+    const validateEmail = (value) => {
+        if (value.trim() === "") {
+            return "Email Address is required";
+        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(value)) {
+            return "Invalid email address";
+        } else {
+            return "";
+        }
+    };
+
+    const validateStartDate = (value) => {
+        if (value.trim() === "") {
+            return "Starting date is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateEmp = (value) => {
+        if (value === "") {
+            return "Total employee is required";
+        } else {
+            return "";
+        }
+    };
 
     const validateForm = () => {
-        let valid = true;
-        const newErrors = {};
-
-        if (!formData.name.trim()) {
-            newErrors.name = 'Name is required';
-            valid = false;
-        } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-            newErrors.name = "Name should contain only characters";
-            valid = false;
-        }
-
-        if (!formData.headName.trim()) {
-            newErrors.headName = 'Name is required';
-            valid = false;
-        } else if (!/^[A-Za-z\s]+$/.test(formData.headName)) {
-            newErrors.headName = "Name should contain only characters";
-            valid = false;
-        }
-
-        if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
-            valid = false;
-        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(formData.email)) {
-            newErrors.email = 'Invalid email format';
-            valid = false;
-        }
-
-        if (!formData.number.trim()) {
-            newErrors.number = 'Mobile number is required';
-            valid = false;
-        } else if (!/^\d{10}$/.test(formData.number)) {
-            newErrors.number = "Contact Number must be a 10-digit number";
-            valid = false;
-        }
-
-        if (!formData.startingDate) {
-            newErrors.startingDate = 'Starting date is required';
-            valid = false;
-        }
-
-        if (!formData.totalEmp.trim()) {
-            newErrors.totalEmp = 'Total employee is required';
-            valid = false;
-        }
+        // Validate all form fields and set the error messages
+        const newErrors = {
+            name: validateName(formData.name),
+            headName: validateHead(formData.headName),
+            number: validateNumber(formData.number),
+            email: validateEmail(formData.email),
+            startingDate: validateStartDate(formData.startingDate),
+            totalEmp: validateEmp(formData.totalEmp)
+        };
 
         setErrors(newErrors);
-        return valid;
+
+        // Check if the form is valid by checking if there are no error messages
+        return !Object.values(newErrors).some((error) => error !== "");
+    };
+
+    // Handle onBlur event for each input field
+    const handleInputBlur = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        // Validate the current field and set the error message
+        if (name === "name") {
+            setErrors({ ...errors, [name]: validateName(value) });
+        } else if (name === "headName") {
+            setErrors({ ...errors, [name]: validateHead(value) });
+        } else if (name === "email") {
+            setErrors({ ...errors, [name]: validateEmail(value) });
+        } else if (name === "number") {
+            setErrors({ ...errors, [name]: validateNumber(value) });
+        } else if (name === "startingDate") {
+            setErrors({ ...errors, [name]: validateStartDate(value) });
+        } else if (name === "totalEmp") {
+            setErrors({ ...errors, [name]: validateEmp(value) });
+        }
     };
 
     const handleInputChange = (event) => {
@@ -100,6 +138,7 @@ export const useModalFormLogic = (department, editDepartmentName) => {
         setFormData,
         errors,
         validateForm,
+        handleInputBlur,
         handleInputChange,
     };
 };

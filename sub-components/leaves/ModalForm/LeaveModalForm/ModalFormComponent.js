@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
     handleImageChange
   } = useModalFormLogic(leaveData, editLeaveId);
@@ -69,6 +70,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -89,6 +91,7 @@ const ModalFormComponent = ({
                 name="id"
                 value={formData.id}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.id && <div className="invalid-feedback">{errors.id}</div>}
             </div>
@@ -112,6 +115,7 @@ const ModalFormComponent = ({
                 options={leaveOptions}
                 value={formData.leaveType}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.leaveType && <div className="invalid-feedback">{errors.leaveType}</div>}
             </div>
@@ -132,6 +136,7 @@ const ModalFormComponent = ({
                 name="doj"
                 value={formData.doj}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.doj && <div className="invalid-feedback">{errors.doj}</div>}
             </div>
@@ -154,6 +159,7 @@ const ModalFormComponent = ({
                 name="entitled"
                 value={formData.entitled}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.entitled && <div className="invalid-feedback">{errors.entitled}</div>}
             </div>
@@ -174,6 +180,7 @@ const ModalFormComponent = ({
                 name="utilized"
                 value={formData.utilized}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.utilized && <div className="invalid-feedback">{errors.utilized}</div>}
             </div>
@@ -196,6 +203,7 @@ const ModalFormComponent = ({
                 name="balanced"
                 value={formData.balanced}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.balanced && <div className="invalid-feedback">{errors.balanced}</div>}
             </div>
@@ -216,6 +224,7 @@ const ModalFormComponent = ({
                 name="forward"
                 value={formData.forward}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.forward && <div className="invalid-feedback">{errors.forward}</div>}
             </div>

@@ -43,7 +43,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     }
 
     const validateId = (value) => {
-        if (value.trim() === "") {
+        if (value === "") {
             return "Employee Id is required";
         } else {
             return "";
@@ -64,7 +64,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         if (value.trim() === "") {
             return "Mobile number is required";
         } else if (!/^\d{10}$/.test(value)) {
-            return "Contact Number must be a 10-digit number";
+            return "Mobile Number must be a 10-digit number";
         } else {
             return "";
         }
@@ -74,7 +74,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         if (value.trim() === "") {
             return "Alternative Number is required";
         } else if (!/^\d{10}$/.test(value)) {
-            return "Contact Number must be a 10-digit number";
+            return "Alternative Contact Number must be a 10-digit number";
         } else {
             return "";
         }

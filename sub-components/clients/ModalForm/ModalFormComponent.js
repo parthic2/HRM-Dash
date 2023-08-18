@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
     handleImageChange,
   } = useModalFormLogic(clientData, editClientId);
@@ -58,8 +59,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="name"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Name
             </label>
@@ -72,6 +72,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -79,8 +80,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="email"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Email
             </label>
@@ -93,6 +93,7 @@ const ModalFormComponent = ({
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
@@ -102,8 +103,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="organization"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Organization
             </label>
@@ -116,6 +116,7 @@ const ModalFormComponent = ({
                 name="organization"
                 value={formData.organization}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.organization && <div className="invalid-feedback">{errors.organization}</div>}
             </div>
@@ -123,8 +124,7 @@ const ModalFormComponent = ({
           <div className="col-sm-6">
             <label
               htmlFor="number"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Mobile No.
             </label>
@@ -138,6 +138,7 @@ const ModalFormComponent = ({
                 maxLength="10"
                 value={formData.number}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.number && <div className="invalid-feedback">{errors.number}</div>}
             </div>
@@ -149,8 +150,7 @@ const ModalFormComponent = ({
             <div className="col-sm-6">
               <label
                 htmlFor="website"
-                className="col-sm-6 col-form-label
-                    form-label"
+                className="col-sm-6 col-form-label form-label"
               >
                 Website
               </label>
@@ -163,6 +163,7 @@ const ModalFormComponent = ({
                   name="website"
                   value={formData.website}
                   onChange={handleInputChange}
+                  onBlur={handleInputBlur}
                 />
                 {errors.website && <div className="invalid-feedback">{errors.website}</div>}
               </div>
@@ -170,8 +171,7 @@ const ModalFormComponent = ({
             <div className="col-sm-6">
               <label
                 htmlFor="country"
-                className="col-sm-6 col-form-label
-                    form-label"
+                className="col-sm-6 col-form-label form-label"
               >
                 Country
               </label>
@@ -184,6 +184,7 @@ const ModalFormComponent = ({
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
+                  onBlur={handleInputBlur}
                 />
                 {errors.country && <div className="invalid-feedback">{errors.country}</div>}
               </div>
@@ -196,8 +197,7 @@ const ModalFormComponent = ({
             <div className="col-sm-6">
               <label
                 htmlFor="joiningDate"
-                className="col-sm-6 col-form-label
-                    form-label"
+                className="col-sm-6 col-form-label form-label"
               >
                 Joining Date
               </label>
@@ -210,6 +210,7 @@ const ModalFormComponent = ({
                   name="joiningDate"
                   value={formData.joiningDate}
                   onChange={handleInputChange}
+                  onBlur={handleInputBlur}
                 />
                 {errors.joiningDate && <div className="invalid-feedback">{errors.joiningDate}</div>}
               </div>
@@ -217,8 +218,7 @@ const ModalFormComponent = ({
             <div className="col-sm-6">
               <label
                 htmlFor="gender"
-                className="col-sm-6 col-form-label
-                    form-label"
+                className="col-sm-6 col-form-label form-label"
               >
                 Gender
               </label>
@@ -231,6 +231,7 @@ const ModalFormComponent = ({
                   name="gender"
                   value={formData.gender}
                   onChange={handleInputChange}
+                  onBlur={handleInputBlur}
                   options={genderOptions}
                 />
                 {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
@@ -243,8 +244,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="address"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Address
             </label>
@@ -257,6 +257,7 @@ const ModalFormComponent = ({
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.address && <div className="invalid-feedback">{errors.address}</div>}
             </div>
@@ -266,8 +267,7 @@ const ModalFormComponent = ({
           <div className="col-sm-12">
             <label
               htmlFor="image"
-              className="col-sm-6 col-form-label
-                    form-label"
+              className="col-sm-6 col-form-label form-label"
             >
               Upload Client Profile Photo
             </label>
