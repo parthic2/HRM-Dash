@@ -70,8 +70,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <TimerProvider>
         <Layout>
-          {authorized && (
+          {authorized || router.pathname.includes('authentication') ? (
             <Component {...pageProps} />
+          ) : (
+            <p>Loading..</p>
           )}
         </Layout>
       </TimerProvider>
