@@ -20,7 +20,9 @@ function MyApp({ Component, pageProps }) {
     }
 
     // on initial load - run auth check 
-    authCheck(router.asPath);
+    authCheck(router.pathname);
+
+    console.log(router.pathname);
   }, []);
 
   function authCheck(url) {
@@ -69,9 +71,11 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <TimerProvider>
         <Layout>
-          {authorized &&
+          {authorized || router.pathname.includes('authentication') ? (
             <Component {...pageProps} />
-          }
+          ) : (
+            <p>Loading..</p>
+          )}
         </Layout>
       </TimerProvider>
     </SSRProvider>

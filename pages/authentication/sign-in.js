@@ -18,8 +18,12 @@ const SignIn = () => {
     const user = { id: 1, username: "testuser", role: selectedRole };
     localStorage.setItem('user', JSON.stringify(user));
 
+    // Debug: Check if user data is successfully stored in local storage
+    console.log("Stored user data:", user);
+
     // Redirect the user back to the returnUrl or a default route
     const returnUrl = router.query.returnUrl || '/';
+    console.log("Return URL:", returnUrl);
     router.push(returnUrl);
   };
 
