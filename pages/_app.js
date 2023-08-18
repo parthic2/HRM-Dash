@@ -67,6 +67,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <meta name="description" content="Optimize workforce management with our comprehensive HRM dashboard. Streamline employee data, track performance, monitor attendance, and enhance decision-making, all in one intuitive platform. Simplify HR processes and drive organizational success"></meta>
         <title>HRM - Dashboard</title>
       </Head>
       <TimerProvider>

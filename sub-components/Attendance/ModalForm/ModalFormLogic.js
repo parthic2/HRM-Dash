@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (attendanceData, editAttId) => {
-    const [formData, setFormData] = useState({
+    const initialFormValue = {
         name: "",
         employeeId: "",
         department: "",
@@ -9,56 +9,75 @@ export const useModalFormLogic = (attendanceData, editAttId) => {
         checkOut: "",
         status: "",
         image: null // To store the selected image
-    });
+    };
 
-    const [errors, setErrors] = useState({
-        name: "",
-        employeeId: "",
-        department: "",
-        // checkIn: "",
-        // checkOut: "",
-        status: "",
-    });
+    const [formData, setFormData] = useState(initialFormValue);
+    const [errors, setErrors] = useState(initialFormValue);
+
+    const validateName = (value) => {
+        if (value.trim() === "") {
+            return "Name is required";
+        } else if (!/^[A-Za-z\s]+$/.test(value)) {
+            return "Name should contain only characters";
+        } else {
+            return "";
+        }
+    };
+
+    const validateID = (value) => {
+        if (value.trim() === "") {
+            return "Employee Id is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateDepart = (value) => {
+        if (value.trim() === "") {
+            return "Department is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateStatus = (value) => {
+        if (value.trim() === "") {
+            return "Status is required";
+        } else {
+            return "";
+        }
+    };
 
     const validateForm = () => {
-        let valid = true;
-        const newErrors = {};
-
-        if (!formData.name.trim()) {
-            newErrors.name = 'Name is required';
-            valid = false;
-        } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-            newErrors.name = "Name should contain only characters";
-            valid = false;
-        }
-
-        if (!formData.employeeId.trim()) {
-            newErrors.employeeId = 'Employee Id is required';
-            valid = false;
-        }
-
-        if (!formData.department.trim()) {
-            newErrors.department = 'Department is required';
-            valid = false;
-        }
-
-        // if (!formData.checkIn.trim()) {
-        //     newErrors.checkIn = 'Check In time is required';
-        //     valid = false;
-        // }
-
-        // if (!formData.checkOut.trim()) {
-        //     newErrors.checkOut = 'Check Out time is required';
-        //     valid = false;
-        // }
-
-        if (!formData.status.trim()) {
-            newErrors.status = 'Status is required';
-            valid = false;
-        }
+        // Validate all form fields and set the error messages
+        const newErrors = {
+            employeeId: validateID(formData.employeeId),
+            name: validateName(formData.name),
+            department: validateDepart(formData.department),
+            status: validateStatus(formData.status)
+        };
 
         setErrors(newErrors);
-        return valid;
+
+        // Check if the form is valid by checking if there are no error messages
+        return !Object.values(newErrors).some((error) => error !== "");
+    };
+
+    // Handle onBlur event for each input field
+    const handleInputBlur = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        // Validate the current field and set the error message
+        if (name === "employeeId") {
+            setErrors({ ...errors, [name]: validateID(value) });
+        } else if (name === "name") {
+            setErrors({ ...errors, [name]: validateName(value) });
+        } else if (name === "department") {
+            setErrors({ ...errors, [name]: validateDepart(value) });
+        } else if (name === "status") {
+            setErrors({ ...errors, [name]: validateStatus(value) });
+        }
     };
 
     const handleInputChange = (event) => {
@@ -98,6 +117,7 @@ export const useModalFormLogic = (attendanceData, editAttId) => {
         setFormData,
         errors,
         validateForm,
+        handleInputBlur,
         handleInputChange,
         handleImageChange,
     };

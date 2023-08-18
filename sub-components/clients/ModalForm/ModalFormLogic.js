@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (clientData, editClientId) => {
-    const [formData, setFormData] = useState({
+    const initialFormValue = {
         name: "",
         email: "",
         number: "",
@@ -12,19 +12,10 @@ export const useModalFormLogic = (clientData, editClientId) => {
         country: "",
         gender: "",
         image: null // To store the selected image
-    });
+    }
 
-    const [errors, setErrors] = useState({
-        name: "",
-        email: "",
-        number: "",
-        address: "",
-        organization: "",
-        joiningDate: "",
-        website: "",
-        country: "",
-        gender: ""
-    });
+    const [formData, setFormData] = useState(initialFormValue);
+    const [errors, setErrors] = useState(initialFormValue);
 
     const validateForm = () => {
         let valid = true;

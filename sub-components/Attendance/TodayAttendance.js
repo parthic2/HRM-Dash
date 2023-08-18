@@ -59,8 +59,8 @@ const TodayAttendance = () => {
                   </td>
                   <td className="align-middle">{item.employeeId}</td>
                   <td className="align-middle">{item.department}</td>
-                  <td className="align-middle">{item.checkIn}</td>
-                  <td className="align-middle">{item.checkOut}</td>
+                  <td className="align-middle">{item.checkIn || "-"}</td>
+                  <td className="align-middle">{item.checkOut || "-"}</td>
                   <td className="align-middle">
                     <span className={`badge bg-${statusColorMap[item.status]}`}>
                       {item.status}

@@ -17,6 +17,7 @@ const ModalFormComponent = ({
     setFormData,
     errors,
     validateForm,
+    handleInputBlur,
     handleInputChange,
     handleImageChange,
   } = useModalFormLogic(attendanceData, editAttId);
@@ -68,6 +69,7 @@ const ModalFormComponent = ({
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -88,6 +90,7 @@ const ModalFormComponent = ({
                 name="employeeId"
                 value={formData.employeeId}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
               />
               {errors.employeeId && <div className="invalid-feedback">{errors.employeeId}</div>}
             </div>
@@ -110,6 +113,7 @@ const ModalFormComponent = ({
                 name="department"
                 value={formData.department}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
                 options={deptOptions}
               />
               {errors.department && <div className="invalid-feedback">{errors.department}</div>}
@@ -131,6 +135,7 @@ const ModalFormComponent = ({
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
+                onBlur={handleInputBlur}
                 options={attStatusOptions}
               />
               {errors.status && <div className="invalid-feedback">{errors.status}</div>}
@@ -151,14 +156,12 @@ const ModalFormComponent = ({
                   <input
                     type="time"
                     className="form-control"
-                    // className={`form-control ${errors.checkOut ? 'is-invalid' : ''}`}
                     placeholder="Check Out"
                     id="checkOut"
                     name="checkOut"
                     value={formData.checkOut}
                     onChange={handleInputChange}
                   />
-                  {/* {errors.checkOut && <div className="invalid-feedback">{errors.checkOut}</div>} */}
                 </div>
               </div>
 
@@ -173,7 +176,6 @@ const ModalFormComponent = ({
                   <input
                     type="time"
                     className="form-control"
-                    // className={`form-control ${errors.checkIn ? 'is-invalid' : ''}`}
                     placeholder="Check In"
                     id="checkIn"
                     name="checkIn"
@@ -181,7 +183,6 @@ const ModalFormComponent = ({
                     value={formData.checkIn}
                     onChange={handleInputChange}
                   />
-                  {/* {errors.checkIn && <div className="invalid-feedback">{errors.checkIn}</div>} */}
                 </div>
               </div>
             </>
