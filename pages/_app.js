@@ -70,14 +70,11 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <TimerProvider>
         <Layout>
-          {authorized || router.pathname.includes("authentication") ? (
-            <Component {...pageProps} />
-          ) : ""}
-          {/* {authorized || router.pathname.includes('authentication') ? (
+          {authorized || router.pathname.includes('authentication') ? (
             <Component {...pageProps} />
           ) : (
             <p>Loading ...</p>
-          )} */}
+          )}
         </Layout>
       </TimerProvider>
     </SSRProvider>
