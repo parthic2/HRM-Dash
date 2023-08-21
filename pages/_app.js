@@ -17,6 +17,8 @@ function MyApp({ Component, pageProps }) {
     if (userFromLocalStorage) {
       setUser(JSON.parse(userFromLocalStorage));
       setAuthorized(true);
+    } else {
+      setAuthorized(false);
     }
 
     // on initial load - run auth check 
@@ -43,9 +45,7 @@ function MyApp({ Component, pageProps }) {
   //   (router.pathname.includes('instructor') || router.pathname.includes('student') ?
   //     SignIn : SignIn) : SignIn);
 
-  const Layout = Component.Layout || (router.pathname.includes('dashboard') ?
-    (router.pathname.includes('instructor') || router.pathname.includes('student') ?
-      DefaultDashboardLayout : DefaultDashboardLayout) : DefaultDashboardLayout)
+  const Layout = Component.Layout || DefaultDashboardLayout;
 
   // Simulate user login state using local storage
   // const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <TimerProvider>
         <Layout>
-          {authorized ? (
+          {authorized || router.pathname.includes('authentication') ? (
             <Component {...pageProps} />
           ) : (
             <Component {...pageProps} />
