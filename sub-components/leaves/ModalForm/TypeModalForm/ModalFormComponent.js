@@ -50,14 +50,9 @@ const ModalFormComponent = ({
         {/* row */}
         <Row className="mb-3">
           <div className="col-sm-12">
-            <label
-              htmlFor="name"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Leave Name
-            </label>
-            <div className="col-md-12 col-12">
-              <input
+            <Form.Label className="col-sm-6">Leave Name</Form.Label>
+            <div className="input-group">
+              <Form.Control
                 type="text"
                 className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                 placeholder="Leave Name"
@@ -73,14 +68,9 @@ const ModalFormComponent = ({
         </Row>
         <Row className="mb-3">
           <div className="col-sm-12">
-            <label
-              htmlFor="type"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Leave Type
-            </label>
-            <div className="col-md-12 col-12">
-              <input
+            <Form.Label className="col-sm-6">Leave Type</Form.Label>
+            <div className="input-group">
+              <Form.Control
                 type="text"
                 className={`form-control ${errors.type ? 'is-invalid' : ''}`}
                 placeholder="Leave Type"
@@ -96,13 +86,8 @@ const ModalFormComponent = ({
         </Row>
         <Row className="mb-3">
           <div className="col-sm-12">
-            <label
-              htmlFor="status"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Status
-            </label>
-            <div className="col-md-12 col-12">
+            <Form.Label className="col-sm-6">Status</Form.Label>
+            <div className="input-group">
               <Form.Control
                 className={`form-control ${errors.status ? 'is-invalid' : ''}`}
                 as={FormSelect}

@@ -42,7 +42,7 @@ export const useModalFormLogic = (reqData, editReqId) => {
     };
 
     const validatePos = (value) => {
-        if (value.trim() === "") {
+        if (value === "") {
             return "No of position is required";
         } else {
             return "";

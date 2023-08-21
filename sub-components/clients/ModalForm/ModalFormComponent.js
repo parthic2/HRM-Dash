@@ -57,105 +57,72 @@ const ModalFormComponent = ({
         {/* row */}
         <Row className="mb-3">
           <div className="col-sm-6">
-            <label
-              htmlFor="name"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Name
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                placeholder="Name"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Name</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+              placeholder="Name"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.name && <div className="invalid-feedback">{errors.name}</div>}
           </div>
           <div className="col-sm-6">
-            <label
-              htmlFor="email"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Email
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                placeholder="Email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Email</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              placeholder="Email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
           </div>
         </Row>
         <Row className="mb-3">
           <div className="col-sm-6">
-            <label
-              htmlFor="organization"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Organization
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.organization ? 'is-invalid' : ''}`}
-                placeholder="Organization"
-                id="organization"
-                name="organization"
-                value={formData.organization}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.organization && <div className="invalid-feedback">{errors.organization}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Organization</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.organization ? 'is-invalid' : ''}`}
+              placeholder="Organization"
+              id="organization"
+              name="organization"
+              value={formData.organization}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.organization && <div className="invalid-feedback">{errors.organization}</div>}
           </div>
           <div className="col-sm-6">
-            <label
-              htmlFor="number"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Mobile No.
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.number ? 'is-invalid' : ''}`}
-                placeholder="Mobile Number"
-                id="number"
-                name="number"
-                maxLength="10"
-                value={formData.number}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.number && <div className="invalid-feedback">{errors.number}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Mobile No.</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.number ? 'is-invalid' : ''}`}
+              placeholder="Mobile Number"
+              id="number"
+              name="number"
+              maxLength="10"
+              value={formData.number}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.number && <div className="invalid-feedback">{errors.number}</div>}
           </div>
         </Row>
 
         {!editClientId ? (
           <Row className="mb-3">
             <div className="col-sm-6">
-              <label
-                htmlFor="website"
-                className="col-sm-6 col-form-label form-label"
-              >
-                Website
-              </label>
-              <div className="col-md-12 col-12">
-                <input
+              <Form.Label className="col-sm-6">Website</Form.Label>
+              <div className="input-group">
+                <Form.Control
                   type="text"
                   className={`form-control ${errors.website ? 'is-invalid' : ''}`}
                   placeholder="Website"
@@ -169,25 +136,18 @@ const ModalFormComponent = ({
               </div>
             </div>
             <div className="col-sm-6">
-              <label
-                htmlFor="country"
-                className="col-sm-6 col-form-label form-label"
-              >
-                Country
-              </label>
-              <div className="col-md-12 col-12">
-                <input
-                  type="text"
-                  className={`form-control ${errors.country ? 'is-invalid' : ''}`}
-                  placeholder="Country"
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                  onBlur={handleInputBlur}
-                />
-                {errors.country && <div className="invalid-feedback">{errors.country}</div>}
-              </div>
+              <Form.Label className="col-sm-6">Country</Form.Label>
+              <Form.Control
+                type="text"
+                className={`form-control ${errors.country ? 'is-invalid' : ''}`}
+                placeholder="Country"
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+              />
+              {errors.country && <div className="invalid-feedback">{errors.country}</div>}
             </div>
           </Row>
         ) : ""}
@@ -195,14 +155,9 @@ const ModalFormComponent = ({
         {!editClientId ? (
           <Row className="mb-3">
             <div className="col-sm-6">
-              <label
-                htmlFor="joiningDate"
-                className="col-sm-6 col-form-label form-label"
-              >
-                Joining Date
-              </label>
-              <div className="col-md-12 col-12">
-                <input
+              <Form.Label className="col-sm-6">Joining Date</Form.Label>
+              <div className="input-group">
+                <Form.Control
                   type="date"
                   className={`form-control ${errors.joiningDate ? 'is-invalid' : ''}`}
                   placeholder="Joining Date"
@@ -216,40 +171,28 @@ const ModalFormComponent = ({
               </div>
             </div>
             <div className="col-sm-6">
-              <label
-                htmlFor="gender"
-                className="col-sm-6 col-form-label form-label"
-              >
-                Gender
-              </label>
-              <div className="col-md-12 col-12">
-                <Form.Control
-                  as={FormSelect}
-                  className={`form-control ${errors.gender ? 'is-invalid' : ''}`}
-                  placeholder="Select Gender"
-                  id="gender"
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleInputChange}
-                  onBlur={handleInputBlur}
-                  options={genderOptions}
-                />
-                {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
-              </div>
+              <Form.Label className="col-sm-6">Gender</Form.Label>
+              <Form.Control
+                as={FormSelect}
+                className={`form-control ${errors.gender ? 'is-invalid' : ''}`}
+                placeholder="Select Gender"
+                id="gender"
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                options={genderOptions}
+              />
+              {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
             </div>
           </Row>
         ) : ""}
 
         <Row className="mb-3">
           <div className="col-sm-12">
-            <label
-              htmlFor="address"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Address
-            </label>
-            <div className="col-md-12 col-12">
-              <input
+            <Form.Label className="col-sm-6">Address</Form.Label>
+            <div className="input-group">
+              <Form.Control
                 type="text"
                 className={`form-control ${errors.address ? 'is-invalid' : ''}`}
                 placeholder="Address"
@@ -265,19 +208,13 @@ const ModalFormComponent = ({
         </Row>
         <Row className="mb-3">
           <div className="col-sm-12">
-            <label
-              htmlFor="image"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Upload Client Profile Photo
-            </label>
+            <Form.Label className="col-sm-6">Upload Client Profile Photo</Form.Label>
             <div className="col-md-12 col-12">
-              <Form
-                action="#"
+              <div
                 className="dropzone mb-3 py-10 border-dashed"
               >
                 <DropFiles handleImageChange={handleImageChange} />
-              </Form>
+              </div>
             </div>
           </div>
         </Row>

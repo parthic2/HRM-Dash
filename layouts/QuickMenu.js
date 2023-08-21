@@ -108,7 +108,7 @@ const QuickMenu = () => {
               </div>
               <div className=" dropdown-divider mt-3 mb-2"></div>
             </Dropdown.Item>
-            <Dropdown.Item eventKey="2">
+            <Dropdown.Item>
               <Link href="/pages/editProfile" className="text-inherit"><i className="fe fe-user me-2"></i> Edit Profile</Link>
             </Dropdown.Item>
             <Dropdown.Item>

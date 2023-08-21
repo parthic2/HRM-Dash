@@ -55,7 +55,7 @@ export const useModalFormLogic = (department, editDepartmentName) => {
     };
 
     const validateStartDate = (value) => {
-        if (value.trim() === "") {
+        if (value === "") {
             return "Starting date is required";
         } else {
             return "";

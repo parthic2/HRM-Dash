@@ -55,103 +55,70 @@ const ModalFormComponent = ({
         {/* row */}
         <Row className="mb-3">
           <div className="col-sm-6">
-            <label
-              htmlFor="name"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Employee Name
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                placeholder="Employee Name"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Employee Name</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+              placeholder="Employee Name"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.name && <div className="invalid-feedback">{errors.name}</div>}
           </div>
           <div className="col-sm-6">
-            <label
-              htmlFor="id"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Employee ID
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.id ? 'is-invalid' : ''}`}
-                placeholder="Employee ID"
-                id="id"
-                name="id"
-                value={formData.id}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.id && <div className="invalid-feedback">{errors.id}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Employee ID</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+              placeholder="Employee ID"
+              id="id"
+              name="id"
+              value={formData.id}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.id && <div className="invalid-feedback">{errors.id}</div>}
           </div>
         </Row>
         <Row className="mb-3">
           <div className="col-sm-6">
-            <label
-              htmlFor="applyDate"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Apply Date
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="date"
-                className={`form-control ${errors.applyDate ? 'is-invalid' : ''}`}
-                placeholder="Apply Date"
-                id="applyDate"
-                name="applyDate"
-                value={formData.applyDate}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.applyDate && <div className="invalid-feedback">{errors.applyDate}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Apply Date</Form.Label>
+            <Form.Control
+              type="date"
+              className={`form-control ${errors.applyDate ? 'is-invalid' : ''}`}
+              placeholder="Apply Date"
+              id="applyDate"
+              name="applyDate"
+              value={formData.applyDate}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.applyDate && <div className="invalid-feedback">{errors.applyDate}</div>}
           </div>
           <div className="col-sm-6">
-            <label
-              htmlFor="leaveType"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Leave Type
-            </label>
-            <div className="col-md-12 col-12">
+            <Form.Label className="col-sm-6">Leave Type</Form.Label>
+            <Form.Control
+              className={`form-control ${errors.leaveType ? 'is-invalid' : ''}`}
+              as={FormSelect}
+              placeholder="Select Leave Type"
+              id="leaveType"
+              name="leaveType"
+              value={formData.leaveType}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+              options={leaveOptions}
+            />
+            {errors.leaveType && <div className="invalid-feedback">{errors.leaveType}</div>}
+          </div>
+        </Row>
+        <Row className="mb-3">
+          <div className="col-sm-6">
+            <Form.Label className="col-sm-6">From Date</Form.Label>
+            <div className="input-group">
               <Form.Control
-                className={`form-control ${errors.leaveType ? 'is-invalid' : ''}`}
-                as={FormSelect}
-                placeholder="Select Leave Type"
-                id="leaveType"
-                name="leaveType"
-                value={formData.leaveType}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                options={leaveOptions}
-              />
-              {errors.leaveType && <div className="invalid-feedback">{errors.leaveType}</div>}
-            </div>
-          </div>
-        </Row>
-        <Row className="mb-3">
-          <div className="col-sm-6">
-            <label
-              htmlFor="fromDate"
-              className="col-sm-6 col-form-label form-label"
-            >
-              From Date
-            </label>
-            <div className="col-md-12 col-12">
-              <input
                 type="date"
                 className={`form-control ${errors.fromDate ? 'is-invalid' : ''}`}
                 placeholder="From Date"
@@ -165,36 +132,24 @@ const ModalFormComponent = ({
             </div>
           </div>
           <div className="col-sm-6">
-            <label
-              htmlFor="toDate"
-              className="col-sm-6 col-form-label form-label"
-            >
-              To Date
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="date"
-                className={`form-control ${errors.toDate ? 'is-invalid' : ''}`}
-                placeholder="To Date"
-                id="toDate"
-                name="toDate"
-                value={formData.toDate}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.toDate && <div className="invalid-feedback">{errors.toDate}</div>}
-            </div>
+            <Form.Label className="col-sm-6">To Date</Form.Label>
+            <Form.Control
+              type="date"
+              className={`form-control ${errors.toDate ? 'is-invalid' : ''}`}
+              placeholder="To Date"
+              id="toDate"
+              name="toDate"
+              value={formData.toDate}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.toDate && <div className="invalid-feedback">{errors.toDate}</div>}
           </div>
         </Row>
         <Row className="mb-3">
           <div className="col-sm-6">
-            <label
-              htmlFor="status"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Status
-            </label>
-            <div className="col-md-12 col-12">
+            <Form.Label className="col-sm-6">Status</Form.Label>
+            <div className="input-group">
               <Form.Control
                 as={FormSelect}
                 className={`form-control ${errors.status ? 'is-invalid' : ''}`}
@@ -210,42 +165,29 @@ const ModalFormComponent = ({
             </div>
           </div>
           <div className="col-sm-6">
-            <label
-              htmlFor="remark"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Remark
-            </label>
-            <div className="col-md-12 col-12">
-              <input
-                type="text"
-                className={`form-control ${errors.remark ? 'is-invalid' : ''}`}
-                placeholder="Remark"
-                id="remark"
-                name="remark"
-                value={formData.remark}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.remark && <div className="invalid-feedback">{errors.remark}</div>}
-            </div>
+            <Form.Label className="col-sm-6">Remark</Form.Label>
+            <Form.Control
+              type="text"
+              className={`form-control ${errors.remark ? 'is-invalid' : ''}`}
+              placeholder="Remark"
+              id="remark"
+              name="remark"
+              value={formData.remark}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+            />
+            {errors.remark && <div className="invalid-feedback">{errors.remark}</div>}
           </div>
         </Row>
         <Row className="mb-3">
           <div className="col-sm-12">
-            <label
-              htmlFor="image"
-              className="col-sm-6 col-form-label form-label"
-            >
-              Employee Profile
-            </label>
+            <Form.Label className="col-sm-6">Employee Profile</Form.Label>
             <div className="col-md-12 col-12">
-              <Form
-                action="#"
+              <div
                 className="dropzone mb-3 py-10 border-dashed"
               >
                 <DropFiles handleImageChange={handleImageChange} />
-              </Form>
+              </div>
             </div>
           </div>
         </Row>

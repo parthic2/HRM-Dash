@@ -60,6 +60,7 @@ export const useModalFormLogic = (projectData, editProjectId) => {
             return "";
         }
     };
+
     const validateMember = (value) => {
         if (value === "") {
             return "Member number is required";
@@ -67,6 +68,7 @@ export const useModalFormLogic = (projectData, editProjectId) => {
             return "";
         }
     };
+
     const validateStatus = (value) => {
         if (value.trim() === "") {
             return "Status is required";
@@ -76,7 +78,7 @@ export const useModalFormLogic = (projectData, editProjectId) => {
     };
 
     const validateProgress = (value) => {
-        if (value.trim() === "") {
+        if (value === "") {
             return "Progress is required";
         } else {
             return "";
