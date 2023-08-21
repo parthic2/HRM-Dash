@@ -47,37 +47,33 @@ const AllOptions = () => {
       <Row className="my-6">
         <Col xl={6} lg={6} md={12} xs={12} className="mb-6 mb-xl-0">
           <h3>HR Options</h3>
-          <ul>
-            {DashboardMenu.map(menuItem => (
-              <li key={menuItem.id}>
-                <label className="iphone-switch">
-                  <Switch
-                    {...label}
-                    checked={localStorage.getItem('hrEnabledRoutes')?.includes(menuItem.title)}
-                    onChange={() => handleToggleChange(menuItem.title, 'hr')}
-                  />
-                  <span className="title">{menuItem.title}</span>
-                </label>
-              </li>
-            ))}
-          </ul>
+          {DashboardMenu.map(menuItem => (
+            <div key={menuItem.id}>
+              <label className="iphone-switch">
+                <Switch
+                  {...label}
+                  checked={localStorage.getItem('hrEnabledRoutes')?.includes(menuItem.title)}
+                  onChange={() => handleToggleChange(menuItem.title, 'hr')}
+                />
+                <span className="title">{menuItem.title}</span>
+              </label>
+            </div>
+          ))}
         </Col>
         <Col xl={6} lg={6} md={12} xs={12}>
           <h3>User Options</h3>
-          <ul>
-            {DashboardMenu.map(menuItem => (
-              <li key={menuItem.id}>
-                <label className="iphone-switch">
-                  <Switch
-                    {...label}
-                    checked={localStorage.getItem('userEnabledRoutes')?.includes(menuItem.title)}
-                    onChange={() => handleToggleChange(menuItem.title, 'user')}
-                  />
-                  <span className="title">{menuItem.title}</span>
-                </label>
-              </li>
-            ))}
-          </ul>
+          {DashboardMenu.map(menuItem => (
+            <div key={menuItem.id}>
+              <label className="iphone-switch" >
+                <Switch
+                  {...label}
+                  checked={localStorage.getItem('userEnabledRoutes')?.includes(menuItem.title)}
+                  onChange={() => handleToggleChange(menuItem.title, 'user')}
+                />
+                <span className="title">{menuItem.title}</span>
+              </label>
+            </div>
+          ))}
         </Col>
       </Row>
     </div>

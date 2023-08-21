@@ -3,38 +3,10 @@ import React from "react";
 import Link from "next/link";
 import { MoreVertical } from "react-feather";
 import { Col, Row, Card, Form, Dropdown, Image, Button } from "react-bootstrap";
+import ActionMenu from "common/ActionMenu";
 
 const RecentFromBlog = () => {
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <Link
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="text-muted text-primary-hover"
-    >
-      {children}
-    </Link>
-  ));
-
-  CustomToggle.displayName = "CustomToggle";
-
-  const ActionMenu = () => {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle}>
-          <MoreVertical size="15px" className="text-muted" />
-        </Dropdown.Toggle>
-        <Dropdown.Menu align={"end"}>
-          <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-          <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-          <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  };
+  const userData = JSON.parse(localStorage.getItem('userData'));
 
   return (
     <Col xl={6} md={12} xs={12} className="mb-6">
@@ -51,7 +23,7 @@ const RecentFromBlog = () => {
                 />
               </div>
               <div className="ms-3">
-                <h5 className="mb-0 fw-bold">Jitu Chauhan</h5>
+                <h5 className="mb-0 fw-bold">{userData?.username}</h5>
                 <p className="mb-0">19 minutes ago</p>
               </div>
             </div>

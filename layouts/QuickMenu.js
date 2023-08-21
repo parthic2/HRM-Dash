@@ -174,7 +174,7 @@ const QuickMenu = () => {
             <Dropdown.Item as="div" className="px-4 pb-0 pt-2" bsPrefix=' '>
               <div className="lh-1 ">
                 <h5 className="mb-1"> John E. Grainger</h5>
-                <Link href="#" className="text-inherit fs-6">View my profile</Link>
+                <Link href="/pages/profile" className="text-inherit fs-6">View my profile</Link>
               </div>
               <div className=" dropdown-divider mt-3 mb-2"></div>
             </Dropdown.Item>

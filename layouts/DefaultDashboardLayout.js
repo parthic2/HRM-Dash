@@ -1,6 +1,4 @@
-// import node module libraries
 import { useState } from 'react';
-// import sub components
 import NavbarVertical from './navbars/NavbarVertical';
 import NavbarTop from './navbars/NavbarTop';
 

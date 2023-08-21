@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row, Form, Card, Button, Image } from "react-bootstrap";
 import { DropFiles } from "widgets";
 
 const EditProfile = () => {
   const [profileImage, setProfileImage] = useState("/images/avatar/avatar-5.jpg");
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const userData = JSON.parse(localStorage.getItem('userData'));
 
   const onImageChange = (newImage) => {
     setSelectedImage(newImage[0].preview); // Set the selected image when user selects an image
@@ -41,6 +43,7 @@ const EditProfile = () => {
                         type="text"
                         id="Employee ID"
                         readOnly
+                        value={userData?.id}
                       />
                     </Col>
                   </Row>
@@ -53,6 +56,7 @@ const EditProfile = () => {
                         type="text"
                         id="Name"
                         readOnly
+                        value={userData?.username}
                       />
                     </Col>
                   </Row>
@@ -65,6 +69,7 @@ const EditProfile = () => {
                         type="text"
                         id="Email"
                         readOnly
+                        value={userData?.email}
                       />
                     </Col>
                   </Row>
@@ -77,6 +82,7 @@ const EditProfile = () => {
                         type="text"
                         id="Designation"
                         readOnly
+                        value={userData?.des}
                       />
                     </Col>
                   </Row>
@@ -89,6 +95,7 @@ const EditProfile = () => {
                         type="text"
                         id="Mobile"
                         readOnly
+                        value={userData?.number}
                       />
                     </Col>
                   </Row>
@@ -101,6 +108,7 @@ const EditProfile = () => {
                         type="text"
                         id="Address"
                         readOnly
+                        value={userData?.address}
                       />
                     </Col>
                   </Row>
@@ -113,6 +121,7 @@ const EditProfile = () => {
                         type="text"
                         id="Birth Date"
                         readOnly
+                        value={userData?.bDate}
                       />
                     </Col>
                   </Row>
@@ -125,6 +134,7 @@ const EditProfile = () => {
                         type="text"
                         id="Joining Date"
                         readOnly
+                        value={userData?.jDate}
                       />
                     </Col>
                   </Row>
@@ -137,6 +147,7 @@ const EditProfile = () => {
                         type="text"
                         id="Blood Group"
                         readOnly
+                        value={userData?.blood}
                       />
                     </Col>
                   </Row>

@@ -13,9 +13,9 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // Simulate checking if a user is already authenticated
-    const userFromLocalStorage = localStorage.getItem('user');
+    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
     if (userFromLocalStorage) {
-      setUser(JSON.parse(userFromLocalStorage));
+      setUser(userFromLocalStorage);
       setAuthorized(true);
     } else {
       setAuthorized(false);
@@ -73,7 +73,7 @@ function MyApp({ Component, pageProps }) {
           {authorized || router.pathname.includes('authentication') ? (
             <Component {...pageProps} />
           ) : (
-            <Component {...pageProps} />
+            <p>Loading ...</p>
           )}
         </Layout>
       </TimerProvider>

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Col, Row, Image } from "react-bootstrap";
 
 const ProfileHeader = () => {
+  const userData = JSON.parse(localStorage.getItem('userData'));
+
   return (
     <Row className="align-items-center">
       <Col xl={12} lg={12} md={12} xs={12}>
@@ -43,7 +45,7 @@ const ProfileHeader = () => {
               {/* text */}
               <div className="lh-1">
                 <h2 className="mb-0">
-                  Jitu Chauhan
+                  {userData?.username}
                   <Link
                     href="#!"
                     className="text-decoration-none"
@@ -53,12 +55,12 @@ const ProfileHeader = () => {
                     data-original-title="Beginner"
                   ></Link>
                 </h2>
-                <p className="mb-0 d-block">@imjituchauhan</p>
+                <p className="mb-0 d-block">{userData?.email}</p>
               </div>
             </div>
             <div>
               <Link
-                href="#"
+                href="/pages/editProfile"
                 className="btn btn-outline-primary d-none d-md-block"
               >
                 Edit Profile

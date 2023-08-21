@@ -8,11 +8,11 @@ export const DashboardMenu = [
 		link: '/',
 		roles: ['admin', 'hr', 'employee'],
 	},
-	// {
-	// 	id: uuid(),
-	// 	title: 'PAGES',
-	// 	grouptitle: true
-	// },
+	{
+		id: uuid(),
+		title: 'PAGES',
+		grouptitle: true
+	},
 	{
 		id: uuid(),
 		title: 'Employees',
