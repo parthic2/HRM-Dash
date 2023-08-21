@@ -117,23 +117,23 @@ export const DashboardMenu = [
 	{
 		id: uuid(),
 		title: 'Options',
-		icon: 'clock',
+		icon: 'list',
 		link: "/pages/option",
 		roles: ['admin']
 	},
 	{
 		id: uuid(),
 		title: 'Announcement',
-		icon: 'clock',
+		icon: 'mic',
 		link: "/pages/announcement",
-		roles: ['employee']
+		roles: ['employee', "admin", "hr"]
 	},
 	{
 		id: uuid(),
 		title: 'Awards',
-		icon: 'clock',
+		icon: 'award',
 		link: "/pages/awards",
-		roles: ['employee']
+		roles: ['employee', "admin", "hr"]
 	},
 	// {
 	// 	id: uuid(),
