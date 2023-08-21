@@ -114,13 +114,13 @@ export const DashboardMenu = [
 		link: "/pages/tracker",
 		roles: ['user', 'hr']
 	},
-	{
-		id: uuid(),
-		title: 'Options',
-		icon: 'clock',
-		link: "/pages/option",
-		roles: ['admin']
-	},
+	// {
+	// 	id: uuid(),
+	// 	title: 'Options',
+	// 	icon: 'clock',
+	// 	link: "/pages/option",
+	// 	roles: ['admin']
+	// },
 	{
 		id: uuid(),
 		title: 'Announcement',
