@@ -73,7 +73,7 @@ function MyApp({ Component, pageProps }) {
           {authorized || router.pathname.includes('authentication') ? (
             <Component {...pageProps} />
           ) : (
-            <Component {...pageProps} />
+            <p>Loading..</p>
           )}
         </Layout>
       </TimerProvider>
