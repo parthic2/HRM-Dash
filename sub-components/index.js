@@ -70,5 +70,5 @@ export {
    UpdateDetail,
    EditProfile,
    Announcement,
-   Award
+   Award,
 };
