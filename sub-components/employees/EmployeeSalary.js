@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { Col, Card, Table, Image } from 'react-bootstrap';
-import EmployeesData from 'data/employees/employees';
 import React from 'react';
 import ModalForm from './salaryModalForm/ModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useEmpSalaryData from 'hooks/useEmpSalaryData';
 
 const AllEmployeeSalary = () => {
-  const { employeeData, editEmployeeEmail, addEmpSalary, editEmpSalary, deleteEmpSalary, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useEmpSalaryData(EmployeesData);
+  const { employeeData, editEmployeeEmail, addEmpSalary, editEmpSalary, deleteEmpSalary, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useEmpSalaryData();
 
   return (
     <Col md={12} xs={12}>
@@ -46,7 +45,7 @@ const AllEmployeeSalary = () => {
                       <div className="d-flex align-items-center">
                         <div>
                           <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
+                            {/* {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""} */}
                           </div>
                         </div>
                         <div className="ms-3 lh-1">

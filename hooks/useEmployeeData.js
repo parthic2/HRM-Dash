@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useEmployeeData = (initialData) => {
-    const [employeeData, setEmployeeData] = useState(initialData);
+const useEmployeeData = () => {
+    const [employeeData, setEmployeeData] = useState(JSON.parse(localStorage.getItem('employees')) || []);
     const [editEmployeeEmail, setEditEmployeeEmail] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useEmployeeData = (initialData) => {
     };
 
     const addEmployee = (newEmployee) => {
-        setEmployeeData([...employeeData, newEmployee]);
+        const updatedData = [...employeeData, newEmployee];
+        setEmployeeData(updatedData);
+        localStorage.setItem('employees', JSON.stringify(updatedData));
     };
 
     const editEmployee = (editedEmployee) => {
@@ -20,11 +22,13 @@ const useEmployeeData = (initialData) => {
         );
         setEmployeeData(updatedData);
         setEditEmployeeEmail(null);
+        localStorage.setItem('employees', JSON.stringify(updatedData));
     };
 
     const deleteEmployee = (email) => {
         const updatedData = employeeData.filter((employee) => employee.email !== email);
         setEmployeeData(updatedData);
+        localStorage.setItem('employees', JSON.stringify(updatedData));
     };
 
     return {

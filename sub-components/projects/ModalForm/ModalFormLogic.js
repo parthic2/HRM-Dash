@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (projectData, editProjectId) => {
     const initialFormValue = {
+        id: "",
         projectName: "",
         clientName: "",
         clientEmail: "",
@@ -20,6 +21,14 @@ export const useModalFormLogic = (projectData, editProjectId) => {
     const validateProName = (value) => {
         if (value.trim() === "") {
             return "Project name is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateId = (value) => {
+        if (value === "") {
+            return "Project Id is required";
         } else {
             return "";
         }
@@ -88,6 +97,7 @@ export const useModalFormLogic = (projectData, editProjectId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
+            id: validateId(formData.id),
             projectName: validateProName(formData.projectName),
             clientName: validateName(formData.clientName),
             clientEmail: validateEmail(formData.clientEmail),
@@ -110,7 +120,9 @@ export const useModalFormLogic = (projectData, editProjectId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "projectName") {
+        if (name === "id") {
+            setErrors({ ...errors, [name]: validateId(value) });
+        } else if (name === "projectName") {
             setErrors({ ...errors, [name]: validateProName(value) });
         } else if (name === "clientName") {
             setErrors({ ...errors, [name]: validateName(value) });

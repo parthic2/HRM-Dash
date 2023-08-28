@@ -34,6 +34,7 @@ const ModalFormComponent = ({
       addRequirement(formData);
     }
     setFormData({
+      id: "",
       title: "",
       posType: "",
       department: "",
@@ -53,7 +54,23 @@ const ModalFormComponent = ({
       <Form onSubmit={handleFormSubmit} autoComplete="off">
         {/* row */}
         <Row className="mb-3">
-          <div className="col-sm-12">
+          <div className="col-sm-6">
+            <Form.Label className="col-sm-6">Job ID</Form.Label>
+            <div className="input-group">
+              <Form.Control
+                type="text"
+                className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+                placeholder="Job ID"
+                id="id"
+                name="id"
+                value={formData.id}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+              />
+              {errors.id && <div className="invalid-feedback">{errors.id}</div>}
+            </div>
+          </div>
+          <div className="col-sm-6">
             <Form.Label className="col-sm-6">Job Title</Form.Label>
             <div className="input-group">
               <Form.Control

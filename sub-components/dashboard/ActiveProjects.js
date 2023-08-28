@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Col, Row, Card, Table } from 'react-bootstrap';
-import ProjectsData from 'data/projects/projects';
 
 const statusColorMap = {
   Pending: "warning",
@@ -9,6 +8,8 @@ const statusColorMap = {
 };
 
 const ActiveProjects = () => {
+  const projectData = JSON.parse(localStorage.getItem('project')) || []
+
   return (
     <Row className="mt-6">
       <Col md={12} xs={12}>
@@ -27,7 +28,7 @@ const ActiveProjects = () => {
               </tr>
             </thead>
             <tbody>
-              {ProjectsData.map((item, index) => {
+              {projectData.map((item, index) => {
                 return (
                   <tr key={index}>
                     <td className="align-middle">

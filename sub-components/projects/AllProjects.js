@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Col, Card, Table, ProgressBar } from 'react-bootstrap';
 import ModalForm from './ModalForm/ModalForm';
-import ProjectsData from 'data/projects/projects';
 import ActionMenu from 'common/ActionMenu';
 import useProjectData from 'hooks/useProjectData';
 
@@ -12,7 +11,7 @@ const statusColorMap = {
 };
 
 const AllProjects = () => {
-  const { projectData, editProjectId, addProject, editProject, deleteProject, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useProjectData(ProjectsData);
+  const { projectData, editProjectId, addProject, editProject, deleteProject, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useProjectData();
 
   return (
     <Col md={12} xs={12}>
@@ -34,6 +33,7 @@ const AllProjects = () => {
           <Table responsive className="text-nowrap mb-0">
             <thead className="table-light">
               <tr>
+                <th>Project ID</th>
                 <th>Project name</th>
                 <th>Client name</th>
                 <th>Client Email</th>
@@ -49,6 +49,7 @@ const AllProjects = () => {
               {projectData.map((item, index) => {
                 return (
                   <tr key={index}>
+                    <td className="align-middle">{item.id}</td>
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
                         <h5 className="mb-1">

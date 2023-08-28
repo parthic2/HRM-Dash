@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { Col, Card, Table, Image } from 'react-bootstrap';
-import EmployeesData from 'data/employees/employees';
 import React from 'react';
 import ModalForm from './ModalForm/ModalForm';
 import useEmployeeData from 'hooks/useEmployeeData';
 import ActionMenu from 'common/ActionMenu';
 
 const AllEmployee = () => {
-  const { employeeData, editEmployeeEmail, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, addEmployee, editEmployee, deleteEmployee } = useEmployeeData(EmployeesData);
+  const { employeeData, editEmployeeEmail, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, addEmployee, editEmployee, deleteEmployee } = useEmployeeData();
 
   return (
     <Col md={12} xs={12}>
@@ -64,9 +63,8 @@ const AllEmployee = () => {
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
                         <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                          <Image src={item.clientImg} alt="" width={35} />
-
-                          {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
+                          {/* <Image src={item.image} alt="" width={35} /> */}
+                          {/* <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> */}
                         </div>
                       </div>
                     </td>

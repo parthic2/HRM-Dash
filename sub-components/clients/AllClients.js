@@ -4,10 +4,9 @@ import React from 'react';
 import ModalForm from './ModalForm/ModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useClientData from 'hooks/useClientData';
-import ClientData from 'data/clients/clients';
 
 const AllClients = () => {
-  const { clientData, editClientId, addClient, editClient, deleteClient, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useClientData(ClientData);
+  const { clientData, editClientId, addClient, editClient, deleteClient, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useClientData();
 
   return (
     <Col md={12} xs={12}>
@@ -34,6 +33,7 @@ const AllClients = () => {
                 <th>Organization</th>
                 <th>Mobile No.</th>
                 <th>Email</th>
+                <th>Website</th>
                 <th>Address</th>
                 <th></th>
               </tr>
@@ -42,14 +42,14 @@ const AllClients = () => {
               {clientData.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td className="align-middle">{item.clientId}</td>
+                    <td className="align-middle">{item.id}</td>
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
                         <div>
                           <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                            <Image src={item.clientImg} alt="" width={35} />
+                            {/* <Image src={item.clientImg} alt="" width={35} />
 
-                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
+                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""} */}
                           </div>
                         </div>
                         <div className="ms-3 lh-1">
@@ -59,12 +59,10 @@ const AllClients = () => {
                       </div>
                     </td>
                     <td className="align-middle">{item.organization}</td>
-                    <td className="align-middle">{item.number}
-                    </td>
-                    <td className="align-middle">{item.email}
-                    </td>
-                    <td className="align-middle">{item.address}
-                    </td>
+                    <td className="align-middle">{item.number}</td>
+                    <td className="align-middle">{item.email}</td>
+                    <td className="align-middle">{item.website}</td>
+                    <td className="align-middle">{item.address}</td>
                     <td className="align-middle">
                       <ActionMenu
                         onDelete={() => deleteClient(item.id)}

@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (clientData, editClientId) => {
     const initialFormValue = {
+        id: "",
         name: "",
         email: "",
         number: "",
         address: "",
         organization: "",
-        joiningDate: "",
         website: "",
         country: "",
         gender: "",
@@ -18,6 +18,14 @@ export const useModalFormLogic = (clientData, editClientId) => {
     const [errors, setErrors] = useState(initialFormValue);
 
     // Validation function for each field
+    const validateId = (value) => {
+        if (value === "") {
+            return "Client Id is required";
+        } else {
+            return "";
+        }
+    };
+
     const validateName = (value) => {
         if (value.trim() === "") {
             return "Name is required";
@@ -64,14 +72,6 @@ export const useModalFormLogic = (clientData, editClientId) => {
         }
     };
 
-    const validateJoinDate = (value) => {
-        if (value === "") {
-            return "Joining date is required";
-        } else {
-            return "";
-        }
-    };
-
     const validateWebsite = (value) => {
         if (value === "") {
             return "Website is required";
@@ -98,12 +98,12 @@ export const useModalFormLogic = (clientData, editClientId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
+            id: validateId(formData.id),
             name: validateName(formData.name),
             email: validateEmail(formData.email),
             number: validateNumber(formData.number),
             address: validateAddress(formData.address),
             organization: validateOrg(formData.organization),
-            joiningDate: validateJoinDate(formData.joiningDate),
             website: validateWebsite(formData.website),
             country: validateCountry(formData.country),
             gender: validateGender(formData.gender),
@@ -121,7 +121,9 @@ export const useModalFormLogic = (clientData, editClientId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "name") {
+        if (name === "id") {
+            setErrors({ ...errors, [name]: validateId(value) });
+        } else if (name === "name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "email") {
             setErrors({ ...errors, [name]: validateEmail(value) });
@@ -131,8 +133,6 @@ export const useModalFormLogic = (clientData, editClientId) => {
             setErrors({ ...errors, [name]: validateAddress(value) });
         } else if (name === "organization") {
             setErrors({ ...errors, [name]: validateOrg(value) });
-        } else if (name === "joiningDate") {
-            setErrors({ ...errors, [name]: validateJoinDate(value) });
         } else if (name === "website") {
             setErrors({ ...errors, [name]: validateWebsite(value) });
         } else if (name === "country") {
@@ -163,12 +163,12 @@ export const useModalFormLogic = (clientData, editClientId) => {
             setFormData(selectedClient);
         } else {
             setFormData({
+                id: "",
                 name: "",
                 email: "",
                 number: "",
                 address: "",
                 organization: "",
-                joiningDate: "",
                 website: "",
                 country: "",
                 image: null // Clear the image after submission

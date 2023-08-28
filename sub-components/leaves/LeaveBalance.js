@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { Col, Card, Table, Image } from 'react-bootstrap';
-import LeaveBalanceData from 'data/leave/leaveBalance';
 import React from 'react';
 import ModalForm from './ModalForm/LeaveModalForm/ModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useLeaveBalData from 'hooks/useLeaveBalData';
 
 const AllLeaveBalance = () => {
-  const { leaveData, editLeaveId, addLeaveBal, editLeaveBal, deleteLeaveBal, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveBalData(LeaveBalanceData);
+  const { leaveData, editLeaveId, addLeaveBal, editLeaveBal, deleteLeaveBal, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveBalData();
 
   return (
     <Col md={12} xs={12}>
@@ -49,8 +48,8 @@ const AllLeaveBalance = () => {
                       <div className="d-flex align-items-center">
                         <div>
                           <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                            <Image src={item.employeeImg} alt="" width={35} />
-                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
+                            {/* <Image src={item.employeeImg} alt="" width={35} />
+                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""} */}
                           </div>
                         </div>
                         <div className="ms-3 lh-1">

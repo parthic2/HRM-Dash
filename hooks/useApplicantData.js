@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useApplicantData = (initialData) => {
-    const [applicantData, setApplicantData] = useState(initialData); // State to hold form data
+const useApplicantData = () => {
+    const [applicantData, setApplicantData] = useState(JSON.parse(localStorage.getItem('Applicant')) || []);
     const [editAppliId, setEditAppliId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useApplicantData = (initialData) => {
     };
 
     const addApplicant = (newAppli) => {
-        setApplicantData([...applicantData, newAppli]);
+        const updatedData = [...applicantData, newAppli];
+        setApplicantData(updatedData);
+        localStorage.setItem('Applicant', JSON.stringify(updatedData));
     };
 
     const editApplicant = (editedAppli) => {
@@ -20,11 +22,13 @@ const useApplicantData = (initialData) => {
         );
         setApplicantData(updatedData);
         setEditAppliId(null);
+        localStorage.setItem('Applicant', JSON.stringify(updatedData));
     };
 
     const deleteApplicant = (id) => {
         const updatedData = applicantData.filter((req) => req.id !== id);
         setApplicantData(updatedData);
+        localStorage.setItem('Applicant', JSON.stringify(updatedData));
     };
 
     return {

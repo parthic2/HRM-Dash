@@ -26,7 +26,7 @@ const Home = () => {
                                     <h3 className="mb-0  text-white">Projects</h3>
                                 </div>
                                 <div>
-                                    <Link href="#" className="btn btn-white">Create New Project</Link>
+                                    <Link href="/pages/projects" className="btn btn-white">Create New Project</Link>
                                 </div>
                             </div>
                         </div>

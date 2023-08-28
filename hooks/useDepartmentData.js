@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useDepartmentData = (initialData) => {
-    const [department, setDepartment] = useState(initialData); // State to hold form data
+const useDepartmentData = () => {
+    const [department, setDepartment] = useState(JSON.parse(localStorage.getItem('department')) || []);
     const [editDepartmentName, setEditDepartmentName] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useDepartmentData = (initialData) => {
     };
 
     const addDepartment = (newDepartment) => {
-        setDepartment([...department, newDepartment]);
+        const updatedData = [...department, newDepartment];
+        setDepartment(updatedData);
+        localStorage.setItem('department', JSON.stringify(updatedData));
     };
 
     const editDepartment = (editedDepartment) => {
@@ -20,11 +22,13 @@ const useDepartmentData = (initialData) => {
         );
         setDepartment(updatedData);
         setEditDepartmentName(null);
+        localStorage.setItem('department', JSON.stringify(updatedData));
     };
 
     const deleteDepartment = (name) => {
         const updatedData = department.filter((dept) => dept.name !== name);
         setDepartment(updatedData);
+        localStorage.setItem('department', JSON.stringify(updatedData));
     };
 
     return {

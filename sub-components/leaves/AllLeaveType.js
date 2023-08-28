@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Col, Card, Table } from 'react-bootstrap';
 import React from 'react';
 import ModalForm from './ModalForm/TypeModalForm/ModalForm';
-import leaveTypeData from 'data/leave/leaveType';
 import ActionMenu from 'common/ActionMenu';
 import useLeaveTypeData from 'hooks/useLeaveTypeData';
 
@@ -12,7 +11,7 @@ const statusColorMap = {
 };
 
 const AllLeaveType = () => {
-  const { leaveData, editLeaveName, addLeaveType, editLeave, deleteLeaveType, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveTypeData(leaveTypeData);
+  const { leaveData, editLeaveName, addLeaveType, editLeave, deleteLeaveType, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveTypeData();
 
   return (
     <Col md={12} xs={12}>

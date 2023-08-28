@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Col, Card, Table, Image } from 'react-bootstrap';
 import React from 'react';
-import LeaveReqData from 'data/leave/leaveReq';
 import ReqModalForm from './ModalForm/ReqModalForm/ReqModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useLeaveReqData from 'hooks/useLeaveReqData';
@@ -13,7 +12,7 @@ const statusColorMap = {
 };
 
 const AllLeaveReq = () => {
-  const { leaveData, editLeaveId, addLeaveReq, editLeaveReq, deleteLeaveReq, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveReqData(LeaveReqData);
+  const { leaveData, editLeaveId, addLeaveReq, editLeaveReq, deleteLeaveReq, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveReqData();
 
   return (
     <Col md={12} xs={12}>
@@ -55,8 +54,8 @@ const AllLeaveReq = () => {
                       <div className="d-flex align-items-center">
                         <div>
                           <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                            <Image src={item.employeeImg} alt="" width={35} />
-                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""}
+                            {/* <Image src={item.employeeImg} alt="" width={35} />
+                            {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""} */}
                           </div>
                         </div>
                         <div className="ms-3 lh-1">

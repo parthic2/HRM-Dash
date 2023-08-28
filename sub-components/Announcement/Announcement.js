@@ -7,27 +7,32 @@ import useAnnounceData from 'hooks/useAnnounceData';
 const Announce = () => {
   const { isEditModalOpen, setIsEditModalOpen, announcements, setAnnouncements, selectAllSelected, setSelectAllSelected, announcementId, setAnnouncementId, announcementText, setAnnouncementText, announcementDetails, setAnnouncementDetails, editAnnouncementIndex, setEditAnnouncementIndex, selectedEmployeeNames, setSelectedEmployeeNames, selectedEmployees, setSelectedEmployees, handleEdit, handleDelete } = useAnnounceData();
 
+  const userInfo = JSON.parse(localStorage.getItem('user'));
+  console.log(userInfo.role);
+
   return (
     <Col md={12} xs={12}>
-      <ModalForm
-        isEditModalOpen={isEditModalOpen}
-        setIsEditModalOpen={setIsEditModalOpen}
-        announcements={announcements}
-        setAnnouncements={setAnnouncements}
-        setSelectAllSelected={setSelectAllSelected}
-        announcementId={announcementId}
-        setAnnouncementId={setAnnouncementId}
-        announcementText={announcementText}
-        setAnnouncementText={setAnnouncementText}
-        announcementDetails={announcementDetails}
-        setAnnouncementDetails={setAnnouncementDetails}
-        editAnnouncementIndex={editAnnouncementIndex}
-        setEditAnnouncementIndex={setEditAnnouncementIndex}
-        selectedEmployeeNames={selectedEmployeeNames}
-        setSelectedEmployeeNames={setSelectedEmployeeNames}
-        selectedEmployees={selectedEmployees}
-        setSelectedEmployees={setSelectedEmployees}
-      />
+      {userInfo.role === "employee" ? "" : (
+        <ModalForm
+          isEditModalOpen={isEditModalOpen}
+          setIsEditModalOpen={setIsEditModalOpen}
+          announcements={announcements}
+          setAnnouncements={setAnnouncements}
+          setSelectAllSelected={setSelectAllSelected}
+          announcementId={announcementId}
+          setAnnouncementId={setAnnouncementId}
+          announcementText={announcementText}
+          setAnnouncementText={setAnnouncementText}
+          announcementDetails={announcementDetails}
+          setAnnouncementDetails={setAnnouncementDetails}
+          editAnnouncementIndex={editAnnouncementIndex}
+          setEditAnnouncementIndex={setEditAnnouncementIndex}
+          selectedEmployeeNames={selectedEmployeeNames}
+          setSelectedEmployeeNames={setSelectedEmployeeNames}
+          selectedEmployees={selectedEmployees}
+          setSelectedEmployees={setSelectedEmployees}
+        />
+      )}
       <Card>
         <Card.Header className="bg-white  py-4">
           <h4 className="mb-0">Announcement</h4>

@@ -78,7 +78,7 @@ const QuickMenu = () => {
               </div>
               <Notifications />
               <div className="border-top px-3 pt-3 pb-3">
-                <Link href="/dashboard/notification-history" className="text-link fw-semi-bold">
+                <Link href="#" className="text-link fw-semi-bold">
                   See all Notifications
                 </Link>
               </div>
@@ -149,7 +149,7 @@ const QuickMenu = () => {
               </div>
               <Notifications />
               <div className="border-top px-3 pt-3 pb-3">
-                <Link href="/dashboard/notification-history" className="text-link fw-semi-bold">
+                <Link href="#" className="text-link fw-semi-bold">
                   See all Notifications
                 </Link>
               </div>

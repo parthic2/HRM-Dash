@@ -22,7 +22,7 @@ const ModalForm = ({
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Add Projects
+            {editProjectId ? 'Edit Projects' : 'Add Projects'}   
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

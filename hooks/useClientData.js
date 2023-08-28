@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useClientData = (initialData) => {
-    const [clientData, setClientData] = useState(initialData); // State to hold form data
+const useClientData = () => {
+    const [clientData, setClientData] = useState(JSON.parse(localStorage.getItem('clients')) || []);
     const [editClientId, setEditClientId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useClientData = (initialData) => {
     };
 
     const addClient = (newClient) => {
-        setClientData([...clientData, newClient]);
+        const updatedData = [...clientData, newClient];
+        setClientData(updatedData);
+        localStorage.setItem('clients', JSON.stringify(updatedData));
     };
 
     const editClient = (editedClient) => {
@@ -20,11 +22,13 @@ const useClientData = (initialData) => {
         );
         setClientData(updatedData);
         setEditClientId(null);
+        localStorage.setItem('clients', JSON.stringify(updatedData));
     };
 
     const deleteClient = (id) => {
         const updatedData = clientData.filter((client) => client.id !== id);
         setClientData(updatedData);
+        localStorage.setItem('clients', JSON.stringify(updatedData));
     };
 
     return {

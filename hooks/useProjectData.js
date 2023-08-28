@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useProjectData = (initialData) => {
-    const [projectData, setProjectData] = useState(initialData); // State to hold form data
+const useProjectData = () => {
+    const [projectData, setProjectData] = useState(JSON.parse(localStorage.getItem('project')) || []); 
     const [editProjectId, setEditProjectId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useProjectData = (initialData) => {
     };
 
     const addProject = (newProject) => {
-        setProjectData([...projectData, newProject]);
+        const updatedData = [...projectData, newProject];
+        setProjectData(updatedData);
+        localStorage.setItem('project', JSON.stringify(updatedData));
     };
 
     const editProject = (editedProject) => {
@@ -20,11 +22,13 @@ const useProjectData = (initialData) => {
         );
         setProjectData(updatedData);
         setEditProjectId(null);
+        localStorage.setItem('project', JSON.stringify(updatedData));
     };
 
     const deleteProject = (id) => {
         const updatedData = projectData.filter((project) => project.id !== id);
         setProjectData(updatedData);
+        localStorage.setItem('project', JSON.stringify(updatedData));
     };
 
     return {

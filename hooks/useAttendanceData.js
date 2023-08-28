@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useAttendanceData = (initialData) => {
-    const [attendanceData, setAttendanceData] = useState(initialData);
+const useAttendanceData = () => {
+    const [attendanceData, setAttendanceData] = useState(JSON.parse(localStorage.getItem('attendance')) || []);
     const [editAttId, setAttId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useAttendanceData = (initialData) => {
     };
 
     const addAttendance = (newAtt) => {
-        setAttendanceData([...attendanceData, newAtt]);
+        const updatedData = [...attendanceData, newAtt];
+        setAttendanceData(updatedData);
+        localStorage.setItem('attendance', JSON.stringify(updatedData));
     };
 
     const editAttendance = (editedAtt) => {
@@ -20,11 +22,13 @@ const useAttendanceData = (initialData) => {
         );
         setAttendanceData(updatedData);
         setAttId(null);
+        localStorage.setItem('attendance', JSON.stringify(updatedData));
     };
 
     const deleteAttendance = (id) => {
         const updatedData = attendanceData.filter((attendance) => attendance.id !== id);
         setAttendanceData(updatedData);
+        localStorage.setItem('attendance', JSON.stringify(updatedData));
     };
 
     return {

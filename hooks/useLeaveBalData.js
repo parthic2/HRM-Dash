@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useLeaveBalData = (initialData) => {
-    const [leaveData, setLeaveData] = useState(initialData); // State to hold form data
+const useLeaveBalData = () => {
+    const [leaveData, setLeaveData] = useState(JSON.parse(localStorage.getItem('leaveBal')) || []); 
     const [editLeaveId, setEditLeaveId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useLeaveBalData = (initialData) => {
     };
 
     const addLeaveBal = (newLeave) => {
-        setLeaveData([...leaveData, newLeave]);
+        const updatedData = [...leaveData, newLeave];
+        setLeaveData(updatedData);
+        localStorage.setItem('leaveBal', JSON.stringify(updatedData));
     };
 
     const editLeaveBal = (editedLeave) => {
@@ -20,11 +22,13 @@ const useLeaveBalData = (initialData) => {
         );
         setLeaveData(updatedData);
         setEditLeaveId(null);
+        localStorage.setItem('leaveBal', JSON.stringify(updatedData));
     };
 
     const deleteLeaveBal = (id) => {
         const updatedData = leaveData.filter((leave) => leave.id !== id);
         setLeaveData(updatedData);
+        localStorage.setItem('leaveBal', JSON.stringify(updatedData));
     };
 
     return {

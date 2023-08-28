@@ -61,6 +61,14 @@ const ModalFormComponent = ({
         <Row className="mb-3">
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Employee ID</Form.Label>
+            {/* {editEmployeeEmail ? (
+              <Form.Control
+                type="text"
+                className="form-control"
+                value={formData.id}
+                readOnly
+              />
+            ) : ( */}
             <Form.Control
               type="text"
               className={`form-control ${errors.id ? 'is-invalid' : ''}`}
@@ -71,6 +79,7 @@ const ModalFormComponent = ({
               onChange={handleInputChange}
               onBlur={handleInputBlur}
             />
+            {/* )} */}
             {errors.id && <div className="invalid-feedback">{errors.id}</div>}
           </div>
           <div className="col-sm-6">
@@ -271,6 +280,8 @@ const ModalFormComponent = ({
             <Form.Label className="col-sm-6">Government Document</Form.Label>
             <div className="col-md-12 col-12">
               <div
+                id="image"
+                name="image"
                 className="dropzone mb-3 py-10 border-dashed"
               >
                 <DropFiles handleImageChange={handleImageChange} />

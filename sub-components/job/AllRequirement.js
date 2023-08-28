@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { Col, Card, Table } from 'react-bootstrap';
 import React from 'react';
-import RequirementData from 'data/job/requirement';
 import ModalForm from './ModalForm/ModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useReqData from 'hooks/useReqData';
 
 const AllRequirement = () => {
-  const { reqData, editReqId, addRequirement, editRequirement, deleteRequirement, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useReqData(RequirementData);
+  const { reqData, editReqId, addRequirement, editRequirement, deleteRequirement, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useReqData();
 
   return (
     <Col md={12} xs={12}>
@@ -29,6 +28,7 @@ const AllRequirement = () => {
           <Table responsive className="text-nowrap mb-0">
             <thead className="table-light">
               <tr>
+                <th>Job ID</th>
                 <th>Job Title</th>
                 <th>Position</th>
                 <th>Department</th>
@@ -44,6 +44,7 @@ const AllRequirement = () => {
               {reqData.map((item, index) => {
                 return (
                   <tr key={index}>
+                    <td className="align-middle">{item.id}</td>
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
                         <h5 className="mb-1">

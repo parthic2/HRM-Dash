@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { Col, Card, Table } from 'react-bootstrap';
 import React from 'react';
-import departmentData from 'data/department/department';
 import ModalForm from './ModalForm/ModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useDepartmentData from 'hooks/useDepartmentData';
 
 const AllDepartment = () => {
-  const { department, editDepartmentName, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, addDepartment, editDepartment, deleteDepartment } = useDepartmentData(departmentData);
+  const { department, editDepartmentName, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, addDepartment, editDepartment, deleteDepartment } = useDepartmentData();
 
   return (
     <Col md={12} xs={12}>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useReqData = (initialData) => {
-    const [reqData, setReqData] = useState(initialData); // State to hold form data
+const useReqData = () => {
+    const [reqData, setReqData] = useState(JSON.parse(localStorage.getItem('requirement')) || []);
     const [editReqId, setEditReqId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -11,7 +11,9 @@ const useReqData = (initialData) => {
     };
 
     const addRequirement = (newReq) => {
-        setReqData([...reqData, newReq]);
+        const updatedData = [...reqData, newReq];
+        setReqData(updatedData);
+        localStorage.setItem('requirement', JSON.stringify(updatedData));
     };
 
     const editRequirement = (editedReq) => {
@@ -20,11 +22,13 @@ const useReqData = (initialData) => {
         );
         setReqData(updatedData);
         setEditReqId(null);
+        localStorage.setItem('requirement', JSON.stringify(updatedData));
     };
 
     const deleteRequirement = (id) => {
         const updatedData = reqData.filter((req) => req.id !== id);
         setReqData(updatedData);
+        localStorage.setItem('requirement', JSON.stringify(updatedData));
     };
 
     return {
