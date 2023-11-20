@@ -10,6 +10,7 @@ const ModalFormComponent = ({
   editLeaveReq,
   editLeaveId,
   setIsEditModalOpen,
+  maxId
 }) => {
 
   const {
@@ -36,7 +37,6 @@ const ModalFormComponent = ({
     }
     setFormData({
       name: "",
-      id: "",
       applyDate: "",
       leaveType: "",
       fromDate: "",
@@ -72,15 +72,13 @@ const ModalFormComponent = ({
             <Form.Label className="col-sm-6">Employee ID</Form.Label>
             <Form.Control
               type="text"
-              className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+              className="form-control"
               placeholder="Employee ID"
               id="id"
               name="id"
-              value={formData.id}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
+              value={isInEditMode ? formData.id : maxId + 1}
+              readOnly
             />
-            {errors.id && <div className="invalid-feedback">{errors.id}</div>}
           </div>
         </Row>
         <Row className="mb-3">

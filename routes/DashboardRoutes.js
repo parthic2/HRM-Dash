@@ -10,11 +10,6 @@ export const DashboardMenu = [
 	},
 	{
 		id: uuid(),
-		title: 'PAGES',
-		grouptitle: true
-	},
-	{
-		id: uuid(),
 		title: 'Employees',
 		icon: 'users',
 		roles: ['admin', "hr"],

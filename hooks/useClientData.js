@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useClientData = () => {
     const [clientData, setClientData] = useState(JSON.parse(localStorage.getItem('clients')) || []);
     const [editClientId, setEditClientId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [maxId, setMaxId] = useState(0);
+
+    useEffect(() => {
+        // Calculate the maximum ID from the existing data
+        const maxExistingId = clientData.reduce((maxId, client) => Math.max(maxId, client.id), 0);
+        setMaxId(maxExistingId);
+    }, [clientData]);
 
     const handleEditButtonClick = (id) => {
         setEditClientId(id);
@@ -11,8 +18,11 @@ const useClientData = () => {
     };
 
     const addClient = (newClient) => {
-        const updatedData = [...clientData, newClient];
+        // Increment the maxId and assign it to the new employee
+        const newId = maxId + 1;
+        const updatedData = [...clientData, { ...newClient, id: newId }];
         setClientData(updatedData);
+        setMaxId(newId);
         localStorage.setItem('clients', JSON.stringify(updatedData));
     };
 
@@ -40,7 +50,8 @@ const useClientData = () => {
         deleteClient,
         isEditModalOpen,
         setIsEditModalOpen,
-        handleEditButtonClick
+        handleEditButtonClick,
+        maxId
     };
 };
 

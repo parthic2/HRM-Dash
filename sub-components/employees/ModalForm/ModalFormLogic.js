@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const initialFormValue = {
-        id: "",
         name: "",
         password: "",
         email: "",
@@ -41,14 +40,6 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             return "";
         }
     }
-
-    const validateId = (value) => {
-        if (value === "") {
-            return "Employee Id is required";
-        } else {
-            return "";
-        }
-    };
 
     const validateEmail = (value) => {
         if (value.trim() === "") {
@@ -131,7 +122,6 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            id: validateId(formData.id),
             name: validateName(formData.name),
             password: validatePassword(formData.password),
             email: validateEmail(formData.email),
@@ -157,9 +147,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "id") {
-            setErrors({ ...errors, [name]: validateId(value) });
-        } else if (name === "name") {
+        if (name === "name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "password") {
             setErrors({ ...errors, [name]: validatePassword(value) });
@@ -205,19 +193,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             setFormData(selectedEmployee);
         } else {
             setFormData({
-                id: "",
-                name: "",
-                password: "",
-                email: "",
-                number: "",
-                alterNum: "",
-                address: "",
-                designation: "",
-                joiningDate: "",
-                birthDate: "",
-                gender: "",
-                bloodGroup: "",
-                image: null, // Clear the image after submission
+                ...initialFormValue
             });
         }
     }, [editEmployeeEmail]);

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 export const useModalFormLogic = (leaveData, editLeaveId) => {
   const initialFormValue = {
     name: "",
-    id: "",
     applyDate: "",
     leaveType: "",
     fromDate: "",
@@ -21,14 +20,6 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
       return "Name is required";
     } else if (!/^[A-Za-z\s]+$/.test(value)) {
       return "Name should contain only characters";
-    } else {
-      return "";
-    }
-  };
-
-  const validateId = (value) => {
-    if (value.trim() === "") {
-      return "ID is required";
     } else {
       return "";
     }
@@ -85,7 +76,6 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
   const validateForm = () => {
     // Validate all form fields and set the error messages
     const newErrors = {
-      id: validateId(formData.id),
       name: validateName(formData.name),
       applyDate: validateAppDate(formData.applyDate),
       leaveType: validateType(formData.leaveType),
@@ -107,9 +97,7 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
     setFormData({ ...formData, [name]: value });
 
     // Validate the current field and set the error message
-    if (name === "id") {
-      setErrors({ ...errors, [name]: validateId(value) });
-    } else if (name === "name") {
+    if (name === "name") {
       setErrors({ ...errors, [name]: validateName(value) });
     } else if (name === "applyDate") {
       setErrors({ ...errors, [name]: validateAppDate(value) });
@@ -147,15 +135,7 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
       setFormData(selectedLeave);
     } else {
       setFormData({
-        name: "",
-        id: "",
-        applyDate: "",
-        leaveType: "",
-        fromDate: "",
-        toDate: "",
-        status: "",
-        remark: "",
-        image: null, // Clear the image after submission
+        ...initialFormValue
       });
     }
   }, [editLeaveId]);

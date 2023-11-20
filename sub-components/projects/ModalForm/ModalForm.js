@@ -7,9 +7,9 @@ const ModalForm = ({
   editProject,
   editProjectId,
   isEditModalOpen,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
-
   return (
     <Col md={12} xs={12}>
       <div className="btn btn-white mb-5" onClick={() => setIsEditModalOpen(true)}>Add Projects</div>
@@ -32,6 +32,7 @@ const ModalForm = ({
             editProject={editProject}
             editProjectId={editProjectId}
             setIsEditModalOpen={setIsEditModalOpen}
+            maxId={maxId}
           />
         </Modal.Body>
       </Modal>

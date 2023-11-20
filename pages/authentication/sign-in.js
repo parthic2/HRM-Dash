@@ -3,24 +3,120 @@ import Link from "next/link";
 import AuthLayout from "layouts/AuthLayout";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import axios from "axios";
 
 const SignIn = () => {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState(""); // Default role is user
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   // Simulate a successful sign-in by setting the user and role in localStorage
+  //   const user = { id: 1, username: "testuser", role: selectedRole };
+  //   localStorage.setItem('user', JSON.stringify(user));
+
+  //   // Redirect the user back to the returnUrl or a default route
+  //   const returnUrl = router.query.returnUrl || '/';
+  //   router.push(returnUrl);
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await fetch 
+  //     ("https://hrm.stackholic.io/api/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: email,  // Make sure to extract the value here
+  //         password: password,  // Make sure to extract the value here
+  //       }),
+  //     });
+
+  //     console.log(response.json());
+
+  //     if (response.ok) {
+  //       const { token } = await response.json();
+
+  //       // Store the token in localStorage or state
+  //       localStorage.setItem("token", token);
+
+  //       // Include the token in subsequent requests
+  //       const dataResponse = await fetch("https://hrm.stackholic.io/api/some-endpoint", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "Authorization": `Bearer ${token}`,
+  //         },
+  //       });
+
+  //       if (dataResponse.ok) {
+  //         const data = await dataResponse.json();
+  //         console.log("Data fetched successfully:", data);
+  //       } else {
+  //         console.error("Failed to fetch data:", dataResponse.status);
+  //       }
+  //     } else {
+  //       console.error("Login failed:", response.status);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during login:", error);
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulate a successful sign-in by setting the user and role in localStorage
-    const user = { id: 1, username: "testuser", role: selectedRole };
-    localStorage.setItem('user', JSON.stringify(user));
+    try {
+      // Convert the selected role to a numeric value
+      const numericRole = selectedRole === "hr" ? "1" : selectedRole === "employee" ? "2" : selectedRole === "admin" ? "3" : "0";
 
-    // Redirect the user back to the returnUrl or a default route
-    const returnUrl = router.query.returnUrl || '/';
-    router.push(returnUrl);
+      const response = await axios.post("https://hrm.stackholic.io/api/login", {
+        email,
+        password,
+        role: numericRole, // Include the selected role in the login request
+      },
+        // {
+        //   withCredentials: true, // Include credentials (e.g., cookies) in the request
+        // }
+      );
+
+      // console.log("Email:", email);
+      // console.log("Password:", password);
+      // console.log("Numeric Role:", numericRole);
+
+      if (response.status === 200) {
+        const userData = response.data;
+        const { role } = userData;
+
+        // Set user data in localStorage or global state
+        localStorage.setItem("login-user", JSON.stringify({ ...userData, role }));
+
+        // Redirect the user back to the returnUrl or a default route
+        const returnUrl = router.query.returnUrl || "/";
+        router.push(returnUrl);
+      } else {
+        console.error("Login failed:", response.status, response.data);
+
+        // Handle specific cases (adjust as needed)
+        if (response.status === 401) {
+          console.error("Unauthorized: Check your credentials");
+        } else if (response.status === 419) {
+          console.error("Session expired");
+        } else {
+          console.error("Unexpected error");
+        }
+      }
+    } catch (error) {
+      console.error("Error during login:", error.message);
+    }
   };
 
   return (
@@ -51,8 +147,8 @@ const SignIn = () => {
                   name="username"
                   placeholder="Enter address here"
                   // required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
 

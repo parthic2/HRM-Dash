@@ -1,12 +1,14 @@
 import Link from 'next/link';
-import { Col, Card, Table, Image } from 'react-bootstrap';
-import React from 'react';
+import { Col, Card, Table, Image, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
 import ModalForm from './salaryModalForm/ModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useEmpSalaryData from 'hooks/useEmpSalaryData';
 
 const AllEmployeeSalary = () => {
   const { employeeData, editEmployeeEmail, addEmpSalary, editEmpSalary, deleteEmpSalary, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useEmpSalaryData();
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Col md={12} xs={12}>
@@ -19,8 +21,17 @@ const AllEmployeeSalary = () => {
         setIsEditModalOpen={setIsEditModalOpen}
       />
       <Card>
-        <Card.Header className="bg-white  py-4">
+      <Card.Header className="bg-white py-4 d-flex justify-content-between align-items-center">
           <h4 className="mb-0">Employee Salary</h4>
+          <div>
+            <Form.Control
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </Card.Header>
         {employeeData.length === 0 ? (
           <p style={{ textAlign: "center", marginTop: "20px", fontSize: "20px" }}>No Data Found!</p>
@@ -38,9 +49,18 @@ const AllEmployeeSalary = () => {
               </tr>
             </thead>
             <tbody>
-              {employeeData.map((item, index) => {
-                return (
-                  <tr key={index}>
+              {employeeData
+                .filter((item) =>
+                  Object.values(item).some(
+                    (value) =>
+                      value &&
+                      typeof value === 'string' &&
+                      value.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                )
+                .map((item, index) => {
+                  return (
+                    <tr key={index}>
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
                         <div>
@@ -66,8 +86,8 @@ const AllEmployeeSalary = () => {
                       />
                     </td>
                   </tr>
-                )
-              })}
+                  );
+                })}
             </tbody>
           </Table>
         )}

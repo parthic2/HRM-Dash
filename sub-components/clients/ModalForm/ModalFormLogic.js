@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (clientData, editClientId) => {
     const initialFormValue = {
-        id: "",
         name: "",
         email: "",
         number: "",
@@ -18,14 +17,6 @@ export const useModalFormLogic = (clientData, editClientId) => {
     const [errors, setErrors] = useState(initialFormValue);
 
     // Validation function for each field
-    const validateId = (value) => {
-        if (value === "") {
-            return "Client Id is required";
-        } else {
-            return "";
-        }
-    };
-
     const validateName = (value) => {
         if (value.trim() === "") {
             return "Name is required";
@@ -98,7 +89,6 @@ export const useModalFormLogic = (clientData, editClientId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            id: validateId(formData.id),
             name: validateName(formData.name),
             email: validateEmail(formData.email),
             number: validateNumber(formData.number),
@@ -121,9 +111,7 @@ export const useModalFormLogic = (clientData, editClientId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "id") {
-            setErrors({ ...errors, [name]: validateId(value) });
-        } else if (name === "name") {
+        if (name === "name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "email") {
             setErrors({ ...errors, [name]: validateEmail(value) });
@@ -163,15 +151,7 @@ export const useModalFormLogic = (clientData, editClientId) => {
             setFormData(selectedClient);
         } else {
             setFormData({
-                id: "",
-                name: "",
-                email: "",
-                number: "",
-                address: "",
-                organization: "",
-                website: "",
-                country: "",
-                image: null // Clear the image after submission
+                ...initialFormValue
             });
         }
     }, [editClientId]);

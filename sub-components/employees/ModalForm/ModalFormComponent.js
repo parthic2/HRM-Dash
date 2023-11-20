@@ -9,7 +9,8 @@ const ModalFormComponent = ({
   employeeData,
   addEmployee,
   editEmployee,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
 
   const {
@@ -35,7 +36,6 @@ const ModalFormComponent = ({
       addEmployee(formData);
     }
     setFormData({
-      id: "",
       name: "",
       password: "",
       email: "",
@@ -57,30 +57,18 @@ const ModalFormComponent = ({
   return (
     <Col md={12} xs={12}>
       <Form onSubmit={handleFormSubmit} autoComplete="off">
-        {/* row */}
         <Row className="mb-3">
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Employee ID</Form.Label>
-            {/* {editEmployeeEmail ? (
-              <Form.Control
-                type="text"
-                className="form-control"
-                value={formData.id}
-                readOnly
-              />
-            ) : ( */}
             <Form.Control
               type="text"
-              className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+              className="form-control"
               placeholder="Employee ID"
               id="id"
               name="id"
-              value={formData.id}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
+              value={isInEditMode ? formData.id : maxId + 1} // Use maxId + 1 for new employees
+              readOnly
             />
-            {/* )} */}
-            {errors.id && <div className="invalid-feedback">{errors.id}</div>}
           </div>
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Name</Form.Label>

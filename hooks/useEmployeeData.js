@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useEmployeeData = () => {
     const [employeeData, setEmployeeData] = useState(JSON.parse(localStorage.getItem('employees')) || []);
     const [editEmployeeEmail, setEditEmployeeEmail] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [maxId, setMaxId] = useState(0);
+
+    useEffect(() => {
+        // Calculate the maximum ID from the existing data
+        const maxExistingId = employeeData.reduce((maxId, employee) => Math.max(maxId, employee.id), 0);
+        setMaxId(maxExistingId);
+    }, [employeeData]);
 
     const handleEditButtonClick = (email) => {
         setEditEmployeeEmail(email);
@@ -11,8 +18,11 @@ const useEmployeeData = () => {
     };
 
     const addEmployee = (newEmployee) => {
-        const updatedData = [...employeeData, newEmployee];
+        // Increment the maxId and assign it to the new employee
+        const newId = maxId + 1;
+        const updatedData = [...employeeData, { ...newEmployee, id: newId }];
         setEmployeeData(updatedData);
+        setMaxId(newId); // Update the maxId
         localStorage.setItem('employees', JSON.stringify(updatedData));
     };
 
@@ -40,7 +50,8 @@ const useEmployeeData = () => {
         deleteEmployee,
         isEditModalOpen,
         setIsEditModalOpen,
-        handleEditButtonClick
+        handleEditButtonClick,
+        maxId
     };
 };
 

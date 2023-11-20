@@ -9,7 +9,8 @@ const ModalFormComponent = ({
   editClient,
   editClientId,
   clientData,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
 
   const {
@@ -36,7 +37,6 @@ const ModalFormComponent = ({
     }
 
     setFormData({
-      id: "",
       name: "",
       email: "",
       number: "",
@@ -54,21 +54,18 @@ const ModalFormComponent = ({
   return (
     <Col md={12} xs={12}>
       <Form onSubmit={handleFormSubmit} autoComplete="off">
-        {/* row */}
         <Row className="mb-3">
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Client ID</Form.Label>
             <Form.Control
               type="text"
-              className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+              className="form-control"
               placeholder="Client ID"
               id="id"
               name="id"
-              value={formData.id}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
+              value={isInEditMode ? formData.id : maxId + 1}
+              readOnly
             />
-            {errors.id && <div className="invalid-feedback">{errors.id}</div>}
           </div>
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Name</Form.Label>

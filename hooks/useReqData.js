@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useReqData = () => {
     const [reqData, setReqData] = useState(JSON.parse(localStorage.getItem('requirement')) || []);
     const [editReqId, setEditReqId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [maxId, setMaxId] = useState(0);
+
+    useEffect(() => {
+        // Calculate the maximum ID from the existing data
+        const maxExistingId = reqData.reduce((maxId, req) => Math.max(maxId, req.id), 0);
+        setMaxId(maxExistingId);
+    }, [reqData]);
 
     const handleEditButtonClick = (id) => {
         setEditReqId(id);
@@ -11,8 +18,11 @@ const useReqData = () => {
     };
 
     const addRequirement = (newReq) => {
-        const updatedData = [...reqData, newReq];
+        // Increment the maxId and assign it to the new employee
+        const newId = maxId + 1;
+        const updatedData = [...reqData, { ...newReq, id: newId }];
         setReqData(updatedData);
+        setMaxId(newId);
         localStorage.setItem('requirement', JSON.stringify(updatedData));
     };
 
@@ -40,7 +50,8 @@ const useReqData = () => {
         deleteRequirement,
         isEditModalOpen,
         setIsEditModalOpen,
-        handleEditButtonClick
+        handleEditButtonClick,
+        maxId
     };
 };
 

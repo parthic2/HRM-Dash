@@ -9,7 +9,8 @@ const ModalFormComponent = ({
   projectData,
   editProject,
   editProjectId,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
 
   const {
@@ -36,7 +37,6 @@ const ModalFormComponent = ({
     }
 
     setFormData({
-      id: "",
       projectName: "",
       clientName: "",
       clientEmail: "",
@@ -61,15 +61,13 @@ const ModalFormComponent = ({
             <Form.Label className="col-sm-6">Project ID</Form.Label>
             <Form.Control
               type="text"
-              className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+              className="form-control"
               placeholder="Project ID"
               id="id"
               name="id"
-              value={formData.id}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
+              value={isInEditMode ? formData.id : maxId + 1}
+              readOnly
             />
-            {errors.id && <div className="invalid-feedback">{errors.id}</div>}
           </div>
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Project Name</Form.Label>

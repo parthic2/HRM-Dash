@@ -9,7 +9,8 @@ const ModalFormComponent = ({
   reqData,
   editRequirement,
   editReqId,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
 
   const {
@@ -34,7 +35,6 @@ const ModalFormComponent = ({
       addRequirement(formData);
     }
     setFormData({
-      id: "",
       title: "",
       posType: "",
       department: "",
@@ -59,15 +59,13 @@ const ModalFormComponent = ({
             <div className="input-group">
               <Form.Control
                 type="text"
-                className={`form-control ${errors.id ? 'is-invalid' : ''}`}
+                className="form-control"
                 placeholder="Job ID"
                 id="id"
                 name="id"
-                value={formData.id}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
+                value={isInEditMode ? formData.id : maxId + 1}
+                readOnly
               />
-              {errors.id && <div className="invalid-feedback">{errors.id}</div>}
             </div>
           </div>
           <div className="col-sm-6">

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (reqData, editReqId) => {
     const initialFormValue = {
-        id: "",
         title: "",
         posType: "",
         department: "",
@@ -15,14 +14,6 @@ export const useModalFormLogic = (reqData, editReqId) => {
 
     const [formData, setFormData] = useState(initialFormValue);
     const [errors, setErrors] = useState(initialFormValue);
-
-    const validateId = (value) => {
-        if (value === "") {
-            return "Job Id is required";
-        } else {
-            return "";
-        }
-    };
 
     const validateTitle = (value) => {
         if (value.trim() === "") {
@@ -94,7 +85,6 @@ export const useModalFormLogic = (reqData, editReqId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            id: validateId(formData.id),
             title: validateTitle(formData.title),
             posType: validateType(formData.posType),
             department: validateDept(formData.department),
@@ -117,9 +107,7 @@ export const useModalFormLogic = (reqData, editReqId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "id") {
-            setErrors({ ...errors, [name]: validateId(value) });
-        } else if (name === "title") {
+        if (name === "title") {
             setErrors({ ...errors, [name]: validateTitle(value) });
         } else if (name === "posType") {
             setErrors({ ...errors, [name]: validateType(value) });
@@ -152,15 +140,7 @@ export const useModalFormLogic = (reqData, editReqId) => {
             setFormData(selectedReq);
         } else {
             setFormData({
-                id: "",
-                title: "",
-                posType: "",
-                department: "",
-                noPos: "",
-                interviewDate: "",
-                location: "",
-                reportingTo: "",
-                qualification: ""
+                ...initialFormValue
             });
         }
     }, [editReqId]);

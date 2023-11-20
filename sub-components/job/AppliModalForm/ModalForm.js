@@ -8,7 +8,8 @@ const ModalForm = ({
   editApplicant,
   editAppliId,
   isEditModalOpen,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
 
   return (
@@ -33,6 +34,7 @@ const ModalForm = ({
             editApplicant={editApplicant}
             editAppliId={editAppliId}
             setIsEditModalOpen={setIsEditModalOpen}
+            maxId={maxId}
           />
         </Modal.Body>
       </Modal>

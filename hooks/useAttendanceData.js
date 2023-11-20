@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useAttendanceData = () => {
     const [attendanceData, setAttendanceData] = useState(JSON.parse(localStorage.getItem('attendance')) || []);
     const [editAttId, setAttId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [maxId, setMaxId] = useState(0);
+
+    useEffect(() => {
+        // Calculate the maximum ID from the existing data
+        const maxExistingId = attendanceData.reduce((maxId, att) => Math.max(maxId, att.id), 0);
+        setMaxId(maxExistingId);
+    }, [attendanceData]);
 
     const handleEditButtonClick = (id) => {
         setAttId(id);
@@ -11,8 +18,11 @@ const useAttendanceData = () => {
     };
 
     const addAttendance = (newAtt) => {
-        const updatedData = [...attendanceData, newAtt];
+        // Increment the maxId and assign it to the new employee
+        const newId = maxId + 1;
+        const updatedData = [...attendanceData, { ...newAtt, id: newId }];
         setAttendanceData(updatedData);
+        setMaxId(newId);
         localStorage.setItem('attendance', JSON.stringify(updatedData));
     };
 
@@ -40,7 +50,8 @@ const useAttendanceData = () => {
         deleteAttendance,
         isEditModalOpen,
         setIsEditModalOpen,
-        handleEditButtonClick
+        handleEditButtonClick,
+        maxId
     };
 };
 

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 export const useModalFormLogic = (attendanceData, editAttId) => {
     const initialFormValue = {
         name: "",
-        employeeId: "",
         department: "",
         checkIn: "",
         checkOut: "",
@@ -19,14 +18,6 @@ export const useModalFormLogic = (attendanceData, editAttId) => {
             return "Name is required";
         } else if (!/^[A-Za-z\s]+$/.test(value)) {
             return "Name should contain only characters";
-        } else {
-            return "";
-        }
-    };
-
-    const validateID = (value) => {
-        if (value.trim() === "") {
-            return "Employee Id is required";
         } else {
             return "";
         }
@@ -51,7 +42,6 @@ export const useModalFormLogic = (attendanceData, editAttId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            employeeId: validateID(formData.employeeId),
             name: validateName(formData.name),
             department: validateDepart(formData.department),
             status: validateStatus(formData.status)
@@ -69,9 +59,7 @@ export const useModalFormLogic = (attendanceData, editAttId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "employeeId") {
-            setErrors({ ...errors, [name]: validateID(value) });
-        } else if (name === "name") {
+        if (name === "name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "department") {
             setErrors({ ...errors, [name]: validateDepart(value) });
@@ -101,13 +89,7 @@ export const useModalFormLogic = (attendanceData, editAttId) => {
             setFormData(selectedAttendance);
         } else {
             setFormData({
-                name: "",
-                employeeId: "",
-                department: "",
-                checkIn: "",
-                checkOut: "",
-                status: "",
-                image: null, // Clear the image after submission
+                ...initialFormValue
             });
         }
     }, [editAttId]);

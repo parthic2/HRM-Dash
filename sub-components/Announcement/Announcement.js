@@ -8,7 +8,6 @@ const Announce = () => {
   const { isEditModalOpen, setIsEditModalOpen, announcements, setAnnouncements, selectAllSelected, setSelectAllSelected, announcementId, setAnnouncementId, announcementText, setAnnouncementText, announcementDetails, setAnnouncementDetails, editAnnouncementIndex, setEditAnnouncementIndex, selectedEmployeeNames, setSelectedEmployeeNames, selectedEmployees, setSelectedEmployees, handleEdit, handleDelete } = useAnnounceData();
 
   const userInfo = JSON.parse(localStorage.getItem('user'));
-  console.log(userInfo.role);
 
   return (
     <Col md={12} xs={12}>

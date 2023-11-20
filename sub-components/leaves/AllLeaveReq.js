@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Col, Card, Table, Image } from 'react-bootstrap';
-import React from 'react';
+import { Col, Card, Table, Image, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
 import ReqModalForm from './ModalForm/ReqModalForm/ReqModalForm';
 import ActionMenu from 'common/ActionMenu';
 import useLeaveReqData from 'hooks/useLeaveReqData';
@@ -12,7 +12,9 @@ const statusColorMap = {
 };
 
 const AllLeaveReq = () => {
-  const { leaveData, editLeaveId, addLeaveReq, editLeaveReq, deleteLeaveReq, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick } = useLeaveReqData();
+  const { leaveData, editLeaveId, addLeaveReq, editLeaveReq, deleteLeaveReq, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick,maxId } = useLeaveReqData();
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Col md={12} xs={12}>
@@ -23,10 +25,20 @@ const AllLeaveReq = () => {
         editLeaveId={editLeaveId}
         isEditModalOpen={isEditModalOpen}
         setIsEditModalOpen={setIsEditModalOpen}
+        maxId={maxId}
       />
       <Card>
-        <Card.Header className="bg-white  py-4">
+      <Card.Header className="bg-white py-4 d-flex justify-content-between align-items-center">
           <h4 className="mb-0">All Leave Request</h4>
+          <div>
+            <Form.Control
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </Card.Header>
         {leaveData.length === 0 ? (
           <p style={{ textAlign: "center", marginTop: "20px", fontSize: "20px" }}>No Data Found!</p>
@@ -46,9 +58,18 @@ const AllLeaveReq = () => {
               </tr>
             </thead>
             <tbody>
-              {leaveData.map((item, index) => {
-                return (
-                  <tr key={index}>
+              {leaveData
+                .filter((item) =>
+                  Object.values(item).some(
+                    (value) =>
+                      value &&
+                      typeof value === 'string' &&
+                      value.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                )
+                .map((item, index) => {
+                  return (
+                    <tr key={index}>
                     <td className="align-middle">{item.id}</td>
                     <td className="align-middle">
                       <div className="d-flex align-items-center">
@@ -81,8 +102,8 @@ const AllLeaveReq = () => {
                       />
                     </td>
                   </tr>
-                )
-              })}
+                  );
+                })}
             </tbody>
           </Table>
         )}

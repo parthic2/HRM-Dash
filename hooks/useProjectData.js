@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useProjectData = () => {
     const [projectData, setProjectData] = useState(JSON.parse(localStorage.getItem('project')) || []); 
     const [editProjectId, setEditProjectId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [maxId, setMaxId] = useState(0);
+
+    useEffect(() => {
+        // Calculate the maximum ID from the existing data
+        const maxExistingId = projectData.reduce((maxId, project) => Math.max(maxId, project.id), 0);
+        setMaxId(maxExistingId);
+    }, [projectData]);
 
     const handleEditButtonClick = (id) => {
         setEditProjectId(id);
@@ -11,8 +18,11 @@ const useProjectData = () => {
     };
 
     const addProject = (newProject) => {
-        const updatedData = [...projectData, newProject];
+         // Increment the maxId and assign it to the new employee
+        const newId = maxId + 1;
+        const updatedData = [...projectData, { ...newProject, id: newId }];
         setProjectData(updatedData);
+        setMaxId(newId);
         localStorage.setItem('project', JSON.stringify(updatedData));
     };
 
@@ -40,7 +50,8 @@ const useProjectData = () => {
         deleteProject,
         isEditModalOpen,
         setIsEditModalOpen,
-        handleEditButtonClick
+        handleEditButtonClick,
+        maxId
     };
 };
 

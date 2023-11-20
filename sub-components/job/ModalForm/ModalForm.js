@@ -8,9 +8,9 @@ const ModalForm = ({
   editRequirement,
   editReqId,
   isEditModalOpen,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
-
   return (
     <Col md={12} xs={12}>
       <div className="btn btn-white mb-5" onClick={() => setIsEditModalOpen(true)}>Add Job</div>
@@ -33,6 +33,7 @@ const ModalForm = ({
             editRequirement={editRequirement}
             editReqId={editReqId}
             setIsEditModalOpen={setIsEditModalOpen}
+            maxId={maxId}
           />
         </Modal.Body>
       </Modal>

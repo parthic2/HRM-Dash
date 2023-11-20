@@ -9,7 +9,8 @@ const ModalFormComponent = ({
   attendanceData,
   addAttendance,
   editAttendance,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
 
   const {
@@ -36,7 +37,6 @@ const ModalFormComponent = ({
     }
     setFormData({
       name: "",
-      employeeId: "",
       department: "",
       checkIn: "",
       checkOut: "",
@@ -51,7 +51,6 @@ const ModalFormComponent = ({
   return (
     <Col md={12} xs={12}>
       <Form onSubmit={handleFormSubmit} autoComplete="off">
-        {/* row */}
         <Row className="mb-3">
           <div className="col-sm-6">
             <Form.Label className="col-sm-6">Name</Form.Label>
@@ -71,15 +70,13 @@ const ModalFormComponent = ({
             <Form.Label className="col-sm-6">Employee ID</Form.Label>
             <Form.Control
               type="text"
-              className={`form-control ${errors.employeeId ? 'is-invalid' : ''}`}
+              className="form-control"
               placeholder="Employee ID"
-              id="employeeId"
-              name="employeeId"
-              value={formData.employeeId}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
+              id="id"
+              name="id"
+              value={isInEditMode ? formData.id : maxId + 1}
+              readOnly
             />
-            {errors.employeeId && <div className="invalid-feedback">{errors.employeeId}</div>}
           </div>
         </Row>
         <Row className="mb-3">
@@ -118,6 +115,19 @@ const ModalFormComponent = ({
           {formData.status !== 'Leave' && (
             <>
               <div className="col-sm-6">
+                <Form.Label className="col-sm-6">Check In</Form.Label>
+                <Form.Control
+                  type="time"
+                  className="form-control"
+                  placeholder="Check In"
+                  id="checkIn"
+                  name="checkIn"
+                  maxLength="10"
+                  value={formData.checkIn}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="col-sm-6">
                 <Form.Label className="col-sm-6">Check Out</Form.Label>
                 <div className="input-group">
                   <Form.Control
@@ -130,19 +140,6 @@ const ModalFormComponent = ({
                     onChange={handleInputChange}
                   />
                 </div>
-              </div>
-              <div className="col-sm-6">
-                <Form.Label className="col-sm-6">Check In</Form.Label>
-                <Form.Control
-                  type="time"
-                  className="form-control"
-                  placeholder="Check In"
-                  id="checkIn"
-                  name="checkIn"
-                  maxLength="10"
-                  value={formData.checkIn}
-                  onChange={handleInputChange}
-                />
               </div>
             </>
           )}

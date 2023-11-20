@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 export const useModalFormLogic = (leaveData, editLeaveId) => {
     const initialFormValue = {
         name: "",
-        id: "",
         doj: "",
         leaveType: "",
         entitled: "",
@@ -22,14 +21,6 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
             return "Name is required";
         } else if (!/^[A-Za-z\s]+$/.test(value)) {
             return "Name should contain only characters";
-        } else {
-            return "";
-        }
-    };
-
-    const validateId = (value) => {
-        if (value.trim() === "") {
-            return "Employee Id is required";
         } else {
             return "";
         }
@@ -94,7 +85,6 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            id: validateId(formData.id),
             name: validateName(formData.name),
             doj: validateJoinDate(formData.doj),
             leaveType: validateType(formData.leaveType),
@@ -116,9 +106,7 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "id") {
-            setErrors({ ...errors, [name]: validateId(value) });
-        } else if (name === "name") {
+        if (name === "name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "doj") {
             setErrors({ ...errors, [name]: validateJoinDate(value) });
@@ -156,15 +144,7 @@ export const useModalFormLogic = (leaveData, editLeaveId) => {
             setFormData(selectedLeave);
         } else {
             setFormData({
-                name: "",
-                id: "",
-                doj: "",
-                leaveType: "",
-                entitled: "",
-                utilized: "",
-                balanced: "",
-                forward: "",
-                image: null, // Clear the image after submission
+                ...initialFormValue
             });
         }
     }, [editLeaveId]);

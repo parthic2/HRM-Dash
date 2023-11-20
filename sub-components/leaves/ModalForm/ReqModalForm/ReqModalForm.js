@@ -9,6 +9,7 @@ const ReqModalForm = ({
   editLeaveId,
   isEditModalOpen,
   setIsEditModalOpen,
+  maxId
 }) => {
   return (
     <Col md={12} xs={12}>
@@ -32,6 +33,7 @@ const ReqModalForm = ({
             editLeaveReq={editLeaveReq}
             editLeaveId={editLeaveId}
             setIsEditModalOpen={setIsEditModalOpen}
+            maxId={maxId}
           />
         </Modal.Body>
       </Modal>

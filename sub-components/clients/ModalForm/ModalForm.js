@@ -8,7 +8,8 @@ const ModalForm = ({
   editClientId,
   clientData,
   isEditModalOpen,
-  setIsEditModalOpen
+  setIsEditModalOpen,
+  maxId
 }) => {
   return (
     <Col md={12} xs={12}>
@@ -32,6 +33,7 @@ const ModalForm = ({
             editClientId={editClientId}
             clientData={clientData}
             setIsEditModalOpen={setIsEditModalOpen}
+            maxId={maxId}
           />
         </Modal.Body>
       </Modal>

@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useLeaveBalData = () => {
     const [leaveData, setLeaveData] = useState(JSON.parse(localStorage.getItem('leaveBal')) || []); 
     const [editLeaveId, setEditLeaveId] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [maxId, setMaxId] = useState(0);
+
+    useEffect(() => {
+        // Calculate the maximum ID from the existing data
+        const maxExistingId = leaveData.reduce((maxId, leave) => Math.max(maxId, leave.id), 0);
+        setMaxId(maxExistingId);
+    }, [leaveData]);
 
     const handleEditButtonClick = (id) => {
         setEditLeaveId(id);
@@ -11,8 +18,11 @@ const useLeaveBalData = () => {
     };
 
     const addLeaveBal = (newLeave) => {
-        const updatedData = [...leaveData, newLeave];
+        // Increment the maxId and assign it to the new employee
+        const newId = maxId + 1;
+        const updatedData = [...leaveData, { ...newLeave, id: newId }];
         setLeaveData(updatedData);
+        setMaxId(newId);
         localStorage.setItem('leaveBal', JSON.stringify(updatedData));
     };
 
@@ -40,7 +50,8 @@ const useLeaveBalData = () => {
         deleteLeaveBal,
         isEditModalOpen,
         setIsEditModalOpen,
-        handleEditButtonClick
+        handleEditButtonClick,
+        maxId
     };
 };
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (applicantData, editAppliId) => {
     const initialFormValue = {
-        id: "",
         name: "",
         title: "",
         department: "",
@@ -14,14 +13,6 @@ export const useModalFormLogic = (applicantData, editAppliId) => {
 
     const [formData, setFormData] = useState(initialFormValue);
     const [errors, setErrors] = useState(initialFormValue);
-
-    const validateId = (value) => {
-        if (value === "") {
-            return "Applicant Id is required";
-        } else {
-            return "";
-        }
-    };
 
     const validateName = (value) => {
         if (value.trim() === "") {
@@ -88,7 +79,6 @@ export const useModalFormLogic = (applicantData, editAppliId) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            id: validateId(formData.id),
             name: validateName(formData.name),
             title: validateTitle(formData.title),
             department: validateDept(formData.department),
@@ -110,9 +100,7 @@ export const useModalFormLogic = (applicantData, editAppliId) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "id") {
-            setErrors({ ...errors, [name]: validateId(value) });
-        } else if (name === "name") {
+        if (name === "name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "title") {
             setErrors({ ...errors, [name]: validateTitle(value) });
@@ -143,13 +131,7 @@ export const useModalFormLogic = (applicantData, editAppliId) => {
             setFormData(selectedApplicant);
         } else {
             setFormData({
-                name: "",
-                title: "",
-                department: "",
-                interviewDate: "",
-                interviewTime: "",
-                reportingTo: "",
-                qualification: ""
+                ...initialFormValue
             });
         }
     }, [editAppliId]);
