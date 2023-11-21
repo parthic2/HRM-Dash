@@ -8,57 +8,28 @@ import { TimerProvider } from 'context/TimerContext';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [user, setUser] = useState(null);
   const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate checking if a user is already authenticated
-    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-    if (userFromLocalStorage) {
-      setUser(userFromLocalStorage);
+    // Check for the presence of a token after the initial render
+    const loginToken = JSON.parse(localStorage.getItem('login-details'));
+
+    if (loginToken?.token) {
       setAuthorized(true);
     } else {
       setAuthorized(false);
-    }
-
-    // on initial load - run auth check 
-    authCheck(router.pathname);
-  }, []);
-
-  function authCheck(url) {
-    const publicPaths = ['/authentication/sign-in', '/authentication/sign-up'];
-    const path = url.split('?')[0];
-
-    if (!publicPaths.includes(path)) {
-      if (!user) {
+      if (router.pathname !== '/authentication/sign-in') {
+        // Redirect only if not already on the sign-in page
         router.push('/authentication/sign-in');
-      } else {
-        setAuthorized(true);
       }
-    } else {
-      setAuthorized(true);
     }
-  }
+
+    setLoading(false); // Set loading to false after the initial render
+  }, [authorized, router, router.pathname]);
 
   // Identify the layout, which will be applied conditionally
-  // const Layout = Component.Layout || (router.pathname.includes('dashboard') ?
-  //   (router.pathname.includes('instructor') || router.pathname.includes('student') ?
-  //     SignIn : SignIn) : SignIn);
-
   const Layout = Component.Layout || DefaultDashboardLayout;
-
-  // Simulate user login state using local storage
-  // const [userLoggedIn, setUserLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem('userLoggedIn');
-  //   if (loggedInUser) {
-  //     setUserLoggedIn(true);
-  //     // router.push('/');
-  //   }
-  // }, []);
-
-  // const Layout = userLoggedIn ? DefaultDashboardLayout : SignIn;
 
   return (
     <SSRProvider>
@@ -69,13 +40,17 @@ function MyApp({ Component, pageProps }) {
         <title>HRM - Dashboard</title>
       </Head>
       <TimerProvider>
-        <Layout>
-          {authorized || router.pathname.includes('authentication') ? (
-            <Component {...pageProps} />
-          ) : (
-            <p>Loading ...</p>
-          )}
-        </Layout>
+        {loading ? (
+          <p>Loading ...</p>
+        ) : (
+          <Layout>
+            {authorized || router.pathname.includes('authentication') ? (
+              <Component {...pageProps} />
+            ) : (
+              <p>Loading ...</p>
+            )}
+          </Layout>
+        )}
       </TimerProvider>
     </SSRProvider>
   )

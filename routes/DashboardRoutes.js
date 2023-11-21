@@ -6,13 +6,13 @@ export const DashboardMenu = [
 		title: 'Dashboard',
 		icon: 'home',
 		link: '/',
-		roles: ['admin', 'hr', 'employee'],
+		roles: ["Admin", "HR", "Employee"],
 	},
 	{
 		id: uuid(),
 		title: 'Employees',
 		icon: 'users',
-		roles: ['admin', "hr"],
+		roles: ["Admin", "HR"],
 		children: [
 			{ id: uuid(), link: '/pages/employee', name: 'All Employees' },
 			// { id: uuid(), link: '/', name: 'Add Employees' }
@@ -22,7 +22,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Projects',
 		icon: 'briefcase',
-		roles: ['admin', "hr"],
+		roles: ["Admin", "HR"],
 		children: [
 			{ id: uuid(), link: '/pages/projects', name: 'All Projects' },
 			// { id: uuid(), link: '/', name: 'Add Projects' }
@@ -32,7 +32,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Attendance',
 		icon: 'book-open',
-		roles: ['admin', "hr"],
+		roles: ["Admin", "HR"],
 		children: [
 			{ id: uuid(), link: '/pages/todayAttendances', name: 'Today Attendance' },
 			{ id: uuid(), link: '/pages/employeeAttendances', name: 'Employees Attendance' }
@@ -42,7 +42,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Clients',
 		icon: 'user',
-		roles: ['admin'],
+		roles: ["Admin"],
 		children: [
 			{ id: uuid(), link: '/pages/clients', name: 'All Clients' },
 			// { id: uuid(), link: '/', name: 'Add Clients' }
@@ -52,7 +52,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Leave Management',
 		icon: 'clipboard',
-		roles: ['admin', "hr", "employee"],
+		roles: ["Admin", "HR", "Employee"],
 		children: [
 			{ id: uuid(), link: '/pages/allLeaveRequest', name: 'All Leave Requests' },
 			{ id: uuid(), link: '/pages/leaveBalance', name: 'Leave Balance' },
@@ -64,7 +64,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Accounts',
 		icon: 'book',
-		roles: ['admin'],
+		roles: ["Admin"],
 		children: [
 			{ id: uuid(), link: '/pages/income', name: 'Income' },
 			{ id: uuid(), link: '/', name: 'Expenses' },
@@ -75,7 +75,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Departments',
 		icon: 'layers',
-		roles: ['admin', "hr"],
+		roles: ["Admin", "HR"],
 		children: [
 			{ id: uuid(), link: '/pages/allDepartment', name: 'All Departments' },
 			// { id: uuid(), link: '/', name: 'Add Departments' }
@@ -85,7 +85,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Payroll',
 		icon: 'dollar-sign',
-		roles: ['admin', "hr"],
+		roles: ["Admin", "HR"],
 		children: [
 			{ id: uuid(), link: '/', name: 'Payslip' },
 			{ id: uuid(), link: '/pages/employeeSalary', name: 'Employees Salary' }
@@ -95,7 +95,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Job',
 		icon: 'command',
-		roles: ['admin', "hr"],
+		roles: ["Admin", "HR"],
 		children: [
 			// { id: uuid(), link: '/', name: 'Add Job' },
 			{ id: uuid(), link: '/pages/requirement', name: 'Requirements' },
@@ -107,39 +107,29 @@ export const DashboardMenu = [
 		title: 'Tracker',
 		icon: 'clock',
 		link: "/pages/tracker",
-		roles: ['employee', 'hr']
+		roles: ["employee", "HR"]
 	},
 	{
 		id: uuid(),
 		title: 'Options',
 		icon: 'list',
 		link: "/pages/option",
-		roles: ['admin']
+		roles: ["Admin"]
 	},
 	{
 		id: uuid(),
 		title: 'Announcement',
 		icon: 'mic',
 		link: "/pages/announcement",
-		roles: ['employee', "admin", "hr"]
+		roles: ["Employee", "Admin", "HR"]
 	},
 	{
 		id: uuid(),
 		title: 'Awards',
 		icon: 'award',
 		link: "/pages/awards",
-		roles: ['employee', "admin", "hr"]
-	},
-	// {
-	// 	id: uuid(),
-	// 	title: 'Authentication',
-	// 	icon: 'lock',
-	// 	children: [
-	// 		{ id: uuid(), link: '/authentication/sign-in', name: 'Sign In' },
-	// 		{ id: uuid(), link: '/authentication/sign-up', name: 'Sign Up' },
-	// 		{ id: uuid(), link: '/authentication/forget-password', name: 'Forget Password'}			
-	// 	]
-	// },
+		roles: ["Employee", "Admin", "HR"]
+	}
 ];
 
 export default DashboardMenu;

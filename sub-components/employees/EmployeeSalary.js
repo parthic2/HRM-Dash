@@ -21,7 +21,7 @@ const AllEmployeeSalary = () => {
         setIsEditModalOpen={setIsEditModalOpen}
       />
       <Card>
-      <Card.Header className="bg-white py-4 d-flex justify-content-between align-items-center">
+        <Card.Header className="bg-white py-4 d-flex justify-content-between align-items-center">
           <h4 className="mb-0">Employee Salary</h4>
           <div>
             <Form.Control
@@ -61,31 +61,31 @@ const AllEmployeeSalary = () => {
                 .map((item, index) => {
                   return (
                     <tr key={index}>
-                    <td className="align-middle">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <div className={`icon-shape icon-md border p-4 rounded-1`}>
-                            {/* {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""} */}
+                      <td className="align-middle">
+                        <div className="d-flex align-items-center">
+                          <div>
+                            <div className={`icon-shape icon-md border p-4 rounded-1`}>
+                              {/* {item.image ? <Image src={URL.createObjectURL(item.image)} alt="" width={35} /> : ""} */}
+                            </div>
+                          </div>
+                          <div className="ms-3 lh-1">
+                            <h5 className=" mb-1">
+                              <Link href="#" className="text-inherit">{item.name}</Link></h5>
                           </div>
                         </div>
-                        <div className="ms-3 lh-1">
-                          <h5 className=" mb-1">
-                            <Link href="#" className="text-inherit">{item.name}</Link></h5>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="align-middle">{item.designation}</td>
-                    <td className="align-middle">{item.number}</td>
-                    <td className="align-middle">{item.email}</td>
-                    <td className="align-middle">{item.joiningDate}</td>
-                    <td className="align-middle">₹ {item.salary}</td>
-                    <td className="align-middle">
-                      <ActionMenu
-                        onDelete={() => deleteEmpSalary(item.email)}
-                        onEdit={() => handleEditButtonClick(item.email)}
-                      />
-                    </td>
-                  </tr>
+                      </td>
+                      <td className="align-middle">{item.designation}</td>
+                      <td className="align-middle">{item.number}</td>
+                      <td className="align-middle">{item.email}</td>
+                      <td className="align-middle">{item.joiningDate}</td>
+                      <td className="align-middle">₹ {item.salary}</td>
+                      <td className="align-middle">
+                        <ActionMenu
+                          onDelete={() => deleteEmpSalary(item.email)}
+                          onEdit={() => handleEditButtonClick(item.email)}
+                        />
+                      </td>
+                    </tr>
                   );
                 })}
             </tbody>

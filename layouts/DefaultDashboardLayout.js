@@ -29,4 +29,5 @@ const DefaultDashboardLayout = (props) => {
 		</div>
 	);
 };
+
 export default DefaultDashboardLayout;

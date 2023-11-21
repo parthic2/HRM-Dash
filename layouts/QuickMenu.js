@@ -14,6 +14,7 @@ import 'simplebar/dist/simplebar.min.css';
 import NotificationList from 'data/Notification';
 import useMounted from 'hooks/useMounted';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const QuickMenu = () => {
   const hasMounted = useMounted();
@@ -46,9 +47,20 @@ const QuickMenu = () => {
     );
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem('user'); // Adjust the key as needed
-    router.push('/authentication/sign-in');
+  const handleSignOut = async () => {
+    try {
+      // Call the logout API
+      await axios.post('https://hrm.stackholic.io/api/logout');
+
+      // Remove the login-details object from local storage
+      localStorage.removeItem('login-details');
+
+      // Redirect to the sign-in page
+      router.push('/authentication/sign-in');
+    } catch (error) {
+      // Handle any errors that occur during the logout API call
+      console.error('Logout failed:', error);
+    }
   };
 
   const QuickMenuDesktop = () => {

@@ -17,13 +17,38 @@ const useEmployeeData = () => {
         setIsEditModalOpen(true);
     };
 
-    const addEmployee = (newEmployee) => {
+    const addEmployee = async (newEmployee) => {
+        try {
+            // Make a POST request to the API endpoint with the authorization token in the headers
+            const response = await axios.post("https://hrm.stackholic.io/api/employee/store", {
+                ...newEmployee,
+                // Include the "gov doc" field in the request payload
+                // gov_doc: newEmployee.gov_doc ? newEmployee.gov_doc[0] : null,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${authToken.token}`,
+                    Accept: "application/json",
+                },
+            });
+
+            console.log(response.data);
+
+            const newId = maxId + 1;
+            const addedEmployee = response.data;
+            const updatedData = [...employeeData, addedEmployee];
+            setEmployeeData(updatedData);
+            setMaxId(newId);
+            setIsEditModalOpen(false);
+        } catch {
+            console.error("Error Adding Employee:");
+        }
+
         // Increment the maxId and assign it to the new employee
-        const newId = maxId + 1;
-        const updatedData = [...employeeData, { ...newEmployee, id: newId }];
-        setEmployeeData(updatedData);
-        setMaxId(newId); // Update the maxId
-        localStorage.setItem('employees', JSON.stringify(updatedData));
+        // const newId = maxId + 1;
+        // const updatedData = [...employeeData, { ...newEmployee, id: newId }];
+        // setEmployeeData(updatedData);
+        // setMaxId(newId); // Update the maxId
+        // localStorage.setItem('employees', JSON.stringify(updatedData));
     };
 
     const editEmployee = (editedEmployee) => {

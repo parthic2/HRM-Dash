@@ -17,30 +17,12 @@ import { DashboardMenu } from "routes/DashboardRoutes";
 
 const NavbarVertical = (props) => {
   const location = useRouter();
+  const data = JSON.parse(localStorage.getItem("login-details"));
+  const userRole = data?.role;
 
-  const [filteredMenu, setFilteredMenu] = useState([]); // Initialize filteredMenu state
-  // const [hrData, setHrData] = useState([]);
-  // const [userData, setUserData] = useState([]);
+  const [filteredMenu, setFilteredMenu] = useState([]);
 
-  // (useEffect to filter menu items based on user role)
   useEffect(() => {
-    // This code will run on the client side
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userRole = user ? user.role : "user";
-
-    // if (userRole === "hr") {
-    //   const hrOptions = JSON.parse(localStorage.getItem("hrEnabledRoutes")) || [];
-    //   console.log({ hrOptions });
-    //   setHrData(hrOptions);
-    // }
-
-    // if (userRole === "user") {
-    //   const userOptions = JSON.parse(localStorage.getItem("userEnabledRoutes")) || [];
-    //   console.log({ userOptions });
-    //   setUserData(userOptions);
-    // }
-
-    // Filter menu items based on user role
     const filtered = DashboardMenu.filter((menuItem) => {
       if (menuItem.roles && menuItem.roles.includes(userRole)) {
         return true;
@@ -48,8 +30,8 @@ const NavbarVertical = (props) => {
       return false;
     });
 
-    setFilteredMenu(filtered); // Update the filteredMenu state
-  }, []); // Empty dependency array ensures this runs after component mounts
+    setFilteredMenu(filtered);
+  }, [userRole]);
 
   const CustomToggle = ({ children, eventKey, icon }) => {
     const { activeEventKey } = useContext(AccordionContext);
@@ -197,19 +179,11 @@ const NavbarVertical = (props) => {
                       ""
                     )}
                   </Link>
-                  {/* end of menu item without any childern items */}
+                  {/* end of menu item without any children items */}
                 </Card>
               );
             }
           })}
-
-          {/* {hrData.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
-
-          {userData.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))} */}
         </Accordion>
         {/* end of Dashboard Menu */}
       </SimpleBar>

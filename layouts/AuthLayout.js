@@ -8,4 +8,5 @@ const AuthLayout = (props) => {
 		</Container>
 	);
 };
+
 export default AuthLayout;

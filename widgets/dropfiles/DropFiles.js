@@ -1,4 +1,4 @@
-// import node module libraries
+/* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Image } from 'react-bootstrap';
@@ -37,7 +37,6 @@ const img = {
 export const DropFiles = ({ handleImageChange }) => {
 	const [files, setFiles] = useState([]);
 	const { getRootProps, getInputProps } = useDropzone({
-		// accept: 'image/*',
 		accept: {
 			'image/*': ['.jpeg', '.jpg', '.png'],
 		},

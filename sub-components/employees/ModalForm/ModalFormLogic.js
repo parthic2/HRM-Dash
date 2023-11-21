@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const initialFormValue = {
-        name: "",
+        user_name: "",
         password: "",
         email: "",
-        number: "",
-        alterNum: "",
+        phone_no: "",
+        alternative_phone: "",
         address: "",
         designation: "",
-        joiningDate: "",
-        birthDate: "",
+        joining_date: "",
+        birth_date: "",
         gender: "",
-        bloodGroup: "",
-        showPassword: false,
-        image: null // To store the selected image
+        blood_group: "",
+        gov_doc: null,
+        status: "",
+        role: "",
+        showPassword: false // To store the selected image
     };
 
     const [formData, setFormData] = useState(initialFormValue);
@@ -111,6 +113,22 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         }
     };
 
+    const validateStatus = (value) => {
+        if (value.trim() === "") {
+            return "Status is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateRole = (value) => {
+        if (value.trim() === "") {
+            return "Role is required";
+        } else {
+            return "";
+        }
+    };
+
     const validateGender = (value) => {
         if (value === "" || value === "select gender") {
             return "Gender is required";
@@ -122,17 +140,19 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const validateForm = () => {
         // Validate all form fields and set the error messages
         const newErrors = {
-            name: validateName(formData.name),
+            user_name: validateName(formData.user_name),
             password: validatePassword(formData.password),
             email: validateEmail(formData.email),
-            number: validateNumber(formData.number),
-            alterNum: validateAltNumber(formData.alterNum),
+            phone_no: validateNumber(formData.phone_no),
+            alternative_phone: validateAltNumber(formData.alternative_phone),
             address: validateAddress(formData.address),
             designation: validateDes(formData.designation),
-            joiningDate: validateJoinDate(formData.joiningDate),
-            birthDate: validateBirDate(formData.birthDate),
+            joining_date: validateJoinDate(formData.joining_date),
+            birth_date: validateBirDate(formData.birth_date),
             gender: validateGender(formData.gender),
-            bloodGroup: validateBGroup(formData.bloodGroup),
+            blood_group: validateBGroup(formData.blood_group),
+            status: validateStatus(formData.status),
+            role: validateRole(formData.role),
         };
 
         setErrors(newErrors);
@@ -147,28 +167,32 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         setFormData({ ...formData, [name]: value });
 
         // Validate the current field and set the error message
-        if (name === "name") {
+        if (name === "user_name") {
             setErrors({ ...errors, [name]: validateName(value) });
         } else if (name === "password") {
             setErrors({ ...errors, [name]: validatePassword(value) });
         } else if (name === "email") {
             setErrors({ ...errors, [name]: validateEmail(value) });
-        } else if (name === "number") {
+        } else if (name === "phone_no") {
             setErrors({ ...errors, [name]: validateNumber(value) });
-        } else if (name === "alterNum") {
+        } else if (name === "alternative_phone") {
             setErrors({ ...errors, [name]: validateAltNumber(value) });
         } else if (name === "address") {
             setErrors({ ...errors, [name]: validateAddress(value) });
         } else if (name === "designation") {
             setErrors({ ...errors, [name]: validateDes(value) });
-        } else if (name === "joiningDate") {
+        } else if (name === "joining_date") {
             setErrors({ ...errors, [name]: validateJoinDate(value) });
-        } else if (name === "birthDate") {
+        } else if (name === "birth_date") {
             setErrors({ ...errors, [name]: validateBirDate(value) });
         } else if (name === "gender") {
             setErrors({ ...errors, [name]: validateGender(value) });
-        } else if (name === "bloodGroup") {
+        } else if (name === "blood_group") {
             setErrors({ ...errors, [name]: validateBGroup(value) });
+        } else if (name === "status") {
+            setErrors({ ...errors, [name]: validateStatus(value) });
+        } else if (name === "role") {
+            setErrors({ ...errors, [name]: validateRole(value) });
         }
     };
 
