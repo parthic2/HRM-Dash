@@ -3,15 +3,15 @@ import { Col, Form, Button, Row } from 'react-bootstrap';
 import { DropFiles, FormSelect } from 'widgets';
 import { genderOptions } from 'data/options/options';
 import { useModalFormLogic } from './ModalFormLogic';
+import useEmployeeData from 'hooks/useEmployeeData';
 
-const ModalFormComponent = ({
-  editEmployeeEmail,
-  employeeData,
-  addEmployee,
-  editEmployee,
-  setIsEditModalOpen,
-  maxId
-}) => {
+const ModalFormComponent = ({ setIsEditModalOpen }) => {
+
+  const { employeeData,
+    editEmployeeEmail,
+    addEmployee,
+    editEmployee,
+    maxId } = useEmployeeData();
 
   const {
     formData,
@@ -46,9 +46,9 @@ const ModalFormComponent = ({
       joining_date: "",
       birth_date: "",
       gender: "",
-      status: "",
-      role: "",
       blood_group: "",
+      role: "",
+      status: "",
       gov_doc: null, // Clear the image after submission
     });
     setIsEditModalOpen(false);
@@ -219,7 +219,7 @@ const ModalFormComponent = ({
             <Form.Control
               type="date"
               className={`form-control ${errors.joining_date ? 'is-invalid' : ''}`}
-              placeholder="Birth Date"
+              placeholder="Joining Date"
               id="joining_date"
               name="joining_date"
               value={formData.joining_date}
@@ -247,24 +247,7 @@ const ModalFormComponent = ({
             </div>
           </div>
 
-          <div className="col-sm-6">
-            <Form.Label className="col-sm-6">Gender</Form.Label>
-            <div className="input-group">
-              <Form.Control
-                type="text"
-                className={`form-control ${errors.gender ? 'is-invalid' : ''}`}
-                placeholder="Select Gender"
-                id="gender"
-                name="gender"
-                value={formData.gender}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-              />
-              {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
-            </div>
-          </div>
-
-          {/* {!editEmployeeEmail ?
+          {!editEmployeeEmail ?
             <div className="col-sm-6">
               <Form.Label className="col-sm-6">Gender</Form.Label>
               <Form.Control
@@ -280,7 +263,7 @@ const ModalFormComponent = ({
               />
               {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
             </div> : ""
-            } */}
+          }
         </Row>
         <Row className="mb-3">
           <div className="col-sm-6">

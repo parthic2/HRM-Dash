@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { bloodGroupMapping, genderMapping, roleMapping, statusMapping } from 'data/options/options';
 import { useEffect, useState } from 'react';
 
 const useEmployeeData = () => {
@@ -5,6 +7,7 @@ const useEmployeeData = () => {
     const [editEmployeeEmail, setEditEmployeeEmail] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [maxId, setMaxId] = useState(0);
+    const authToken = JSON.parse(localStorage.getItem('login-details'));
 
     useEffect(() => {
         // Calculate the maximum ID from the existing data
@@ -19,19 +22,25 @@ const useEmployeeData = () => {
 
     const addEmployee = async (newEmployee) => {
         try {
+            // Convert numeric value using the mapping
+            const roleNumericValue = roleMapping[newEmployee.role.trim().toLowerCase()];
+            const genderNumericValue = genderMapping[newEmployee.gender.trim().toLowerCase()];
+            const statusNumericValue = statusMapping[newEmployee.status.trim().toLowerCase()];
+            const bloodGroupNumericValue = bloodGroupMapping[newEmployee.blood_group.trim().toLowerCase()];
+
             // Make a POST request to the API endpoint with the authorization token in the headers
             const response = await axios.post("https://hrm.stackholic.io/api/employee/store", {
                 ...newEmployee,
-                // Include the "gov doc" field in the request payload
-                // gov_doc: newEmployee.gov_doc ? newEmployee.gov_doc[0] : null,
+                role: roleNumericValue,
+                status: statusNumericValue,
+                gender: genderNumericValue,
+                blood_group: bloodGroupNumericValue
             }, {
                 headers: {
+                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${authToken.token}`,
-                    Accept: "application/json",
                 },
             });
-
-            console.log(response.data);
 
             const newId = maxId + 1;
             const addedEmployee = response.data;
@@ -39,16 +48,9 @@ const useEmployeeData = () => {
             setEmployeeData(updatedData);
             setMaxId(newId);
             setIsEditModalOpen(false);
-        } catch {
-            console.error("Error Adding Employee:");
+        } catch (error) {
+            console.error("Error Adding Employee:", error);
         }
-
-        // Increment the maxId and assign it to the new employee
-        // const newId = maxId + 1;
-        // const updatedData = [...employeeData, { ...newEmployee, id: newId }];
-        // setEmployeeData(updatedData);
-        // setMaxId(newId); // Update the maxId
-        // localStorage.setItem('employees', JSON.stringify(updatedData));
     };
 
     const editEmployee = (editedEmployee) => {

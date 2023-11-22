@@ -1,3 +1,4 @@
+import { bloodGroupMapping, roleMapping, statusMapping } from 'data/options/options';
 import { useState, useEffect } from 'react';
 
 export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
@@ -13,10 +14,10 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
         birth_date: "",
         gender: "",
         blood_group: "",
-        gov_doc: null,
-        status: "",
         role: "",
-        showPassword: false // To store the selected image
+        status: "",
+        showPassword: false,
+        gov_doc: null // To store the selected image
     };
 
     const [formData, setFormData] = useState(initialFormValue);
@@ -108,22 +109,8 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const validateBGroup = (value) => {
         if (value.trim() === "") {
             return "Blood Group is required";
-        } else {
-            return "";
-        }
-    };
-
-    const validateStatus = (value) => {
-        if (value.trim() === "") {
-            return "Status is required";
-        } else {
-            return "";
-        }
-    };
-
-    const validateRole = (value) => {
-        if (value.trim() === "") {
-            return "Role is required";
+        } else if (!bloodGroupMapping[value.trim().toLowerCase()]) {
+            return "Invalid Blood Group";
         } else {
             return "";
         }
@@ -132,6 +119,26 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const validateGender = (value) => {
         if (value === "" || value === "select gender") {
             return "Gender is required";
+        } else {
+            return "";
+        }
+    };
+
+    const validateRole = (value) => {
+        if (value.trim() === "") {
+            return "Role is required";
+        } else if (!roleMapping[value.trim().toLowerCase()]) {
+            return "Invalid role";
+        } else {
+            return "";
+        }
+    };
+
+    const validateStatus = (value) => {
+        if (value.trim() === "") {
+            return "Status is required";
+        } else if (!statusMapping[value.trim().toLowerCase()]) {
+            return "Invalid Status";
         } else {
             return "";
         }
@@ -151,8 +158,8 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             birth_date: validateBirDate(formData.birth_date),
             gender: validateGender(formData.gender),
             blood_group: validateBGroup(formData.blood_group),
-            status: validateStatus(formData.status),
             role: validateRole(formData.role),
+            status: validateStatus(formData.status),
         };
 
         setErrors(newErrors);
@@ -189,10 +196,10 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             setErrors({ ...errors, [name]: validateGender(value) });
         } else if (name === "blood_group") {
             setErrors({ ...errors, [name]: validateBGroup(value) });
-        } else if (name === "status") {
-            setErrors({ ...errors, [name]: validateStatus(value) });
         } else if (name === "role") {
             setErrors({ ...errors, [name]: validateRole(value) });
+        } else if (name === "status") {
+            setErrors({ ...errors, [name]: validateStatus(value) });
         }
     };
 
@@ -207,7 +214,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     const handleImageChange = (files) => {
         setFormData({
             ...formData,
-            image: files[0] // Store the selected image
+            gov_doc: files[0] // Store the selected image
         });
     };
 
