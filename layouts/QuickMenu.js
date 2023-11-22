@@ -79,7 +79,7 @@ const QuickMenu = () => {
             align="end"
             show
           >
-            <Dropdown.Item className="mt-3" bsPrefix=' ' as="div"  >
+            <Dropdown.Item className="mt-3" bsPrefix=' ' as="div">
               <div className="border-bottom px-3 pt-0 pb-3 d-flex justify-content-between align-items-end">
                 <span className="h4 mb-0">Notifications</span>
                 <Link href="/" className="text-muted">
@@ -90,7 +90,7 @@ const QuickMenu = () => {
               </div>
               <Notifications />
               <div className="border-top px-3 pt-3 pb-3">
-                <Link href="#" className="text-link fw-semi-bold">
+                <Link href="/" className="text-link fw-semi-bold">
                   See all Notifications
                 </Link>
               </div>
@@ -161,7 +161,7 @@ const QuickMenu = () => {
               </div>
               <Notifications />
               <div className="border-top px-3 pt-3 pb-3">
-                <Link href="#" className="text-link fw-semi-bold">
+                <Link href="/" className="text-link fw-semi-bold">
                   See all Notifications
                 </Link>
               </div>

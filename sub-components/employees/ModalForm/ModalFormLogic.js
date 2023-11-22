@@ -1,7 +1,7 @@
 import { bloodGroupMapping, roleMapping, statusMapping } from 'data/options/options';
 import { useState, useEffect } from 'react';
 
-export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
+export const useModalFormLogic = (employeeData, editEmployeeId) => {
     const initialFormValue = {
         user_name: "",
         password: "",
@@ -35,7 +35,7 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     };
 
     const validatePassword = (value) => {
-        if (value.trim() === "") {
+        if (value === "") {
             return "Password is required"
         } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)) {
             return "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
@@ -59,16 +59,6 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             return "Mobile number is required";
         } else if (!/^\d{10}$/.test(value)) {
             return "Mobile Number must be a 10-digit number";
-        } else {
-            return "";
-        }
-    };
-
-    const validateAltNumber = (value) => {
-        if (value.trim() === "") {
-            return "Alternative Number is required";
-        } else if (!/^\d{10}$/.test(value)) {
-            return "Alternative Contact Number must be a 10-digit number";
         } else {
             return "";
         }
@@ -151,7 +141,6 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
             password: validatePassword(formData.password),
             email: validateEmail(formData.email),
             phone_no: validateNumber(formData.phone_no),
-            alternative_phone: validateAltNumber(formData.alternative_phone),
             address: validateAddress(formData.address),
             designation: validateDes(formData.designation),
             joining_date: validateJoinDate(formData.joining_date),
@@ -169,45 +158,77 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     };
 
     // Handle onBlur event for each input field
-    const handleInputBlur = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    // const handleInputBlur = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
 
-        // Validate the current field and set the error message
-        if (name === "user_name") {
-            setErrors({ ...errors, [name]: validateName(value) });
-        } else if (name === "password") {
-            setErrors({ ...errors, [name]: validatePassword(value) });
-        } else if (name === "email") {
-            setErrors({ ...errors, [name]: validateEmail(value) });
-        } else if (name === "phone_no") {
-            setErrors({ ...errors, [name]: validateNumber(value) });
-        } else if (name === "alternative_phone") {
-            setErrors({ ...errors, [name]: validateAltNumber(value) });
-        } else if (name === "address") {
-            setErrors({ ...errors, [name]: validateAddress(value) });
-        } else if (name === "designation") {
-            setErrors({ ...errors, [name]: validateDes(value) });
-        } else if (name === "joining_date") {
-            setErrors({ ...errors, [name]: validateJoinDate(value) });
-        } else if (name === "birth_date") {
-            setErrors({ ...errors, [name]: validateBirDate(value) });
-        } else if (name === "gender") {
-            setErrors({ ...errors, [name]: validateGender(value) });
-        } else if (name === "blood_group") {
-            setErrors({ ...errors, [name]: validateBGroup(value) });
-        } else if (name === "role") {
-            setErrors({ ...errors, [name]: validateRole(value) });
-        } else if (name === "status") {
-            setErrors({ ...errors, [name]: validateStatus(value) });
-        }
-    };
+    //     // Validate the current field and set the error message
+    //     if (name === "user_name") {
+    //         setErrors({ ...errors, [name]: validateName(value) });
+    //     } else if (name === "password") {
+    //         setErrors({ ...errors, [name]: validatePassword(value) });
+    //     } else if (name === "email") {
+    //         setErrors({ ...errors, [name]: validateEmail(value) });
+    //     } else if (name === "phone_no") {
+    //         setErrors({ ...errors, [name]: validateNumber(value) });
+    //     } else if (name === "address") {
+    //         setErrors({ ...errors, [name]: validateAddress(value) });
+    //     } else if (name === "designation") {
+    //         setErrors({ ...errors, [name]: validateDes(value) });
+    //     } else if (name === "joining_date") {
+    //         setErrors({ ...errors, [name]: validateJoinDate(value) });
+    //     } else if (name === "birth_date") {
+    //         setErrors({ ...errors, [name]: validateBirDate(value) });
+    //     } else if (name === "gender") {
+    //         setErrors({ ...errors, [name]: validateGender(value) });
+    //     } else if (name === "blood_group") {
+    //         setErrors({ ...errors, [name]: validateBGroup(value) });
+    //     } else if (name === "role") {
+    //         setErrors({ ...errors, [name]: validateRole(value) });
+    //     } else if (name === "status") {
+    //         setErrors({ ...errors, [name]: validateStatus(value) });
+    //     }
+    // };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({
             ...formData,
             [name]: value,
+        });
+
+        // Validate the current field and set the error message
+        let error = "";
+        if (name === "user_name") {
+            error = validateName(value);
+        } else if (name === "password") {
+            error = validatePassword(value);
+        } else if (name === "email") {
+            error = validateEmail(value);
+        } else if (name === "phone_no") {
+            error = validateNumber(value);
+        } else if (name === "address") {
+            error = validateAddress(value);
+        } else if (name === "designation") {
+            error = validateDes(value);
+        } else if (name === "joining_date") {
+            error = validateJoinDate(value);
+        } else if (name === "birth_date") {
+            error = validateBirDate(value);
+        } else if (name === "gender") {
+            error = validateGender(value);
+        } else if (name === "blood_group") {
+            error = validateBGroup(value);
+        } else if (name === "role") {
+            error = validateRole(value);
+        } else if (name === "status") {
+            error = validateStatus(value);
+        }
+
+        // Set the error for the current field
+        setErrors({
+            ...errors,
+            [name]: error,
         });
     };
 
@@ -219,7 +240,10 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
     };
 
     useEffect(() => {
-        const selectedEmployee = employeeData.find((employee) => employee.email === editEmployeeEmail);
+        const selectedEmployee = employeeData.find(
+            (employee) => employee.id === editEmployeeId
+        );
+
         if (selectedEmployee) {
             setFormData(selectedEmployee);
         } else {
@@ -227,15 +251,16 @@ export const useModalFormLogic = (employeeData, editEmployeeEmail) => {
                 ...initialFormValue
             });
         }
-    }, [editEmployeeEmail]);
+    }, [editEmployeeId, employeeData]);
 
     return {
         formData,
         setFormData,
         errors,
         validateForm,
-        handleInputBlur,
+        // handleInputBlur,
         handleInputChange,
         handleImageChange,
+        initialFormValue
     };
 };

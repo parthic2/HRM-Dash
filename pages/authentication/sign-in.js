@@ -3,6 +3,7 @@ import Link from "next/link";
 import AuthLayout from "layouts/AuthLayout";
 import { useRouter } from "next/router";
 import useAuth from "./useAuth";
+import { useEffect } from "react";
 
 const SignIn = () => {
   const router = useRouter();
@@ -16,12 +17,17 @@ const SignIn = () => {
     setSelectedRole,
     handleLogin,
     toggleShowPassword,
+    setDefaultEmail
   } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(router);
   };
+
+  useEffect(() => {
+    setDefaultEmail();
+  }, [selectedRole]);
 
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">

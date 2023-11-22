@@ -3,9 +3,25 @@ export const genderOptions = [
     { value: "Female", label: "Female" }
 ];
 
+export const roleOptions = [
+    { value: "HR", label: "HR" },
+    { value: "Employee", label: "Employee" }
+];
+
+export const bloodGroupOptions = [
+    { value: "A+", label: "A+" },
+    { value: "A-", label: "A-" },
+    { value: "B+", label: "B+" },
+    { value: "B-", label: "B-" },
+    { value: "AB+", label: "AB+" },
+    { value: "AB-", label: "AB-" },
+    { value: "O+", label: "O+" },
+    { value: "O-", label: "O-" }
+];
+
 export const statusOptions = [
     { value: "Active", label: "Active" },
-    { value: "Deactive", label: "Deactive" }
+    { value: "Inactive", label: "Inactive" }
 ];
 
 export const leaveOptions = [

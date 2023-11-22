@@ -3,83 +3,161 @@ import { bloodGroupMapping, genderMapping, roleMapping, statusMapping } from 'da
 import { useEffect, useState } from 'react';
 
 const useEmployeeData = () => {
-    const [employeeData, setEmployeeData] = useState(JSON.parse(localStorage.getItem('employees')) || []);
-    const [editEmployeeEmail, setEditEmployeeEmail] = useState(null);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [maxId, setMaxId] = useState(0);
-    const authToken = JSON.parse(localStorage.getItem('login-details'));
+  const [employeeData, setEmployeeData] = useState([]);
+  const [editEmployeeId, setEditEmployeeId] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [maxId, setMaxId] = useState(0);
+  const authToken = JSON.parse(localStorage.getItem('login-details'));
 
-    useEffect(() => {
-        // Calculate the maximum ID from the existing data
-        const maxExistingId = employeeData.reduce((maxId, employee) => Math.max(maxId, employee.id), 0);
-        setMaxId(maxExistingId);
-    }, [employeeData]);
+  // Helper function to handle unexpected mappings
+  const getMappedValue = (value, mapping) => mapping[value.trim().toLowerCase()] || value;
 
-    const handleEditButtonClick = (email) => {
-        setEditEmployeeEmail(email);
-        setIsEditModalOpen(true);
-    };
+  const fetchData = async () => {
+    try {
+      const numericRole = roleMapping["hr"];
+      const response = await axios.post("https://hrm.stackholic.io/api/employee/list", {
+        role: numericRole,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken.token}`,
+        },
+      });
+      const data = response.data.data || [];
+      // console.log(data);
+      setEmployeeData(data);
+    } catch (error) {
+      console.error("Error fetching employee data:", error);
+    }
+  };
 
-    const addEmployee = async (newEmployee) => {
-        try {
-            // Convert numeric value using the mapping
-            const roleNumericValue = roleMapping[newEmployee.role.trim().toLowerCase()];
-            const genderNumericValue = genderMapping[newEmployee.gender.trim().toLowerCase()];
-            const statusNumericValue = statusMapping[newEmployee.status.trim().toLowerCase()];
-            const bloodGroupNumericValue = bloodGroupMapping[newEmployee.blood_group.trim().toLowerCase()];
+  useEffect(() => {
+    fetchData();
+  }, [authToken.token]);
 
-            // Make a POST request to the API endpoint with the authorization token in the headers
-            const response = await axios.post("https://hrm.stackholic.io/api/employee/store", {
-                ...newEmployee,
-                role: roleNumericValue,
-                status: statusNumericValue,
-                gender: genderNumericValue,
-                blood_group: bloodGroupNumericValue
-            }, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    Authorization: `Bearer ${authToken.token}`,
-                },
-            });
+  useEffect(() => {
+    // Calculate the maximum ID from the existing data
+    const maxExistingId = employeeData.reduce((maxId, employee) => Math.max(maxId, employee.id), 0);
+    setMaxId(maxExistingId);
+  }, [employeeData]);
 
-            const newId = maxId + 1;
-            const addedEmployee = response.data;
-            const updatedData = [...employeeData, addedEmployee];
-            setEmployeeData(updatedData);
-            setMaxId(newId);
-            setIsEditModalOpen(false);
-        } catch (error) {
-            console.error("Error Adding Employee:", error);
-        }
-    };
+  const handleEditButtonClick = (id) => {
+    setEditEmployeeId(id);
+    setIsEditModalOpen(true);
+  };
 
-    const editEmployee = (editedEmployee) => {
+  const addEmployee = async (newEmployee) => {
+    try {
+      const roleNumericValue = getMappedValue(newEmployee.role, roleMapping);
+      const genderNumericValue = getMappedValue(newEmployee.gender, genderMapping);
+      const statusNumericValue = getMappedValue(newEmployee.status, statusMapping);
+      const bloodGroupNumericValue = getMappedValue(newEmployee.blood_group, bloodGroupMapping);
+
+      const response = await axios.post("https://hrm.stackholic.io/api/employee/store", {
+        ...newEmployee,
+        role: roleNumericValue,
+        status: statusNumericValue,
+        gender: genderNumericValue,
+        blood_group: bloodGroupNumericValue
+      }, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${authToken.token}`,
+        },
+      });
+
+      // Check the success status from the API response
+      if (response.data.success) {
+        // Instead of relying on the previous state, you can use the response data directly
+        const addedEmployee = response.data;
+        setEmployeeData((prevData) => [...prevData, addedEmployee]);
+        setMaxId((prevMaxId) => prevMaxId + 1);
+        setIsEditModalOpen(false);
+
+        fetchData();
+      } else {
+        console.error("Error editing employee:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error Adding Employee:", error);
+    }
+  };
+
+  const editEmployee = async (editedEmployee) => {
+    try {
+      // if (!authToken || !authToken.token) {
+      //   console.error("Authentication token not found.");
+      //   return;
+      // }
+
+      const response = await axios.post(`https://hrm.stackholic.io/api/employee/edit`,
+        editedEmployee, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken.token}`,
+        },
+      });
+
+      // Check the success status from the API response
+      if (response.data.success) {
+        // Update the local state to reflect the changes
         const updatedData = employeeData.map((employee) =>
-            employee.email === editedEmployee.email ? editedEmployee : employee
+          employee.id === editedEmployee.id ? editedEmployee : employee
         );
         setEmployeeData(updatedData);
-        setEditEmployeeEmail(null);
-        localStorage.setItem('employees', JSON.stringify(updatedData));
-    };
+        setEditEmployeeId(null); // Reset the edit state
 
-    const deleteEmployee = (email) => {
-        const updatedData = employeeData.filter((employee) => employee.email !== email);
+        fetchData();
+      } else {
+        console.error("Error editing employee:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error editing employee:", error);
+    }
+  };
+
+  const deleteEmployee = async (id) => {
+    try {
+      // if (!authToken || !authToken.token) {
+      //   console.error("Authentication token not found.");
+      //   return;
+      // }
+
+      const response = await axios.post("https://hrm.stackholic.io/api/employee/delete", {
+        id
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken.token}`,
+        },
+      });
+
+      // Check the success status from the API response
+      if (response.data.success) {
+        // Update the local state to reflect the deletion
+        const updatedData = employeeData.filter(
+          (employee) => employee.id !== id
+        );
         setEmployeeData(updatedData);
-        localStorage.setItem('employees', JSON.stringify(updatedData));
-    };
+      } else {
+        console.error("Error deleting employee:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+    }
+  };
 
-    return {
-        employeeData,
-        editEmployeeEmail,
-        setEditEmployeeEmail,
-        addEmployee,
-        editEmployee,
-        deleteEmployee,
-        isEditModalOpen,
-        setIsEditModalOpen,
-        handleEditButtonClick,
-        maxId
-    };
+  return {
+    employeeData,
+    editEmployeeId,
+    addEmployee,
+    editEmployee,
+    deleteEmployee,
+    isEditModalOpen,
+    setIsEditModalOpen,
+    handleEditButtonClick,
+    maxId,
+  };
 };
 
 export default useEmployeeData;

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const useAuth = () => {
-    const [email, setEmail] = useState('14mscit050@gmail.com');
-    const [password, setPassword] = useState('H@min#5079');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [selectedRole, setSelectedRole] = useState(''); // Default role is user
 
@@ -28,9 +28,10 @@ const useAuth = () => {
                 role: numericRole,
             });
 
+            console.log(response.data)
             // Assuming your API returns a token upon successful login
             const { token, role } = response.data.data;
-            
+
             // Store the token in localStorage or secure storage for future API requests
             localStorage.setItem("login-details", JSON.stringify({ token, role, email, password }));
 
@@ -43,6 +44,20 @@ const useAuth = () => {
         }
     };
 
+    // Function to set default email based on selected role
+    const setDefaultEmail = () => {
+        if (selectedRole === "admin") {
+            setEmail("14mscit050@gmail.com");
+            setPassword("H@min#5079");
+        } else if (selectedRole === "hr") {
+            setEmail("stackholic@gmail.com");
+            setPassword("Stack@123");
+        } else {
+            setEmail("");
+            setPassword("");
+        }
+    }
+
     return {
         email,
         setEmail,
@@ -53,7 +68,8 @@ const useAuth = () => {
         selectedRole,
         setSelectedRole,
         handleLogin,
-        toggleShowPassword
+        toggleShowPassword,
+        setDefaultEmail
     };
 };
 
