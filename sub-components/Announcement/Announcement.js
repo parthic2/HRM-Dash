@@ -1,17 +1,17 @@
 import ActionMenu from 'common/ActionMenu';
 import React from 'react';
-import { Card, Col, Table } from 'react-bootstrap';
+import { Card, Col, Image, Table } from 'react-bootstrap';
 import ModalForm from './ModalForm/ModalForm';
 import useAnnounceData from 'hooks/useAnnounceData';
 
 const Announce = () => {
   const { isEditModalOpen, setIsEditModalOpen, announcements, setAnnouncements, selectAllSelected, setSelectAllSelected, announcementId, setAnnouncementId, announcementText, setAnnouncementText, announcementDetails, setAnnouncementDetails, editAnnouncementIndex, setEditAnnouncementIndex, selectedEmployeeNames, setSelectedEmployeeNames, selectedEmployees, setSelectedEmployees, handleEdit, handleDelete } = useAnnounceData();
 
-  const userInfo = JSON.parse(localStorage.getItem('user'));
+  // const userInfo = JSON.parse(localStorage.getItem('user'));
 
   return (
     <Col md={12} xs={12}>
-      {userInfo.role === "employee" ? "" : (
+      {/* {userInfo.role === "employee" ? "" : ( */}
         <ModalForm
           isEditModalOpen={isEditModalOpen}
           setIsEditModalOpen={setIsEditModalOpen}
@@ -31,7 +31,7 @@ const Announce = () => {
           selectedEmployees={selectedEmployees}
           setSelectedEmployees={setSelectedEmployees}
         />
-      )}
+      {/* )} */}
       <Card>
         <Card.Header className="bg-white  py-4">
           <h4 className="mb-0">Announcement</h4>
