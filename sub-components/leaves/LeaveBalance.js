@@ -9,7 +9,7 @@ import Balance from 'common/Balance';
 const AllLeaveBalance = () => {
   const { leaveData, editLeaveId, addLeaveBal, editLeaveBal, deleteLeaveBal, isEditModalOpen, setIsEditModalOpen, handleEditButtonClick, maxId } = useLeaveBalData();
   const [searchQuery, setSearchQuery] = useState("");
-  const userRole = JSON.parse(localStorage.getItem("user"));
+  // const userRole = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Col md={12} xs={12}>
@@ -23,9 +23,9 @@ const AllLeaveBalance = () => {
         maxId={maxId}
       />
 
-      {userRole.role === "employee" || userRole.role === "hr" ? (
+      {/* {userRole.role === "employee" || userRole.role === "hr" ? ( */}
         <Balance />
-      ) : null}
+      {/* ) : null} */}
 
       <Card>
         <Card.Header className="bg-white py-4 d-flex justify-content-between align-items-center">

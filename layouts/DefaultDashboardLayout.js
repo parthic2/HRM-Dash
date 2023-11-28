@@ -15,8 +15,8 @@ const DefaultDashboardLayout = (props) => {
     const data = JSON.parse(localStorage.getItem("login-details"));
     // console.log(data.email);
     // Assuming you have a 'role' property in your login details
-    setUserRole(data.role);
-    setBackgroundColor(getUserRoleColor(data.role));
+    setUserRole(data?.role);
+    setBackgroundColor(getUserRoleColor(data?.role));
   }, []);
 
   return (
