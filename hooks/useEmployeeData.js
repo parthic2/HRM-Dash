@@ -14,9 +14,9 @@ const useEmployeeData = () => {
 
   const fetchData = async () => {
     try {
-      const numericRole = roleMapping["hr"];
+      // const numericRole = roleMapping["hr"];
       const response = await axios.post("https://hrm.stackholic.io/api/employee/list", {
-        role: numericRole,
+        // role: numericRole,
       }, {
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const useEmployeeData = () => {
         },
       });
       const data = response.data.data || [];
-      // console.log(data);
+      console.log(data);
       setEmployeeData(data);
     } catch (error) {
       console.error("Error fetching employee data:", error);
@@ -83,15 +83,18 @@ const useEmployeeData = () => {
     }
   };
 
-  const editEmployee = async (editedEmployee) => {
+  const editEmployee = async (editedEmployee, id) => {
+    console.log(id)
     try {
       // if (!authToken || !authToken.token) {
       //   console.error("Authentication token not found.");
       //   return;
       // }
 
-      const response = await axios.post(`https://hrm.stackholic.io/api/employee/edit`,
-        editedEmployee, {
+      const response = await axios.post(`https://hrm.stackholic.io/api/employee/store`, {
+        editedEmployee,
+        id
+      }, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authToken.token}`,
@@ -106,8 +109,6 @@ const useEmployeeData = () => {
         );
         setEmployeeData(updatedData);
         setEditEmployeeId(null); // Reset the edit state
-
-        fetchData();
       } else {
         console.error("Error editing employee:", response.data.message);
       }

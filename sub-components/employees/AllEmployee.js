@@ -41,7 +41,7 @@ const AllEmployee = () => {
           <Table responsive className="text-nowrap mb-0">
             <thead className="table-light">
               <tr>
-                <th>Employee ID</th>
+                {/* <th>Employee ID</th> */}
                 <th>Employee name</th>
                 {/* <th>Password</th> */}
                 <th>Designation</th>
@@ -71,7 +71,7 @@ const AllEmployee = () => {
                 .map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="align-middle">{item.id}</td>
+                      {/* <td className="align-middle">{item.id}</td> */}
                       <td className="align-middle">
                         <Link href="#" className="text-inherit">{item.user_name}</Link>
                       </td>

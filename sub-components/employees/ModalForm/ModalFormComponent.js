@@ -6,16 +6,13 @@ import { useModalFormLogic } from './ModalFormLogic';
 import useEmployeeData from 'hooks/useEmployeeData';
 
 const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }) => {
-  const { addEmployee,
-    editEmployee,
-    maxId } = useEmployeeData();
+  const { addEmployee, editEmployee } = useEmployeeData();
 
   const {
     formData,
     setFormData,
     errors,
     validateForm,
-    // handleInputBlur,
     handleInputChange,
     handleImageChange,
     initialFormValue
@@ -43,21 +40,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
     <Col md={12} xs={12}>
       <Form onSubmit={handleFormSubmit} autoComplete="off">
         <Row className="mb-3">
-          <div className="col-sm-6">
-            <Form.Label className="col-sm-6">Employee ID</Form.Label>
-            {/* Use maxId + 1 for new employees */}
-            <div>{isInEditMode ? formData.id : maxId + 1}</div>
-            {/* <Form.Control
-              type="text"
-              className="form-control"
-              placeholder="Employee ID"
-              id="id"
-              name="id"
-              value={isInEditMode ? formData.id : maxId + 1} // Use maxId + 1 for new employees
-              readOnly
-            /> */}
-          </div>
-          <div className="col-sm-6">
+          <div className="col-sm-12">
             <Form.Label className="col-sm-6">Name</Form.Label>
             <Form.Control
               type="text"
@@ -67,7 +50,6 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
               name="user_name"
               value={formData.user_name}
               onChange={handleInputChange}
-              // onBlur={handleInputBlur}
             />
             {errors.user_name && <div className="invalid-feedback">{errors.user_name}</div>}
           </div>
@@ -84,7 +66,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                // onBlur={handleInputBlur}
+              // onBlur={handleInputBlur}
               />
               <button
                 className="btn btn-outline-secondary"
@@ -111,7 +93,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              // onBlur={handleInputBlur}
+            // onBlur={handleInputBlur}
             />
             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
           </div>
@@ -128,7 +110,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
                 name="designation"
                 value={formData.designation}
                 onChange={handleInputChange}
-                // onBlur={handleInputBlur}
+              // onBlur={handleInputBlur}
               />
               {errors.designation && <div className="invalid-feedback">{errors.designation}</div>}
             </div>
@@ -144,7 +126,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
               maxLength="10"
               value={formData.phone_no}
               onChange={handleInputChange}
-              // onBlur={handleInputBlur}
+            // onBlur={handleInputBlur}
             />
             {errors.phone_no && <div className="invalid-feedback">{errors.phone_no}</div>}
           </div>
@@ -162,7 +144,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
                 maxLength="10"
                 value={formData.alternative_phone}
                 onChange={handleInputChange}
-                // onBlur={handleInputBlur}
+              // onBlur={handleInputBlur}
               />
             </div>
           </div>
@@ -176,7 +158,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
               name="address"
               value={formData.address}
               onChange={handleInputChange}
-              // onBlur={handleInputBlur}
+            // onBlur={handleInputBlur}
             />
             {errors.address && <div className="invalid-feedback">{errors.address}</div>}
           </div>
@@ -195,7 +177,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
                   name="birth_date"
                   value={formData.birth_date}
                   onChange={handleInputChange}
-                  // onBlur={handleInputBlur}
+                // onBlur={handleInputBlur}
                 />
                 {errors.birth_date && <div className="invalid-feedback">{errors.birth_date}</div>}
               </div>
@@ -210,7 +192,7 @@ const ModalFormComponent = ({ setIsEditModalOpen, editEmployeeId, employeeData }
                 name="joining_date"
                 value={formData.joining_date}
                 onChange={handleInputChange}
-                // onBlur={handleInputBlur}
+              // onBlur={handleInputBlur}
               />
               {errors.joining_date && <div className="invalid-feedback">{errors.joining_date}</div>}
             </div>

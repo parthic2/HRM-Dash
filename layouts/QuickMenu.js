@@ -114,7 +114,7 @@ const QuickMenu = () => {
             show
           >
             <Dropdown.Item as="div" className="px-4 pb-0 pt-2" bsPrefix=' '>
-              <div className="lh-1 ">
+              <div className="lh-1">
                 <h5 className="mb-1"> John E. Grainger</h5>
                 <Link href="/pages/profile" className="text-inherit fs-6">View my profile</Link>
               </div>
@@ -150,7 +150,7 @@ const QuickMenu = () => {
             aria-labelledby="dropdownNotification"
             align="end"
           >
-            <Dropdown.Item className="mt-3" bsPrefix=' ' as="div"  >
+            <Dropdown.Item className="mt-3" bsPrefix=' ' as="div">
               <div className="border-bottom px-3 pt-0 pb-3 d-flex justify-content-between align-items-end">
                 <span className="h4 mb-0">Notifications</span>
                 <Link href="/" className="text-muted">
@@ -184,7 +184,7 @@ const QuickMenu = () => {
             aria-labelledby="dropdownUser"
           >
             <Dropdown.Item as="div" className="px-4 pb-0 pt-2" bsPrefix=' '>
-              <div className="lh-1 ">
+              <div className="lh-1">
                 <h5 className="mb-1"> John E. Grainger</h5>
                 <Link href="/pages/profile" className="text-inherit fs-6">View my profile</Link>
               </div>

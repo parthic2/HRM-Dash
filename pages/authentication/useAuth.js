@@ -27,8 +27,7 @@ const useAuth = () => {
                 password: password,
                 role: numericRole,
             });
-
-            console.log(response.data)
+            
             // Assuming your API returns a token upon successful login
             const { token, role } = response.data.data;
 

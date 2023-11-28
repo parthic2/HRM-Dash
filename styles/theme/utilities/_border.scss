@@ -20,19 +20,21 @@
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-&::after, &::before {
-    -ms-flex: 1 1 0%;
-    flex: 1 1 0%;
-    border-top: .0625rem solid $gray-400;
-    content: "";
-    margin-top: .0625rem;
-}
 
-&::before {
-    margin-right: 1.5rem;
-}
+    &::after,
+    &::before {
+        -ms-flex: 1 1 0%;
+        flex: 1 1 0%;
+        border-top: .0625rem solid $gray-400;
+        content: "";
+        margin-top: .0625rem;
+    }
 
-&::after {
-    margin-left: 1.5rem;
-}
+    &::before {
+        margin-right: 1.5rem;
+    }
+
+    &::after {
+        margin-left: 1.5rem;
+    }
 }
