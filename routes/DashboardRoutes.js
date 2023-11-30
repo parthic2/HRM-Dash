@@ -107,7 +107,7 @@ export const DashboardMenu = [
 		title: 'Tracker',
 		icon: 'clock',
 		link: "/pages/tracker",
-		roles: ["employee", "HR"]
+		roles: ["Employee", "HR"]
 	},
 	{
 		id: uuid(),

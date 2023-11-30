@@ -89,6 +89,7 @@ export const genderMapping = {
     female: 2,
 };
 
+// Blood group object
 export const bloodGroupMapping = {
     'a+': 1,
     'a-': 2,
